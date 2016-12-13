@@ -16,6 +16,9 @@ namespace Final
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        List<GameObject> wallList;
+
         private Texture2D background;
         Texture2D redPlane;
         Vector2 redPosition;
