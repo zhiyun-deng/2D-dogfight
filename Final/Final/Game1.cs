@@ -16,17 +16,21 @@ namespace Final
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        List<Plane> planeList;
         List<GameObject> wallList;
 
         private Texture2D background;
-        Texture2D redPlane;
-        Vector2 redPosition;
-        Vector2 redVelocity;
+        //Texture2D redPlane;
+        //Vector2 redPosition;
+        //Vector2 redVelocity;
 
-        Texture2D bluePlane;
-        Vector2 bluePosition;
-        Vector2 blueVelocity;
+        Plane playerOne;
+        Plane playerTwo;
+
+        //Texture2D bluePlane;
+        //Vector2 bluePosition;
+        //Vector2 blueVelocity;
+        KeyboardState previousState;
 
 
         public Game1()
@@ -47,7 +51,8 @@ namespace Final
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            planeList = new List<Plane>();
+            previousState = Keyboard.GetState();
             base.Initialize();
         }
 
@@ -60,12 +65,20 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
-            redPlane = Content.Load<Texture2D>("biplanered80");
-            redPosition = new Vector2(1000, 400);
-            redVelocity = new Vector2(-1, 0);
-            bluePlane = Content.Load<Texture2D>("bluebibplane80");
-            bluePosition = new Vector2(0, 200);
-            blueVelocity = new Vector2(1, 0);
+            //redPlane = Content.Load<Texture2D>("biplanered80");
+            //redPosition = new Vector2(1000, 400);
+            //redVelocity = new Vector2(-1, 0);
+            //bluePlane = Content.Load<Texture2D>("bluebibplane80");
+            //bluePosition = new Vector2(0, 200);
+            //blueVelocity = new Vector2(1, 0);
+
+            Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
+            playerOne = new Plane(redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero);
+            planeList.Add(playerOne);
+
+            playerTwo = new Plane(bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero);
+            planeList.Add(playerTwo);
 
             // TODO: use this.Content to load your game content here
         }
@@ -86,11 +99,69 @@ namespace Final
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            redPosition += redVelocity;
-            bluePosition += blueVelocity;
-            // TODO: Add your update logic here
+            {
+                KeyboardState state = Keyboard.GetState();
+
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+                if (GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+
+                // TODO: Add your update logic here
+
+                // PlayerOne Controls
+
+                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
+                {
+                    playerOne.Up();
+                }
+                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                {
+                    playerOne.Down();
+                }
+                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S)))
+                {
+                    playerOne.Stop();
+                }
+
+                for (int i = 0; i < planeList.Count; i++)
+                {
+                    planeList[i].Update(wallList);
+                }
+
+
+                //player two controls
+
+
+                if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
+                {
+                    playerTwo.Up();
+                }
+                if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
+                {
+                    playerTwo.Foreward();
+                }
+                if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
+                {
+                    playerTwo.Down();
+                }
+                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left)))
+                {
+                    playerTwo.Stop();
+                }
+
+                //for (int i = 0; i < planeList.Count; i++)
+                //{
+                //    planeList[i].Update(wallList);
+                //}
+
+                //ball.Update(wallList, planeList);
+
+                previousState = state;
+
+                base.Update(gameTime);
+            }
+
 
             base.Update(gameTime);
         }
@@ -105,8 +176,13 @@ namespace Final
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
-            spriteBatch.Draw(redPlane, redPosition);
-            spriteBatch.Draw(bluePlane, bluePosition);
+
+            for (int i = 0; i < planeList.Count; i++)
+            {
+                planeList[i].Draw(spriteBatch);
+            }
+            //spriteBatch.Draw(redPlane, redPosition);
+            //spriteBatch.Draw(bluePlane, bluePosition);
 
             spriteBatch.End();
 
