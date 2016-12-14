@@ -57,14 +57,14 @@ namespace Final
             //goes left
             redPlane = Content.Load<Texture2D>("biplanered80");
             redPosition = new Vector2(1000, 400);
-            redVelocity = new Vector2(-1, 0);
+            redVelocity = new Vector2(-5, 0);
 
             //goes right
             bluePlane = Content.Load<Texture2D>("bluebibplane80");
             bluePosition = new Vector2(0, 200);
             blueVelocity = new Vector2(1, 0);
 
-            red = new Plane(redPlane, redPosition, redVelocity);
+            red = new Plane(redPlane, redPosition, redVelocity, false);
 
             // TODO: use this.Content to load your game content here
         }
@@ -90,6 +90,7 @@ namespace Final
                 Exit();
             
             red.Update();
+            red.Up();
             
             // TODO: Add your update logic here
 
