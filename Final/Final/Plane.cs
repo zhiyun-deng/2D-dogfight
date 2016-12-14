@@ -32,6 +32,7 @@ namespace Final
             this.position = position;
             this.velocity = velocity;
         }
+        public override void Draw(SpriteBatch sprite)
 
 
 
