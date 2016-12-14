@@ -19,7 +19,10 @@ namespace Final
 
         List<GameObject> wallList;
 
+        List<GameObject> planeList;
+
         private Texture2D background;
+
         Texture2D redPlane;
         Vector2 redPosition;
         Vector2 redVelocity;
@@ -48,6 +51,10 @@ namespace Final
         {
             // TODO: Add your initialization logic here
 
+            wallList = new List<GameObject>();
+
+            planeList = new List<GameObject>();
+
             base.Initialize();
         }
 
@@ -60,12 +67,35 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
+
+            //Planes
             redPlane = Content.Load<Texture2D>("biplanered80");
             redPosition = new Vector2(1000, 400);
             redVelocity = new Vector2(-1, 0);
             bluePlane = Content.Load<Texture2D>("bluebibplane80");
             bluePosition = new Vector2(0, 200);
             blueVelocity = new Vector2(1, 0);
+
+            //Walls
+            Texture2D wallImage = Content.Load<Texture2D>("Border1280");
+            GameObject wall = new GameObject(wallImage, Vector2.Zero);
+
+            wallList.Add(wall);
+
+            wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));
+
+            wallList.Add(wall);
+
+            // Side Walls
+
+            wallImage = Content.Load<Texture2D>("Border720");
+
+            wall = new GameObject(wallImage, Vector2.Zero);
+
+            wallList.Add(wall);
+
+            wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
+            wallList.Add(wall);
 
             // TODO: use this.Content to load your game content here
         }
