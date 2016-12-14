@@ -15,22 +15,22 @@ namespace Final
 
         }
 
-        //public void Update(List<GameObject> wallList)
-        //{
-        //    oldPosition = position;
+        public void Update(List<GameObject> wallList)
+        {
+            oldPosition = position;
 
-        //    // position.X += velocity.X;
+            // position.X += velocity.X;
 
-        //    position.Y += velocity.Y;
+            position.Y += velocity.Y;
 
-        //    for (int i = 0; i < wallList.Count; i++)
-        //    {
-        //        if (IsCollide(wallList[i]))
-        //        {
-        //            CollideWallY(wallList[i]);
-        //        }
-        //    }
-        //}
+            //for (int i = 0; i < wallList.Count; i++)
+            //{
+            //    if (IsCollide(wallList[i]))
+            //    {
+            //        CollideWallY(wallList[i]);
+            //    }
+            //}
+        }
 
         //public void CollideWallY(GameObject wall)
         //{
@@ -49,6 +49,15 @@ namespace Final
         public void Up()
         {
             velocity.Y = -5;
+        }
+        public void Foreward()
+        {
+            velocity.X = -5;
+        }
+
+        public void Back()
+        {
+            velocity.X = +5;
         }
 
         public void Down()
