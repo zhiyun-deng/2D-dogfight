@@ -19,6 +19,7 @@ namespace Final
         Texture2D bluePlane;
         Vector2 bluePosition;
         Vector2 blueVelocity;
+        Plane red;
 
 
         public Game1()
@@ -52,12 +53,18 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
+
+            //goes left
             redPlane = Content.Load<Texture2D>("biplanered80");
             redPosition = new Vector2(1000, 400);
             redVelocity = new Vector2(-1, 0);
+
+            //goes right
             bluePlane = Content.Load<Texture2D>("bluebibplane80");
             bluePosition = new Vector2(0, 200);
             blueVelocity = new Vector2(1, 0);
+
+            red = new Plane(redPlane, redPosition, redVelocity);
 
             // TODO: use this.Content to load your game content here
         }
@@ -69,6 +76,7 @@ namespace Final
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         /// <summary>
@@ -80,8 +88,9 @@ namespace Final
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            redPosition += redVelocity;
-            bluePosition += blueVelocity;
+            
+            red.Update();
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -97,8 +106,7 @@ namespace Final
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
-            spriteBatch.Draw(redPlane, redPosition);
-            spriteBatch.Draw(bluePlane, bluePosition);
+            red.Draw(spriteBatch);
 
             spriteBatch.End();
 
