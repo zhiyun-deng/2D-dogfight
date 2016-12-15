@@ -51,6 +51,11 @@ namespace Final
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            wallList = new List<GameObject>();
+
+            //planeList = new List<GameObject>();
+
             planeList = new List<Plane>();
             previousState = Keyboard.GetState();
             base.Initialize();
@@ -79,6 +84,27 @@ namespace Final
 
             playerTwo = new Plane(bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero);
             planeList.Add(playerTwo);
+
+            //Walls
+            Texture2D wallImage = Content.Load<Texture2D>("Border1280");
+            GameObject wall = new GameObject(wallImage, Vector2.Zero);
+
+            wallList.Add(wall);
+
+            wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));
+
+            wallList.Add(wall);
+
+            // Side Walls
+
+            wallImage = Content.Load<Texture2D>("Border720");
+
+            wall = new GameObject(wallImage, Vector2.Zero);
+
+            wallList.Add(wall);
+
+            wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
+            wallList.Add(wall);
 
             // TODO: use this.Content to load your game content here
         }
