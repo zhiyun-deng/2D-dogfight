@@ -39,21 +39,21 @@ namespace Final
 
         public void Up()
         {
-            velocity.Y = -5;
+            velocity.Y = -2;
         }
         public void Left()
         {
-            velocity.X = -5;
+            velocity.X = -2;
         }
 
         public void Right()
         {
-            velocity.X = +5;
+            velocity.X = +2;
         }
 
         public void Down()
         {
-            velocity.Y = 5;
+            velocity.Y = 2;
         }
 
         public void Stop()

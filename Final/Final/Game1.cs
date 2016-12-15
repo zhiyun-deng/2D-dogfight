@@ -141,11 +141,20 @@ namespace Final
                 {
                     playerOne.Up();
                 }
+
+                if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
+                {
+                    playerOne.Left();
+                }
+                if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
+                {
+                    playerOne.Right();
+                }
                 if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
                 {
                     playerOne.Down();
                 }
-                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S)))
+                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
                 {
                     playerOne.Stop();
                 }
@@ -167,11 +176,15 @@ namespace Final
                 {
                     playerTwo.Left();
                 }
+                if (state.IsKeyDown(Keys.Right) && !previousState.IsKeyDown(Keys.Right))
+                {
+                    playerTwo.Right();
+                }
                 if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
                 {
                     playerTwo.Down();
                 }
-                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left)))
+                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left) && (state.IsKeyUp(Keys.Right))))
                 {
                     playerTwo.Stop();
                 }
