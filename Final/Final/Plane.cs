@@ -19,7 +19,7 @@ namespace Final
         {
             oldPosition = position;
 
-            // position.X += velocity.X;
+            position.X += velocity.X;
 
             position.Y += velocity.Y;
 
@@ -50,12 +50,12 @@ namespace Final
         {
             velocity.Y = -5;
         }
-        public void Foreward()
+        public void Left()
         {
             velocity.X = -5;
         }
 
-        public void Back()
+        public void Right()
         {
             velocity.X = +5;
         }
@@ -68,6 +68,7 @@ namespace Final
         public void Stop()
         {
             velocity.Y = 0;
+            velocity.X = 0;
         }
 
     }
