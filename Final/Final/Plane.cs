@@ -10,6 +10,15 @@ namespace Final
 {
     class Plane : GameObject
     {
+
+        private Vector2 headPos;
+        private Vector2 tailPos;
+        private bool faceRight = true;
+        private float angle = 0.0f;
+        Rectangle sourceRectangle;
+
+        Vector2 origin;
+        private float angleSpeed = 0.0f;
         public Plane(Texture2D texture, Vector2 position, Vector2 velocity) : base(texture, position, velocity)
         {
 
