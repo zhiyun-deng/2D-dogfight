@@ -19,8 +19,6 @@ namespace Final
         List<Plane> planeList;
         List<GameObject> wallList;
 
-        List<GameObject> planeList;
-
         private Texture2D background;
         //Texture2D redPlane;
         //Vector2 redPosition;
@@ -56,7 +54,7 @@ namespace Final
 
             wallList = new List<GameObject>();
 
-            planeList = new List<GameObject>();
+            //planeList = new List<GameObject>();
 
             planeList = new List<Plane>();
             previousState = Keyboard.GetState();
