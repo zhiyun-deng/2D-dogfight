@@ -88,14 +88,58 @@ namespace Final
         public void Up()
         {
             angle += 0.01f;
+            double ratio = texture.Width / 4;
 
-            velocity.Y = (float)Math.Tan(angle) * velocity.X;
-            velocity.X = -(float)Math.Sqrt(25 - velocity.Y * velocity.Y);//not working
+            //velocity.Y = (float)Math.Tan(angle) * velocity.X;
+            float upChange = (float)Math.Sin(angle) * texture.Width;//
+            float horiChange = (float)Math.Sqrt(texture.Width * texture.Width - upChange * upChange);
+
+            if (!faceRight)
+            {
+                upChange *= -1;
+                horiChange *= -1;
+            }
+            tailPos = position;
+            if (faceRight)
+            {
+                headPos = new Vector2(tailPos.X + horiChange, tailPos.Y + upChange);
+            }
+            else
+            {
+                headPos = new Vector2(tailPos.X - horiChange, tailPos.Y - upChange);
+            }
+            velocity.X = (float)(horiChange / ratio);
+            velocity.Y = upChange / (float)ratio;
+
         }
 
         public void Down()
         {
-            velocity.Y = 5;
+            angle -= 0.01f;
+
+          
+            double ratio = texture.Width / 4;
+
+            //velocity.Y = (float)Math.Tan(angle) * velocity.X;
+            float upChange = (float)Math.Sin(angle) * texture.Width;//
+            float horiChange = (float)Math.Sqrt(texture.Width * texture.Width - upChange * upChange);
+
+            if (!faceRight)
+            {
+                upChange *= -1;
+                horiChange *= -1;
+            }
+            tailPos = position;
+            if (faceRight)
+            {
+                headPos = new Vector2(tailPos.X + horiChange, tailPos.Y + upChange);
+            }
+            else
+            {
+                headPos = new Vector2(tailPos.X - horiChange, tailPos.Y - upChange);
+            }
+            velocity.X = (float)(horiChange / ratio);
+            velocity.Y = upChange / (float)ratio;
         }
 
         public void Stop()

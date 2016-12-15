@@ -90,7 +90,7 @@ namespace Final
                 Exit();
             
             red.Update();
-            red.Up();
+            red.Down();
             
             // TODO: Add your update logic here
 
