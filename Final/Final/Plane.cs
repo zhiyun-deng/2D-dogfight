@@ -32,19 +32,10 @@ namespace Final
             //}
         }
 
-        //public void CollideWallY(GameObject wall)
-        //{
-        //    if (position.Y - oldPosition.Y > 0)
-        //    {
-        //        position.Y = wall.BoundingBox.Y - BoundingBox.Height;
-        //    }
-        //    else if (position.Y - oldPosition.Y < 0)
-        //    {
-        //        position.Y = wall.BoundingBox.Y + wall.BoundingBox.Height;
-        //    }
-
-        //    velocity.Y = 0;
-        //}
+        public void CollideWall(GameObject wall)
+        {
+            
+        }
 
         public void Up()
         {

@@ -165,7 +165,7 @@ namespace Final
                 }
                 if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
                 {
-                    playerTwo.Foreward();
+                    playerTwo.Left();
                 }
                 if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
                 {
