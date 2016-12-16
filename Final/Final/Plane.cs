@@ -80,12 +80,13 @@ namespace Final
         }
         public override void Draw(SpriteBatch sprite)
         {
+        }
 
         public void CollideWall(GameObject wall)
         {
-            
-        }
-            sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+
+
+            //sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
 
 
         }
