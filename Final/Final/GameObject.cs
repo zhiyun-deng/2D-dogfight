@@ -72,7 +72,7 @@ namespace Final
             velocity = new Vector2(0, 0);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position);
         }
