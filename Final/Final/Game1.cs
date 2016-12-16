@@ -161,7 +161,7 @@ namespace Final
 
                 for (int i = 0; i < planeList.Count; i++)
                 {
-                    planeList[i].Update(wallList);
+                    planeList[i].Update(wallList, planeList);
                 }
 
 
@@ -215,6 +215,10 @@ namespace Final
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                wallList[i].Draw(spriteBatch);
+            }
 
             for (int i = 0; i < planeList.Count; i++)
             {
@@ -222,6 +226,9 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
+
+            playerOne.Update(wallList, planeList);
+            playerOne.Update(wallList, planeList);
 
             spriteBatch.End();
 
