@@ -106,7 +106,7 @@ namespace Final
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
             wallList.Add(wall);
 
-            red = new Plane(redPlane, redPosition, redVelocity, false);
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -140,7 +140,7 @@ namespace Final
 
                 // PlayerOne Controls
 
-                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
+                if (state.IsKeyDown(Keys.W))
                 {
                     playerOne.Up();
                 }
@@ -153,7 +153,7 @@ namespace Final
                 //{
                 //    playerOne.Right();
                 //}
-                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                if (state.IsKeyDown(Keys.S))
                 {
 
                     playerOne.Down();

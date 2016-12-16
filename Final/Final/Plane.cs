@@ -85,6 +85,15 @@ namespace Final
 
 
         }
+
+
+        //if faceright and up, angle -
+        //right and down +
+        //left and down -
+        //left and up +
+
+
+
         public void Up() //not for ffaceright
         {
             if (!faceRight) { angle += 0.01f; }
@@ -156,11 +165,25 @@ namespace Final
         {
             if (angle > 0)
             {
-                Down();
+                if (faceRight)
+                {
+                    Up(); 
+                }
+                else
+                {
+                    Down();
+                }
             }
             else if (angle < 0)
             {
-                Up();
+                if (faceRight)
+                {
+                    Down(); 
+                }
+                else
+                {
+                    Up();
+                }
             }
         }
 
