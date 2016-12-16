@@ -158,33 +158,10 @@ namespace Final
             {
                 Down();
             }
-            if (angle < 0)
+            else if (angle < 0)
             {
                 Up();
             }
-            double ratio = texture.Width / 4;
-
-            //velocity.Y = (float)Math.Tan(angle) * velocity.X;
-            float upChange = (float)Math.Sin(angle) * texture.Width;//
-            float horiChange = (float)Math.Sqrt(texture.Width * texture.Width - upChange * upChange);
-
-            if (!faceRight)
-            {
-                upChange *= -1;
-                horiChange *= -1;
-            }
-            tailPos = position;
-            if (faceRight)
-            {
-                headPos = new Vector2(tailPos.X + horiChange, tailPos.Y + upChange);
-            }
-            else
-            {
-                headPos = new Vector2(tailPos.X - horiChange, tailPos.Y - upChange);
-            }
-            velocity.X = (float)(horiChange / ratio);
-            velocity.Y = upChange / (float)ratio;
-
         }
 
 
