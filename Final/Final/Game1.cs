@@ -137,34 +137,34 @@ namespace Final
 
                 // PlayerOne Controls
 
-                //if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
-                //{
-                //    playerOne.Up();
-                //}
+                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
+                {
+                    playerOne.Up();
+                }
 
-                ////if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
-                ////{
-                ////    playerOne.Left();
-                ////}
-                ////if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
-                ////{
-                ////    playerOne.Right();
-                ////}
-                //if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
                 //{
-                //    playerOne.Down();
+                //    playerOne.Left();
                 //}
-                //if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
+                //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
                 //{
-                //    playerOne.Stop();
+                //    playerOne.Right();
                 //}
-                playerOne.Down();
-                playerTwo.Down();
+                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                {
 
-                //for (int i = 0; i < planeList.Count; i++)
-                //{
-                //    planeList[i].Update(wallList);
-                //}
+                    playerOne.Down();
+                }
+                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
+                {
+                    playerOne.Stop();
+                }
+
+
+                for (int i = 0; i < planeList.Count; i++)
+                {
+                    planeList[i].Update();
+                }
 
 
 
