@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final
 {
-    class Plane:GameObject
+    class Plane : GameObject
     {
         private Vector2 headPos;
         private Vector2 tailPos;
@@ -19,10 +19,10 @@ namespace Final
 
         Vector2 origin;
         private float angleSpeed = 0.0f;
-        
 
 
-        public Plane(Texture2D texture, Vector2 position, bool right):base(texture, position)
+
+        public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
         {
             this.texture = texture;
             this.position = position;
@@ -76,18 +76,22 @@ namespace Final
         public override void Update()
         {
             position += velocity;
-            
+
         }
         public override void Draw(SpriteBatch sprite)
         {
-            
+
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-            
+
 
         }
-        public void Up()
+        public void Up() //not for ffaceright
         {
-            angle += 0.01f;
+            if (!faceRight) { angle += 0.01f; }
+            else
+            {
+                angle -= 0.01f;
+            }
             double ratio = texture.Width / 4;
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
@@ -97,8 +101,10 @@ namespace Final
             if (!faceRight)
             {
                 upChange *= -1;
+
                 horiChange *= -1;
             }
+
             tailPos = position;
             if (faceRight)
             {
@@ -115,9 +121,13 @@ namespace Final
 
         public void Down()
         {
-            angle -= 0.01f;
+            if (!faceRight) { angle -= 0.01f; }
+            else
+            {
+                angle += 0.01f;
+            }
 
-          
+
             double ratio = texture.Width / 4;
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
@@ -144,9 +154,9 @@ namespace Final
 
         public void Stop()
         {
-            if(angle> 0)
+            if (angle > 0)
             {
-                Down(); 
+                Down();
             }
             else if (angle < 0)
             {
@@ -158,3 +168,7 @@ namespace Final
 
     }
 }
+
+
+
+    
