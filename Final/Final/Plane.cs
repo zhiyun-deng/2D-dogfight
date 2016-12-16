@@ -90,9 +90,13 @@ namespace Final
 
 
         }
-        public void Up()
+        public void Up() //not for ffaceright
         {
-            angle += 0.01f;
+            if (!faceRight) { angle += 0.01f; }
+            else
+            {
+                angle -= 0.01f;
+            }
             double ratio = texture.Width / 4;
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
@@ -102,8 +106,10 @@ namespace Final
             if (!faceRight)
             {
                 upChange *= -1;
+
                 horiChange *= -1;
             }
+            
             tailPos = position;
             if (faceRight)
             {
@@ -120,7 +126,11 @@ namespace Final
 
         public void Down()
         {
-            angle -= 0.01f;
+            if (!faceRight) { angle -= 0.01f; }
+            else
+            {
+                angle += 0.01f;
+            }
 
 
             double ratio = texture.Width / 4;
@@ -153,33 +163,10 @@ namespace Final
             {
                 Down();
             }
-            if (angle < 0)
+            else if (angle < 0)
             {
                 Up();
             }
-            double ratio = texture.Width / 4;
-
-            //velocity.Y = (float)Math.Tan(angle) * velocity.X;
-            float upChange = (float)Math.Sin(angle) * texture.Width;//
-            float horiChange = (float)Math.Sqrt(texture.Width * texture.Width - upChange * upChange);
-
-            if (!faceRight)
-            {
-                upChange *= -1;
-                horiChange *= -1;
-            }
-            tailPos = position;
-            if (faceRight)
-            {
-                headPos = new Vector2(tailPos.X + horiChange, tailPos.Y + upChange);
-            }
-            else
-            {
-                headPos = new Vector2(tailPos.X - horiChange, tailPos.Y - upChange);
-            }
-            velocity.X = (float)(horiChange / ratio);
-            velocity.Y = upChange / (float)ratio;
-
         }
 
 
