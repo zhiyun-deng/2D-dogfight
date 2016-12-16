@@ -109,7 +109,7 @@ namespace Final
 
                 horiChange *= -1;
             }
-            
+
             tailPos = position;
             if (faceRight)
             {
@@ -173,4 +173,5 @@ namespace Final
 
     }
 }
+
 
