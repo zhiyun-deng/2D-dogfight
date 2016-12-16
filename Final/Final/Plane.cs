@@ -144,7 +144,14 @@ namespace Final
 
         public void Stop()
         {
-            velocity.Y = 0;
+            if(angle> 0)
+            {
+                Down(); 
+            }
+            else if (angle < 0)
+            {
+                Up();
+            }
         }
 
 
