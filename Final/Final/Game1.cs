@@ -137,10 +137,10 @@ namespace Final
 
                 // PlayerOne Controls
 
-                //if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
-                //{
-                //    playerOne.Up();
-                //}
+                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
+                {
+                    playerOne.Up();
+                }
 
                 ////if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
                 ////{
@@ -150,16 +150,16 @@ namespace Final
                 ////{
                 ////    playerOne.Right();
                 ////}
-                //if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
-                //{
-                //    playerOne.Down();
-                //}
+                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                {
+                    playerOne.Down();
+                }
                 //if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
                 //{
                 //    playerOne.Stop();
                 //}
-                playerOne.Down();
-                playerTwo.Down();
+                //playerOne.Down();
+                //playerTwo.Down();
 
                 //for (int i = 0; i < planeList.Count; i++)
                 //{
@@ -176,10 +176,10 @@ namespace Final
                 //player two controls
 
 
-                //if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
-                //{
-                //    playerTwo.Up();
-                //}
+                if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
+                {
+                    playerTwo.Up();
+                }
                 ////if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
                 ////{
                 ////    playerTwo.Left();
@@ -188,10 +188,10 @@ namespace Final
                 ////{
                 ////    playerTwo.Right();
                 ////}
-                //if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
-                //{
-                //    playerTwo.Down();
-                //}
+                if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
+                {
+                    playerTwo.Down();
+                }
                 //if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left) && (state.IsKeyUp(Keys.Right))))
                 //{
                 //    playerTwo.Stop();
