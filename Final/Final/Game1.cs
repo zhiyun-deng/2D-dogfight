@@ -158,13 +158,18 @@ namespace Final
                 //{
                 //    playerOne.Stop();
                 //}
-                playerOne.Up();
+                playerOne.Down();
+                playerTwo.Down();
 
                 //for (int i = 0; i < planeList.Count; i++)
                 //{
                 //    planeList[i].Update(wallList);
                 //}
+
+
+
                 playerOne.Update();
+                playerTwo.Update();
 
 
 

@@ -85,9 +85,13 @@ namespace Final
 
 
         }
-        public void Up()
+        public void Up() //not for ffaceright
         {
-            angle += 0.01f;
+            if (!faceRight) { angle += 0.01f; }
+            else
+            {
+                angle -= 0.01f;
+            }
             double ratio = texture.Width / 4;
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
@@ -97,8 +101,10 @@ namespace Final
             if (!faceRight)
             {
                 upChange *= -1;
+
                 horiChange *= -1;
             }
+            
             tailPos = position;
             if (faceRight)
             {
@@ -115,7 +121,11 @@ namespace Final
 
         public void Down()
         {
-            angle -= 0.01f;
+            if (!faceRight) { angle -= 0.01f; }
+            else
+            {
+                angle += 0.01f;
+            }
 
 
             double ratio = texture.Width / 4;
