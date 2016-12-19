@@ -155,7 +155,7 @@ namespace Final
 
                     playerOne.Down();
                 }
-                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
+                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S)))
                 {
                     playerOne.Stop();
                 }
@@ -192,10 +192,10 @@ namespace Final
                 {
                     playerTwo.Down();
                 }
-                //if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left) && (state.IsKeyUp(Keys.Right))))
-                //{
-                //    playerTwo.Stop();
-                //}
+                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)))
+                {
+                    playerTwo.Stop();
+                }
 
                 //for (int i = 0; i < planeList.Count; i++)
                 //{
