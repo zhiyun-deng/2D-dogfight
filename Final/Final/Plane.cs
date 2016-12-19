@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final
 {
-    class Plane:GameObject
+    class Plane : GameObject
     {
         private Vector2 headPos;
         private Vector2 tailPos;
@@ -18,11 +18,12 @@ namespace Final
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.0f;
+        private float angleSpeed = 0.03f;
+        double speed = 1;
+
+
         
-
-
-        public Plane(Texture2D texture, Vector2 position, bool right):base(texture, position)
+        public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
         {
             this.texture = texture;
             this.position = position;
@@ -47,6 +48,7 @@ namespace Final
 
             velocity = new Vector2(0, 0);
         }
+        //velocity might not be needed
         public Plane(Texture2D texture, Vector2 position, Vector2 velocity, bool right) : base(texture, position, velocity)
         {
             this.texture = texture;
@@ -76,19 +78,32 @@ namespace Final
         public override void Update()
         {
             position += velocity;
-            
+
         }
         public override void Draw(SpriteBatch sprite)
         {
-            
+
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-            
+
 
         }
-        public void Up()
+
+
+        //if faceright and up, angle -
+        //right and down +
+        //left and down -
+        //left and up +
+
+
+
+        public void Up() //not for ffaceright
         {
-            angle += 0.01f;
-            double ratio = texture.Width / 4;
+            if (!faceRight) { angle += angleSpeed; }
+            else
+            {
+                angle -= angleSpeed;
+            }
+            double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -97,8 +112,10 @@ namespace Final
             if (!faceRight)
             {
                 upChange *= -1;
+
                 horiChange *= -1;
             }
+            
             tailPos = position;
             if (faceRight)
             {
@@ -115,10 +132,14 @@ namespace Final
 
         public void Down()
         {
-            angle -= 0.01f;
+            if (!faceRight) { angle -= angleSpeed; }
+            else
+            {
+                angle += angleSpeed;
+            }
 
-          
-            double ratio = texture.Width / 4;
+
+            double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -144,10 +165,32 @@ namespace Final
 
         public void Stop()
         {
-            velocity.Y = 0;
+            if (angle > 0)
+            {
+                if (faceRight)
+                {
+                    Up(); 
+                }
+                else
+                {
+                    Down();
+                }
+            }
+            else if (angle < 0)
+            {
+                if (faceRight)
+                {
+                    Down(); 
+                }
+                else
+                {
+                    Up();
+                }
+            }
         }
 
 
 
     }
 }
+
