@@ -172,41 +172,38 @@ namespace Final
 
 
                 playerOne.Update();
-                playerTwo.Update();
+
 
 
 
                 //player two controls
 
 
-                if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
+                if (state.IsKeyDown(Keys.Up))
                 {
                     playerTwo.Up();
                 }
-                ////if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
-                ////{
-                ////    playerTwo.Left();
-                ////}
-                ////if (state.IsKeyDown(Keys.Right) && !previousState.IsKeyDown(Keys.Right))
-                ////{
-                ////    playerTwo.Right();
-                ////}
-                if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
+
+                //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
+                //{
+                //    playerOne.Left();
+                //}
+                //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
+                //{
+                //    playerOne.Right();
+                //}
+                if (state.IsKeyDown(Keys.Down))
                 {
+
                     playerTwo.Down();
                 }
-                //if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left) && (state.IsKeyUp(Keys.Right))))
-                //{
-                //    playerTwo.Stop();
-                //}
-
-                //for (int i = 0; i < planeList.Count; i++)
-                //{
-                //    planeList[i].Update(wallList);
-                //}
+                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)))
+                {
+                    playerTwo.Stop();
+                }
 
                 /*ball.Update(wallList, planeList)*/;
-
+                playerTwo.Update();
                 previousState = state;
 
                 base.Update(gameTime);
