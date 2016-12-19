@@ -77,12 +77,14 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
-            Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
-            playerOne = new Plane(redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
+            Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero,false);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero,false);
             planeList.Add(playerTwo);
 
             //Walls

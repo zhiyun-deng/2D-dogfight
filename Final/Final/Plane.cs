@@ -18,19 +18,25 @@ namespace Final
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.03f;
-        double speed = 1;
+        private float angleSpeed = 0.02f;
+        double speed = 1.5;
+        Texture2D rightTexture;
+        Texture2D leftTexture;
+        bool flip = false;
 
 
-        
-        public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
+        //texture faces left, right texture faces right
+        public Plane(Texture2D LeftTexture,Texture2D  rightTexture, Vector2 position, bool right) : base(LeftTexture, position)
         {
-            this.texture = texture;
+            
             this.position = position;
+            this.rightTexture = rightTexture;
+            this.leftTexture = LeftTexture;
 
             //providing the plane is horizontal
             if (right)
             {
+                texture = rightTexture;
                 faceRight = true;
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
@@ -39,6 +45,7 @@ namespace Final
             }
             else
             {
+                texture = leftTexture;
                 faceRight = false;
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
@@ -49,16 +56,19 @@ namespace Final
             velocity = new Vector2(0, 0);
         }
         //velocity might not be needed
-        public Plane(Texture2D texture, Vector2 position, Vector2 velocity, bool right) : base(texture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
         {
-            this.texture = texture;
+            
             this.position = position;
             this.velocity = velocity;
+            this.rightTexture = rightTexture;
+            this.leftTexture = leftTexture;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             //providing the plane is horizontal
             if (right)
             {
+                this.texture = rightTexture;
                 faceRight = true;
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
@@ -67,6 +77,7 @@ namespace Final
             }
             else
             {
+                this.texture = leftTexture;
                 faceRight = false;
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
@@ -78,6 +89,10 @@ namespace Final
         public override void Update()
         {
             position += velocity;
+            if(angle < Math.PI/2 && angle > -Math.PI / 2)
+            {
+                flip();
+            }
 
         }
         public override void Draw(SpriteBatch sprite)
@@ -128,6 +143,7 @@ namespace Final
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
 
+
         }
 
         public void Down()
@@ -161,6 +177,9 @@ namespace Final
             }
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
+
+
+
         }
 
         public void Stop()
@@ -186,6 +205,19 @@ namespace Final
                 {
                     Up();
                 }
+            }
+        }
+        public void flip()
+        {
+            faceRight = !faceRight;
+            if (faceRight)
+            {
+                texture = rightTexture;
+
+            }
+            else
+            {
+                texture = leftTexture;
             }
         }
 
