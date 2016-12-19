@@ -18,10 +18,11 @@ namespace Final
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.0f;
+        private float angleSpeed = 0.03f;
+        double speed = 1;
 
 
-
+        
         public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
         {
             this.texture = texture;
@@ -47,6 +48,7 @@ namespace Final
 
             velocity = new Vector2(0, 0);
         }
+        //velocity might not be needed
         public Plane(Texture2D texture, Vector2 position, Vector2 velocity, bool right) : base(texture, position, velocity)
         {
             this.texture = texture;
@@ -96,12 +98,12 @@ namespace Final
 
         public void Up() //not for ffaceright
         {
-            if (!faceRight) { angle += 0.01f; }
+            if (!faceRight) { angle += angleSpeed; }
             else
             {
-                angle -= 0.01f;
+                angle -= angleSpeed;
             }
-            double ratio = texture.Width / 4;
+            double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -130,14 +132,14 @@ namespace Final
 
         public void Down()
         {
-            if (!faceRight) { angle -= 0.01f; }
+            if (!faceRight) { angle -= angleSpeed; }
             else
             {
-                angle += 0.01f;
+                angle += angleSpeed;
             }
 
 
-            double ratio = texture.Width / 4;
+            double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
