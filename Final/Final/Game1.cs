@@ -106,6 +106,8 @@ namespace Final
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
             wallList.Add(wall);
 
+            
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -116,6 +118,7 @@ namespace Final
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         /// <summary>
@@ -137,7 +140,7 @@ namespace Final
 
                 // PlayerOne Controls
 
-                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
+                if (state.IsKeyDown(Keys.W))
                 {
                     playerOne.Up();
                 }
@@ -150,7 +153,7 @@ namespace Final
                 //{
                 //    playerOne.Right();
                 //}
-                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                if (state.IsKeyDown(Keys.S))
                 {
 
                     playerOne.Down();
@@ -169,14 +172,14 @@ namespace Final
 
 
                 playerOne.Update();
-                playerTwo.Update();
+
 
 
 
                 //player two controls
 
 
-                if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
+                if (state.IsKeyDown(Keys.Up))
                 {
                     playerTwo.Up();
                 }
@@ -199,11 +202,20 @@ namespace Final
 
                 //for (int i = 0; i < planeList.Count; i++)
                 //{
-                //    planeList[i].Update(wallList);
+                //    playerOne.Right();
                 //}
+                if (state.IsKeyDown(Keys.Down))
+                {
+
+                    playerTwo.Down();
+                }
+                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)))
+                {
+                    playerTwo.Stop();
+                }
 
                 /*ball.Update(wallList, planeList)*/;
-
+                playerTwo.Update();
                 previousState = state;
 
                 base.Update(gameTime);
