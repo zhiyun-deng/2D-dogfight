@@ -156,7 +156,7 @@ namespace Final
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
         }
-
+ 
         public void Stop()
         {
             if (angle > 0)
