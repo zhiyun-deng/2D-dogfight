@@ -79,6 +79,8 @@ namespace Final
 
             Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
             Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
 
             playerOne = new Plane(redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
             planeList.Add(playerOne);
