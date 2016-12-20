@@ -11,45 +11,44 @@ namespace Final
 {
     class Plane : GameObject
     {
+        //need to fix protection level of variables
         private Vector2 headPos;
         private Vector2 tailPos;
-        private bool faceRight = true;
-        private float angle = 0.0f;
+        public bool faceRight = true;
+        public float angle = 0.0f;
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.02f;
-        double speed = 1.5;
-        Texture2D rightTexture;
+        private float angleSpeed = 0.01f;
+        double speed = 2;
         Texture2D leftTexture;
-        bool flip = false;
+        Texture2D rightTexture;
 
 
-        //texture faces left, right texture faces right
-        public Plane(Texture2D LeftTexture,Texture2D  rightTexture, Vector2 position, bool right) : base(LeftTexture, position)
+        
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right) : base(leftTexture, position)
         {
-            
-            this.position = position;
+            this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
-            this.leftTexture = LeftTexture;
+            this.position = position;
 
             //providing the plane is horizontal
             if (right)
             {
-                texture = rightTexture;
                 faceRight = true;
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(0, 0);
+                texture = rightTexture;
 
             }
             else
             {
-                texture = leftTexture;
                 faceRight = false;
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
             }
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
@@ -58,30 +57,29 @@ namespace Final
         //velocity might not be needed
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
         {
-            
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
             this.position = position;
             this.velocity = velocity;
-            this.rightTexture = rightTexture;
-            this.leftTexture = leftTexture;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             //providing the plane is horizontal
             if (right)
             {
-                this.texture = rightTexture;
                 faceRight = true;
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(0, 0);
+                texture = rightTexture;
 
             }
             else
             {
-                this.texture = leftTexture;
                 faceRight = false;
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
             }
         }
 
@@ -89,10 +87,8 @@ namespace Final
         public override void Update()
         {
             position += velocity;
-            if(angle < Math.PI/2 && angle > -Math.PI / 2)
-            {
-                flip();
-            }
+            
+            
 
         }
         public override void Draw(SpriteBatch sprite)
@@ -118,6 +114,21 @@ namespace Final
             {
                 angle -= angleSpeed;
             }
+
+            if (angle > Math.PI / 2 || angle < -Math.PI / 2)
+            {
+                flip();
+                if(angle> Math.PI / 2)
+                {
+                    angle = (float)Math.PI / 2;
+                }
+                else
+                {
+                    angle = -(float)Math.PI / 2;
+                }
+                
+            }
+            
             double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
@@ -144,6 +155,10 @@ namespace Final
             velocity.Y = upChange / (float)ratio;
 
 
+
+
+            
+
         }
 
         public void Down()
@@ -153,7 +168,19 @@ namespace Final
             {
                 angle += angleSpeed;
             }
+            if (angle > Math.PI / 2 || angle < -Math.PI / 2)
+            {
+                flip();
+                if (angle > Math.PI / 2)
+                {
+                    angle = (float)Math.PI / 2;
+                }
+                else
+                {
+                    angle = -(float)Math.PI / 2;
+                }
 
+            }
 
             double ratio = texture.Width / (speed*speed);
 
@@ -213,12 +240,40 @@ namespace Final
             if (faceRight)
             {
                 texture = rightTexture;
-
+                
             }
             else
             {
                 texture = leftTexture;
             }
+            angle = -angle;
+        }
+        public void right()
+        {
+            if (faceRight)
+            {
+                Up();
+            }
+            else
+            {
+                Down();
+            }
+        }
+        public void left()
+        {
+
+            if (faceRight)
+            {
+                Down();
+            }
+            else
+            {
+                Up();
+            }
+        }
+        public void accelerate(double speedAdded)
+        {
+            speed += speedAdded;
         }
 
 
