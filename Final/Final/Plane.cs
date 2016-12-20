@@ -268,6 +268,10 @@ namespace Final
                 Up();
             }
         }
+        public void accelerate(double speedAdded)
+        {
+            speed += speedAdded;
+        }
 
 
 

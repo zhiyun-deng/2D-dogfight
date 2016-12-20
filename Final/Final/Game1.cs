@@ -31,6 +31,7 @@ namespace Final
         //Vector2 bluePosition;
         //Vector2 blueVelocity;
         KeyboardState previousState;
+        MouseState previousMouse;
 
 
         public Game1()
@@ -132,6 +133,7 @@ namespace Final
         {
             {
                 KeyboardState state = Keyboard.GetState();
+                MouseState mouse = Mouse.GetState();
 
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
@@ -203,9 +205,15 @@ namespace Final
                     playerTwo.Stop();
                 }
 
-                /*ball.Update(wallList, planeList)*/;
+                /*ball.Update(wallList, planeList)*/
+                if(mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
+                {
+                    playerOne.accelerate(0.5);
+                }
                 
                 previousState = state;
+                previousMouse = mouse;
+
 
                 base.Update(gameTime);
             }
