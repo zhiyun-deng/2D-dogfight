@@ -11,14 +11,15 @@ namespace Final
 {
     class Plane : GameObject
     {
+        //need to fix protection level of variables
         private Vector2 headPos;
         private Vector2 tailPos;
-        private bool faceRight = true;
+        public bool faceRight = true;
         public float angle = 0.0f;
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.015f;
+        private float angleSpeed = 0.01f;
         double speed = 2;
         Texture2D leftTexture;
         Texture2D rightTexture;
@@ -244,7 +245,7 @@ namespace Final
             }
             angle = -angle;
         }
-        public void W()
+        public void right()
         {
             if (faceRight)
             {
@@ -255,7 +256,7 @@ namespace Final
                 Down();
             }
         }
-        public void S()
+        public void left()
         {
 
             if (faceRight)

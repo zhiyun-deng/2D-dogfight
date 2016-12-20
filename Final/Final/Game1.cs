@@ -142,9 +142,9 @@ namespace Final
 
                 // PlayerOne Controls
 
-                if (state.IsKeyDown(Keys.W))
+                if (state.IsKeyDown(Keys.A))
                 {
-                    playerOne.W();
+                    playerOne.left();
                 }
 
                 //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
@@ -155,12 +155,12 @@ namespace Final
                 //{
                 //    playerOne.Right();
                 //}
-                if (state.IsKeyDown(Keys.S))
+                if (state.IsKeyDown(Keys.D))
                 {
 
-                    playerOne.S();
+                    playerOne.right();
                 }
-                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
+                if ((state.IsKeyUp(Keys.A)) && (state.IsKeyUp(Keys.D) ))
                 {
                     playerOne.Stop();
                 }
@@ -180,9 +180,9 @@ namespace Final
                 //player two controls
 
 
-                if (state.IsKeyDown(Keys.Up))
+                if (state.IsKeyDown(Keys.Left))
                 {
-                    playerTwo.Up();
+                    playerTwo.left();
                 }
 
                 //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
@@ -193,18 +193,18 @@ namespace Final
                 //{
                 //    playerOne.Right();
                 //}
-                if (state.IsKeyDown(Keys.Down))
+                if (state.IsKeyDown(Keys.Right))
                 {
 
-                    playerTwo.Down();
+                    playerTwo.right();
                 }
-                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)))
+                if ((state.IsKeyUp(Keys.Left)) && (state.IsKeyUp(Keys.Right)))
                 {
                     playerTwo.Stop();
                 }
 
                 /*ball.Update(wallList, planeList)*/;
-                playerTwo.Update();
+                
                 previousState = state;
 
                 base.Update(gameTime);
