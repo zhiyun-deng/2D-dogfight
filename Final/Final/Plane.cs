@@ -89,10 +89,7 @@ namespace Final
 
         public override void Draw(SpriteBatch sprite)
         {
-
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-
-
         }
 
         public void CollideWallX(GameObject wall)
@@ -138,7 +135,9 @@ namespace Final
             {
                 angle -= angleSpeed;
             }
+
             double ratio = texture.Width / (speed*speed);
+
             for (int i = 0; i < wallList.Count; i++)
             {
                 if (IsCollide(wallList[i]))
@@ -162,14 +161,17 @@ namespace Final
             }
 
             tailPos = position;
+
             if (faceRight)
             {
                 headPos = new Vector2(tailPos.X + horiChange, tailPos.Y + upChange);
             }
+
             else
             {
                 headPos = new Vector2(tailPos.X - horiChange, tailPos.Y - upChange);
             }
+
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
         
@@ -248,5 +250,6 @@ namespace Final
 
     }
 }
+
 
 
