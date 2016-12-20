@@ -18,8 +18,8 @@ namespace Final
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.03f;
-        double speed = 1;
+        private float angleSpeed = 0.02f;
+        double speed = 2;
 
 
         
