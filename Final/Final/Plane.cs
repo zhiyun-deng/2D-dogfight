@@ -86,6 +86,7 @@ namespace Final
         }
 
         }
+
         public override void Draw(SpriteBatch sprite)
         {
 
@@ -93,6 +94,7 @@ namespace Final
 
 
         }
+
         public void CollideWallX(GameObject wall)
         {
             if (position.X - oldPosition.X > 0)
@@ -105,20 +107,21 @@ namespace Final
             }
         }
 
-        public void Update(List<GameObject> wallList, List<Plane> planeList)
+    public void Update(List<GameObject> wallList, List<Plane> planeList)
+    {
+        oldPosition = position;
+
+
+        // Check for x wall collision
+
+        for (int i = 0; i < wallList.Count; i++)
         {
-            oldPosition = position;
-
-
-            // Check for x wall collision
-
-            for (int i = 0; i < wallList.Count; i++)
+            if (IsCollide(wallList[i]))
             {
-                if (IsCollide(wallList[i]))
-                {
-                    CollideWallX(wallList[i]);
-                }
+                CollideWallX(wallList[i]);
             }
+        }
+    }
 
         //if faceright and up, angle -
         //right and down +
