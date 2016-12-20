@@ -31,6 +31,7 @@ namespace Final
         //Vector2 bluePosition;
         //Vector2 blueVelocity;
         KeyboardState previousState;
+        MouseState previousMouse;
 
 
         public Game1()
@@ -77,12 +78,14 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
-            Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
-            playerOne = new Plane(redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
+            Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero,false);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero,false);
             planeList.Add(playerTwo);
 
             //Walls
@@ -106,6 +109,8 @@ namespace Final
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
             wallList.Add(wall);
 
+            
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -116,6 +121,7 @@ namespace Final
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         /// <summary>
@@ -127,6 +133,7 @@ namespace Final
         {
             {
                 KeyboardState state = Keyboard.GetState();
+                MouseState mouse = Mouse.GetState();
 
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
@@ -137,9 +144,9 @@ namespace Final
 
                 // PlayerOne Controls
 
-                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
+                if (state.IsKeyDown(Keys.A))
                 {
-                    playerOne.Up();
+                    playerOne.left();
                 }
 
                 //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
@@ -150,12 +157,12 @@ namespace Final
                 //{
                 //    playerOne.Right();
                 //}
-                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
+                if (state.IsKeyDown(Keys.D))
                 {
 
-                    playerOne.Down();
+                    playerOne.right();
                 }
-                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
+                if ((state.IsKeyUp(Keys.A)) && (state.IsKeyUp(Keys.D) ))
                 {
                     playerOne.Stop();
                 }
@@ -167,44 +174,46 @@ namespace Final
                 }
 
 
+                
 
-                playerOne.Update();
-                playerTwo.Update();
 
 
 
                 //player two controls
 
 
-                if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
+                if (state.IsKeyDown(Keys.Left))
                 {
-                    playerTwo.Up();
+                    playerTwo.left();
                 }
-                ////if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
-                ////{
-                ////    playerTwo.Left();
-                ////}
-                ////if (state.IsKeyDown(Keys.Right) && !previousState.IsKeyDown(Keys.Right))
-                ////{
-                ////    playerTwo.Right();
-                ////}
-                if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
+
+                //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
+                //{
+                //    playerOne.Left();
+                //}
+                //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
+                //{
+                //    playerOne.Right();
+                //}
+                if (state.IsKeyDown(Keys.Right))
                 {
-                    playerTwo.Down();
+
+                    playerTwo.right();
                 }
-                //if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left) && (state.IsKeyUp(Keys.Right))))
-                //{
-                //    playerTwo.Stop();
-                //}
+                if ((state.IsKeyUp(Keys.Left)) && (state.IsKeyUp(Keys.Right)))
+                {
+                    playerTwo.Stop();
+                }
 
-                //for (int i = 0; i < planeList.Count; i++)
-                //{
-                //    planeList[i].Update(wallList);
-                //}
-
-                /*ball.Update(wallList, planeList)*/;
-
+                /*ball.Update(wallList, planeList)*/
+                if(mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
+                {
+                    playerOne.accelerate(0.5);
+                }
+                
                 previousState = state;
+                previousMouse = mouse;
+
 
                 base.Update(gameTime);
             }
