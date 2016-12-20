@@ -36,6 +36,7 @@ namespace Final
                 origin = new Vector2(0, 0);
 
             }
+
             else
             {
                 faceRight = false;
@@ -43,7 +44,9 @@ namespace Final
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
             }
+
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+        }
 
         public void CollideWallY(GameObject wall)
         {
@@ -68,21 +71,12 @@ namespace Final
                 position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
             }
         }
-
+        
         public void Update(List<GameObject> wallList, List<Plane> planeList)
         {
-            this.texture = texture;
-            this.position = position;
-            this.velocity = velocity;
-            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            oldPosition = position;
 
-            //providing the plane is horizontal
-            if (right)
-            {
-                faceRight = true;
-                tailPos = position;
-                headPos = new Vector2(position.X + texture.Width, position.Y);
-                origin = new Vector2(0, 0);
+            position.X += velocity.X;
 
             // Check for x wall collision
 
@@ -94,17 +88,8 @@ namespace Final
                 }
             }
 
-            
+
             position.Y += velocity.Y;
-            }
-            else
-            {
-                faceRight = false;
-                headPos = position;
-                tailPos = new Vector2(position.X + texture.Width, position.Y);
-                origin = new Vector2(texture.Width, texture.Height);
-            }
-        }
 
             // Check for Y wall collision
 
@@ -116,8 +101,8 @@ namespace Final
                 }
             }
 
-            
-          }
+
+        }
 
         public override void Update()
         {
