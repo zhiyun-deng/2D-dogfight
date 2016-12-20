@@ -78,14 +78,14 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
-            Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
-            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
-            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80good");
+            Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80good");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLeft");
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero,false);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false);
             planeList.Add(playerTwo);
 
             //Walls
@@ -109,7 +109,7 @@ namespace Final
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
             wallList.Add(wall);
 
-            
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -162,7 +162,7 @@ namespace Final
 
                     playerOne.right();
                 }
-                if ((state.IsKeyUp(Keys.A)) && (state.IsKeyUp(Keys.D) ))
+                if ((state.IsKeyUp(Keys.A)) && (state.IsKeyUp(Keys.D)))
                 {
                     playerOne.Stop();
                 }
@@ -174,7 +174,10 @@ namespace Final
                 }
 
 
-                
+
+
+
+
 
                 //player two controls
 
@@ -183,24 +186,12 @@ namespace Final
                 {
                     playerTwo.left();
                 }
-                ////if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
-                ////{
-                ////    playerTwo.Left();
-                ////}
-                ////if (state.IsKeyDown(Keys.Right) && !previousState.IsKeyDown(Keys.Right))
-                ////{
-                ////    playerTwo.Right();
-                ////}
-                if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
-                {
-                    playerTwo.Down();
-                }
-                if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)))
-                {
-                    playerTwo.Stop();
-                }
 
-                //for (int i = 0; i < planeList.Count; i++)
+                //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
+                //{
+                //    playerOne.Left();
+                //}
+                //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
                 //{
                 //    playerOne.Right();
                 //}
@@ -215,11 +206,11 @@ namespace Final
                 }
 
                 /*ball.Update(wallList, planeList)*/
-                if(mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
+                if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
                 {
                     playerOne.accelerate(0.5);
                 }
-                
+
                 previousState = state;
                 previousMouse = mouse;
 
@@ -241,10 +232,6 @@ namespace Final
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
-            for (int i = 0; i < wallList.Count; i++)
-            {
-                wallList[i].Draw(spriteBatch);
-            }
 
             for (int i = 0; i < planeList.Count; i++)
             {
@@ -252,9 +239,6 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
-
-            playerOne.Update(wallList, planeList);
-            playerOne.Update(wallList, planeList);
 
             spriteBatch.End();
 
