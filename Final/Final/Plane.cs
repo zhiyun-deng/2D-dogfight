@@ -23,6 +23,7 @@ namespace Final
         double speed = 2;
         Texture2D leftTexture;
         Texture2D rightTexture;
+        int health;
 
 
         
@@ -247,6 +248,8 @@ namespace Final
                 texture = leftTexture;
             }
             angle = -angle;
+            //still jumpy
+            position.X = position.X - texture.Height;
         }
         public void right()
         {
