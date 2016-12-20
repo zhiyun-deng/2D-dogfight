@@ -77,12 +77,14 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
-            Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
-            playerOne = new Plane(redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
+            Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero,false);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero,false);
             planeList.Add(playerTwo);
 
             //Walls
@@ -142,7 +144,7 @@ namespace Final
 
                 if (state.IsKeyDown(Keys.W))
                 {
-                    playerOne.Up();
+                    playerOne.W();
                 }
 
                 //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
@@ -156,7 +158,7 @@ namespace Final
                 if (state.IsKeyDown(Keys.S))
                 {
 
-                    playerOne.Down();
+                    playerOne.S();
                 }
                 if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
                 {
@@ -170,8 +172,7 @@ namespace Final
                 }
 
 
-
-                playerOne.Update();
+                
 
 
 
