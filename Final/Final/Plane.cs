@@ -19,6 +19,8 @@ namespace Final
 
         Vector2 origin;
         private float angleSpeed = 0.0f;
+        Texture2D leftTexture;
+        Texture2D rightTexture;
 
 
 
