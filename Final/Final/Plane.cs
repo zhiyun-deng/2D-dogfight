@@ -55,7 +55,7 @@ namespace Final
                 texture = leftTexture;
             }
 
-            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            //sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
         }
 
         //public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
