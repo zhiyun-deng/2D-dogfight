@@ -170,7 +170,7 @@ namespace Final
 
                 for (int i = 0; i < planeList.Count; i++)
                 {
-                    planeList[i].Update(wallList, planeList);
+                    planeList[i].Update();
                 }
 
 
@@ -244,8 +244,7 @@ namespace Final
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
 
-            playerOne.Update(wallList, planeList);
-            playerOne.Update(wallList, planeList);
+            
 
             spriteBatch.End();
 

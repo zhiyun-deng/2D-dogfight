@@ -74,13 +74,7 @@ namespace Final
 
             // Check for x wall collision
 
-            for (int i = 0; i < wallList.Count; i++)
-            {
-                if (IsCollide(wallList[i]))
-                {
-                    CollideWallX(wallList[i]);
-                }
-            }
+            
 
             
             position.Y += velocity.Y;
