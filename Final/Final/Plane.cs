@@ -30,6 +30,10 @@ namespace Final
         {
             //this.texture = texture;
             this.position = position;
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
+            this.velocity = velocity;
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             //providing the plane is horizontal
             if (right)
@@ -38,6 +42,7 @@ namespace Final
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(0, 0);
+                texture = rightTexture;
 
             }
 
@@ -47,6 +52,7 @@ namespace Final
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
             }
 
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
