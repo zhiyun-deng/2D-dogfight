@@ -48,6 +48,34 @@ namespace Final
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
         }
 
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
+        {
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
+            this.position = position;
+            this.velocity = velocity;
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+
+            //providing the plane is horizontal
+            if (right)
+            {
+                faceRight = true;
+                tailPos = position;
+                headPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(0, 0);
+                texture = rightTexture;
+
+            }
+            else
+            {
+                faceRight = false;
+                headPos = position;
+                tailPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
+            }
+        }
+
         public void CollideWallY(GameObject wall)
         {
             if (position.Y - oldPosition.Y > 0)
