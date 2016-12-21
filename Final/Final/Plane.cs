@@ -11,21 +11,25 @@ namespace Final
 {
     class Plane : GameObject
     {
+        //need to fix protection level of variables
         private Vector2 headPos;
         private Vector2 tailPos;
-        private bool faceRight = true;
-        private float angle = 0.0f;
+        public bool faceRight = true;
+        public float angle = 0.0f;
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.02f;
+        private float angleSpeed = 0.04f;
         double speed = 2;
+        Texture2D leftTexture;
+        Texture2D rightTexture;
 
 
-        
-        public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
+
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right) : base(leftTexture, position)
         {
-            this.texture = texture;
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
             this.position = position;
 
             //providing the plane is horizontal
@@ -35,6 +39,7 @@ namespace Final
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(0, 0);
+                texture = rightTexture;
 
             }
             else
@@ -43,15 +48,17 @@ namespace Final
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
             }
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             velocity = new Vector2(0, 0);
         }
         //velocity might not be needed
-        public Plane(Texture2D texture, Vector2 position, Vector2 velocity, bool right) : base(texture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
         {
-            this.texture = texture;
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
             this.position = position;
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
@@ -63,6 +70,7 @@ namespace Final
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(0, 0);
+                texture = rightTexture;
 
             }
             else
@@ -71,54 +79,26 @@ namespace Final
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
             }
         }
-        public void CollideWallY(GameObject wall)
+
+
+        public override void Update()
         {
-            if (position.Y - oldPosition.Y > 0)
-            {
-                position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
-            }
-            else if (position.Y - oldPosition.Y < 0)
-            {
-                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
-            }
-        }
+            position += velocity;
+
+
 
         }
-
         public override void Draw(SpriteBatch sprite)
         {
+
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+
+
         }
 
-        public void CollideWallX(GameObject wall)
-        {
-            if (position.X - oldPosition.X > 0)
-            {
-                position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
-            }
-            else if (position.X - oldPosition.X < 0)
-            {
-                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
-            }
-        }
-
-    public void Update(List<GameObject> wallList, List<Plane> planeList)
-    {
-        oldPosition = position;
-
-
-        // Check for x wall collision
-
-        for (int i = 0; i < wallList.Count; i++)
-        {
-            if (IsCollide(wallList[i]))
-            {
-                CollideWallX(wallList[i]);
-            }
-        }
-    }
 
         //if faceright and up, angle -
         //right and down +
@@ -126,7 +106,6 @@ namespace Final
         //left and up +
 
 
-            // Check for Y wall collision
 
         public void Up() //not for ffaceright
         {
@@ -136,18 +115,21 @@ namespace Final
                 angle -= angleSpeed;
             }
 
-            double ratio = texture.Width / (speed*speed);
-
-            for (int i = 0; i < wallList.Count; i++)
+            if (angle > Math.PI / 2 || angle < -Math.PI / 2)
             {
-                if (IsCollide(wallList[i]))
+                flip();
+                if (angle > Math.PI / 2)
                 {
-                    CollideWallY(wallList[i]);
+                    angle = (float)Math.PI / 2;
                 }
+                else
+                {
+                    angle = -(float)Math.PI / 2;
+                }
+
             }
 
-            
-          }
+            double ratio = texture.Width / (speed * speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -174,16 +156,11 @@ namespace Final
 
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
-        
-        
-        public void Up()
-        {
-            velocity.Y = -2;
-        }
-        public void Left()
-        {
-            velocity.X = -2;
-        }
+
+
+
+
+
 
         }
 
@@ -194,9 +171,21 @@ namespace Final
             {
                 angle += angleSpeed;
             }
+            if (angle > Math.PI / 2 || angle < -Math.PI / 2)
+            {
+                flip();
+                if (angle > Math.PI / 2)
+                {
+                    angle = (float)Math.PI / 2;
+                }
+                else
+                {
+                    angle = -(float)Math.PI / 2;
+                }
 
+            }
 
-            double ratio = texture.Width / (speed*speed);
+            double ratio = texture.Width / (speed * speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -218,6 +207,9 @@ namespace Final
             }
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
+
+
+
         }
 
         public void Stop()
@@ -226,7 +218,7 @@ namespace Final
             {
                 if (faceRight)
                 {
-                    Up(); 
+                    Up();
                 }
                 else
                 {
@@ -237,13 +229,54 @@ namespace Final
             {
                 if (faceRight)
                 {
-                    Down(); 
+                    Down();
                 }
                 else
                 {
                     Up();
                 }
             }
+        }
+        public void flip()
+        {
+            faceRight = !faceRight;
+            if (faceRight)
+            {
+                texture = rightTexture;
+
+            }
+            else
+            {
+                texture = leftTexture;
+            }
+            angle = -angle;
+        }
+        public void right()
+        {
+            if (faceRight)
+            {
+                Up();
+            }
+            else
+            {
+                Down();
+            }
+        }
+        public void left()
+        {
+
+            if (faceRight)
+            {
+                Down();
+            }
+            else
+            {
+                Up();
+            }
+        }
+        public void accelerate(double speedAdded)
+        {
+            speed += speedAdded;
         }
 
 
