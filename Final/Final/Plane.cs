@@ -24,6 +24,7 @@ namespace Final
         Texture2D leftTexture;
         Texture2D rightTexture;
         int health;
+        bool shield;
 
 
         
@@ -277,6 +278,10 @@ namespace Final
         public void accelerate(double speedAdded)
         {
             speed += speedAdded;
+        }
+        public void sheild()
+        {
+
         }
 
 

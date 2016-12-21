@@ -32,6 +32,7 @@ namespace Final
         //Vector2 blueVelocity;
         KeyboardState previousState;
         MouseState previousMouse;
+        Balloon balloon;
 
 
         public Game1()
@@ -82,11 +83,14 @@ namespace Final
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
             planeList.Add(playerOne);
 
             playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero,false);
             planeList.Add(playerTwo);
+
+            balloon = new Balloon(balloonImage, Vector2.Zero, Vector2.Zero);
 
             //Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
@@ -239,6 +243,7 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
+            balloon.draw(spriteBatch);
 
             spriteBatch.End();
 
