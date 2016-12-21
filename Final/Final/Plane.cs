@@ -135,7 +135,7 @@ namespace Final
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
             float horiChange = (float)Math.Sqrt(texture.Width * texture.Width - upChange * upChange);
-            
+
             if (!faceRight)
             {
                 upChange *= -1;
