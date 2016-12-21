@@ -20,6 +20,7 @@ namespace Final
         List<GameObject> wallList;
 
         private Texture2D background;
+        private Texture2D bullet;
         //Texture2D redPlane;
         //Vector2 redPosition;
         //Vector2 redVelocity;
@@ -71,6 +72,7 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
+            bullet = Content.Load<Texture2D>("bulletGOOD");
             //redPlane = Content.Load<Texture2D>("biplanered80");
             //redPosition = new Vector2(1000, 400);
             //redVelocity = new Vector2(-1, 0);
@@ -231,6 +233,7 @@ namespace Final
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(bullet, new Rectangle(1090, 335, 21, 11), Color.White);//DRAWS BULLET FOR TEST
 
 
             for (int i = 0; i < planeList.Count; i++)
