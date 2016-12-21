@@ -18,7 +18,7 @@ namespace Final
         SpriteBatch spriteBatch;
         List<Plane> planeList;
         List<GameObject> wallList;
-
+        private Texture2D bullet;
         private Texture2D background;
         //Texture2D redPlane;
         //Vector2 redPosition;
