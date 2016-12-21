@@ -79,10 +79,13 @@ namespace Final
 
             Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
             Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
-            playerOne = new Plane(redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+
+            playerOne = new Plane(redRight, redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero,false);
+            playerTwo = new Plane(blueLeft, bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero,false);
             planeList.Add(playerTwo);
 
             //Walls
@@ -163,7 +166,7 @@ namespace Final
 
                 for (int i = 0; i < planeList.Count; i++)
                 {
-                    planeList[i].Update();
+                    planeList[i].Update(wallList, planeList);
                 }
 
 
@@ -223,6 +226,10 @@ namespace Final
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                wallList[i].Draw(spriteBatch);
+            }
 
             for (int i = 0; i < planeList.Count; i++)
             {
@@ -230,6 +237,9 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
+
+            playerOne.Update(wallList, planeList);
+            playerOne.Update(wallList, planeList);
 
             spriteBatch.End();
 

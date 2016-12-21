@@ -19,38 +19,19 @@ namespace Final
 
         Vector2 origin;
         private float angleSpeed = 0.0f;
+        Texture2D leftTexture;
+        Texture2D rightTexture;
 
 
 
-        public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
+        //public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
+
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
         {
-            this.texture = texture;
+            //this.texture = texture;
             this.position = position;
-
-            //providing the plane is horizontal
-            if (right)
-            {
-                faceRight = true;
-                tailPos = position;
-                headPos = new Vector2(position.X + texture.Width, position.Y);
-                origin = new Vector2(0, 0);
-
-            }
-            else
-            {
-                faceRight = false;
-                headPos = position;
-                tailPos = new Vector2(position.X + texture.Width, position.Y);
-                origin = new Vector2(texture.Width, texture.Height);
-            }
-            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-
-            velocity = new Vector2(0, 0);
-        }
-        public Plane(Texture2D texture, Vector2 position, Vector2 velocity, bool right) : base(texture, position, velocity)
-        {
-            this.texture = texture;
-            this.position = position;
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
@@ -61,17 +42,105 @@ namespace Final
                 tailPos = position;
                 headPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(0, 0);
+                texture = rightTexture;
 
             }
+
             else
             {
                 faceRight = false;
                 headPos = position;
                 tailPos = new Vector2(position.X + texture.Width, position.Y);
                 origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
+            }
+
+            //sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+        }
+
+        //public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
+        //{
+        //    this.leftTexture = leftTexture;
+        //    this.rightTexture = rightTexture;
+        //    this.position = position;
+        //    this.velocity = velocity;
+        //    sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+
+        //    //providing the plane is horizontal
+        //    if (right)
+        //    {
+        //        faceRight = true;
+        //        tailPos = position;
+        //        headPos = new Vector2(position.X + texture.Width, position.Y);
+        //        origin = new Vector2(0, 0);
+        //        texture = rightTexture;
+
+        //    }
+        //    else
+        //    {
+        //        faceRight = false;
+        //        headPos = position;
+        //        tailPos = new Vector2(position.X + texture.Width, position.Y);
+        //        origin = new Vector2(texture.Width, texture.Height);
+        //        texture = leftTexture;
+        //    }
+        //}
+
+        public void CollideWallY(GameObject wall)
+        {
+            if (position.Y - oldPosition.Y > 0)
+            {
+                position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
+            }
+            else if (position.Y - oldPosition.Y < 0)
+            {
+                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
             }
         }
 
+        public void CollideWallX(GameObject wall)
+        {
+            if (position.X - oldPosition.X > 0)
+            {
+                position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            }
+            else if (position.X - oldPosition.X < 0)
+            {
+                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
+            }
+        }
+        
+        public void Update(List<GameObject> wallList, List<Plane> planeList)
+        {
+            oldPosition = position;
+
+            position.X += velocity.X;
+
+            // Check for x wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallX(wallList[i]);
+                }
+            }
+
+
+            position.Y += velocity.Y;
+
+            // Check for Y wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallY(wallList[i]);
+                }
+            }
+
+
+        }
 
         public override void Update()
         {
