@@ -19,10 +19,7 @@ namespace Final
             this.texture = texture;
             this.velocity = velocity;
         }
-        public void draw(SpriteBatch sprite)
-        {
-            sprite.Draw(texture, new Rectangle(texture, );
-        }
+        
         
     }
 }

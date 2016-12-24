@@ -243,7 +243,7 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
-            balloon.draw(spriteBatch);
+            balloon.Draw(spriteBatch);
 
             spriteBatch.End();
 
