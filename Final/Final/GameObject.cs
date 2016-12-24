@@ -77,6 +77,10 @@ namespace Final
         {
             spriteBatch.Draw(texture, position);
         }
+        public virtual void DrawSize(SpriteBatch spriteBatch, int width, int height)
+        {
+            spriteBatch.Draw(texture,new Rectangle((int)position.X, (int)position.Y, width, height),Color.White);
+        }
 
         public bool IsCollide(GameObject target)
         {
