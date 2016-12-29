@@ -109,3 +109,9 @@
 /processorParam:TextureFormat=Color
 /build:balloon - Copy.png
 
+#begin Text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Text.spritefont
+

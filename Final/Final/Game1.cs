@@ -176,7 +176,8 @@ namespace Final
                 {
                     planeList[i].Update();
                 }
-                balloon.MoveTo(playerOne.Position);
+                balloon.MoveRandom();
+                //balloon.MoveTo(playerOne.Position);
                 balloon.Update();
           
 
