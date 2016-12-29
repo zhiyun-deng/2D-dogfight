@@ -176,7 +176,7 @@ namespace Final
                 {
                     planeList[i].Update();
                 }
-                balloon.MoveTo(new Vector2(0,0));
+                balloon.MoveTo(playerOne.Position);
                 balloon.Update();
           
 
