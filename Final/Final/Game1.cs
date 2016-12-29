@@ -90,7 +90,7 @@ namespace Final
             playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero,false);
             planeList.Add(playerTwo);
 
-            balloon = new Balloon(balloonImage, Vector2.Zero, Vector2.Zero);
+            balloon = new Balloon(balloonImage, new Vector2(300,300), new Vector2(1,1));
 
             //Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
@@ -176,7 +176,9 @@ namespace Final
                 {
                     planeList[i].Update();
                 }
-
+                balloon.MoveTo(new Vector2(0,0));
+                balloon.Update();
+          
 
                 
 
