@@ -86,9 +86,14 @@ namespace Final
         }
 
 
-        public override void Update()
+        public void Update(Plane another)
         {
             position += velocity;
+            if (another.BoundingBox.Intersects(this.BoundingBox))
+            {
+                position.X -= 300;
+            }
+            
             
             
 
@@ -283,7 +288,12 @@ namespace Final
         {
 
         }
+        public void explode()
+        {
 
+        }
+
+        
 
 
     }

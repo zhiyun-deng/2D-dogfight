@@ -12,23 +12,25 @@ namespace Final
 {
     class Level
     {
-        List<Plane> planeList;
-        List<GameObject> wallList;
+        protected List<Plane> planeList;
+        protected List<GameObject> wallList;
 
-        private Texture2D background;
+        protected Texture2D background;
         //Texture2D redPlane;
         //Vector2 redPosition;
         //Vector2 redVelocity;
 
-        Plane playerOne;
-        Plane playerTwo;
+        protected Plane playerOne;
+        protected Plane playerTwo;
 
         //Texture2D bluePlane;
         //Vector2 bluePosition;
         //Vector2 blueVelocity;
-        KeyboardState previousState;
-        MouseState previousMouse;
-        Balloon balloon;
+        protected KeyboardState previousState;
+        protected MouseState previousMouse;
+        protected Balloon balloon;
+        private SpriteFont font;
+
         public Level()
         {
             wallList = new List<GameObject>();
@@ -42,6 +44,8 @@ namespace Final
         }
         public virtual void Load(ContentManager Content)
         {
+
+            font = Content.Load<SpriteFont>("Text");
             background = Content.Load<Texture2D>("sky");
             //redPlane = Content.Load<Texture2D>("biplanered80");
             //redPosition = new Vector2(1000, 400);
@@ -117,10 +121,12 @@ namespace Final
             }
 
 
-            for (int i = 0; i < planeList.Count; i++)
-            {
-                planeList[i].Update();
-            }
+            //for (int i = 0; i < planeList.Count; i++)
+            //{
+            //    planeList[i].Update();
+            //}
+
+            playerOne.Update(playerTwo);
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
             balloon.Update();
@@ -163,6 +169,11 @@ namespace Final
                 playerOne.accelerate(0.5);
             }
 
+
+
+
+
+
             previousState = state;
             previousMouse = mouse;
 
@@ -177,6 +188,8 @@ namespace Final
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
             balloon.DrawSize(spriteBatch, 45, 70);
+
+            spriteBatch.DrawString(font, "Hello!!!!!!!!!", new Vector2(0, 0), Color.Black);
         }
     }
 }
