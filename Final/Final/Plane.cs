@@ -99,6 +99,60 @@ namespace Final
 
         }
 
+        public void CollideWallY(GameObject wall)
+        {
+            if (position.Y - oldPosition.Y > 0)
+            {
+                position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
+            }
+            else if (position.Y - oldPosition.Y < 0)
+            {
+                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
+            }
+        }
+
+        public void CollideWallX(GameObject wall)
+        {
+            if (position.X - oldPosition.X > 0)
+            {
+                position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            }
+            else if (position.X - oldPosition.X < 0)
+            {
+                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
+            }
+        }
+
+        public void Update(List<GameObject> wallList, List<Plane> planeList)
+        {
+            oldPosition = position;
+
+            position.X += velocity.X;
+
+            // Check for x wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallX(wallList[i]);
+                }
+            }
+
+
+            position.Y += velocity.Y;
+
+            // Check for Y wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallY(wallList[i]);
+                }
+            }
+
+        }
 
         //if faceright and up, angle -
         //right and down +
