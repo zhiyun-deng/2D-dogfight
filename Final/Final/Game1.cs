@@ -84,6 +84,9 @@ namespace Final
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80good");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLeft");
+
+            Texture2D bulletRight = Content.Load<Texture2D>("bulletGood");
+
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true);
             planeList.Add(playerOne);
 
@@ -206,6 +209,12 @@ namespace Final
                 {
                     playerTwo.Stop();
                 }
+
+                if (state.IsKeyDown(Keys.Space))
+                {
+
+                }
+             
 
                 /*ball.Update(wallList, planeList)*/
                 if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
