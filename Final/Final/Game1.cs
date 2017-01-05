@@ -33,7 +33,7 @@ namespace Final
         KeyboardState previousState;
         MouseState previousMouse;
         Balloon balloon;
-
+        Level[] levelList = new Level[1];
 
         public Game1()
         {
@@ -54,12 +54,8 @@ namespace Final
         {
             // TODO: Add your initialization logic here
 
-            wallList = new List<GameObject>();
-
-            //planeList = new List<GameObject>();
-
-            planeList = new List<Plane>();
-            previousState = Keyboard.GetState();
+            Level one = new Level();
+            levelList
             base.Initialize();
         }
 
