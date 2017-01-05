@@ -233,6 +233,10 @@ namespace Final
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                wallList[i].Draw(spriteBatch);
+            }
 
             for (int i = 0; i < planeList.Count; i++)
             {
