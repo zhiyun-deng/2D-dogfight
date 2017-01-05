@@ -173,8 +173,8 @@ namespace Final
                     planeList[i].Update(wallList, planeList);
                 }
 
-                playerOne.Update;
-                playerTwo.Update;
+                //playerOne.Update;
+                //playerTwo.Update;
 
 
 
