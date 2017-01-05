@@ -170,10 +170,11 @@ namespace Final
 
                 for (int i = 0; i < planeList.Count; i++)
                 {
-                    planeList[i].Update();
+                    planeList[i].Update(wallList, planeList);
                 }
 
-
+                playerOne.Update;
+                playerTwo.Update;
 
 
 
