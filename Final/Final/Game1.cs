@@ -245,6 +245,9 @@ namespace Final
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
 
+            playerOne.Update(wallList, planeList);
+            playerOne.Update(wallList, planeList);
+
             spriteBatch.End();
 
             // TODO: Add your drawing code here
