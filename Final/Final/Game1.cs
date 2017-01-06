@@ -20,7 +20,7 @@ namespace Final
         List<GameObject> wallList;
 
         private Texture2D background;
-        private Texture2D bullet;
+        private Texture2D bulletTex;
         //Texture2D redPlane;
         //Vector2 redPosition;
         //Vector2 redVelocity;
@@ -60,6 +60,7 @@ namespace Final
 
             planeList = new List<Plane>();
             previousState = Keyboard.GetState();
+            
             base.Initialize();
         }
 
@@ -72,7 +73,7 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
-            bullet = Content.Load<Texture2D>("bulletGOOD");
+            bulletTex = Content.Load<Texture2D>("bulletGOOD");
             //redPlane = Content.Load<Texture2D>("biplanered80");
             //redPosition = new Vector2(1000, 400);
             //redVelocity = new Vector2(-1, 0);
@@ -87,10 +88,10 @@ namespace Final
 
             Texture2D bulletRight = Content.Load<Texture2D>("bulletGood");
 
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, bulletTex);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false, bulletTex);
             planeList.Add(playerTwo);
 
             //Walls
@@ -242,7 +243,7 @@ namespace Final
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
-            spriteBatch.Draw(bullet, new Rectangle(1090, 335, 21, 11), Color.White);//DRAWS BULLET FOR TEST
+            spriteBatch.Draw(bulletTex, new Rectangle(1090, 335, 21, 11), Color.White);//DRAWS BULLET FOR TEST
 
 
             for (int i = 0; i < planeList.Count; i++)

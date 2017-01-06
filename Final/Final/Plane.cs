@@ -24,16 +24,20 @@ namespace Final
         double speed = 2;
         Texture2D leftTexture;
         Texture2D rightTexture;
-        
+
+        List<Bullet> bulletList;
+        Texture2D bulletTex;
 
 
 
 
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, Texture2D bulletTex ) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
+            bulletList = new List<Bullet>();
+           
 
             //providing the plane is horizontal
             if (right)
@@ -56,9 +60,11 @@ namespace Final
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             velocity = new Vector2(0, 0);
+
+            this.bulletTex = bulletTex;
         }
         //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position,Vector2 velocity, bool right, Texture2D bulletTex) : base(leftTexture, position, velocity)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -85,9 +91,9 @@ namespace Final
                 texture = leftTexture;
             }
 
-        
+            this.bulletTex = bulletTex;
 
-    }
+        }
 
 
    
@@ -116,7 +122,11 @@ namespace Final
         //right and down +
         //left and down -
         //left and up +
-
+        public void Shoot()
+        {
+            Bullet bullet = new Final.Bullet(bulletTex, position);
+            bullet.MoveTo(Vector2.Zero);
+        }
 
 
         public void Up() //not for ffaceright
