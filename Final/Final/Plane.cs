@@ -20,7 +20,7 @@ namespace Final
 
         Vector2 origin;
         private float angleSpeed = 0.04f;
-        double speed = 2;
+        double speed = 1.5;
         Texture2D leftTexture;
         Texture2D rightTexture;
 
@@ -84,19 +84,14 @@ namespace Final
         }
 
 
-        public override void Update()
-        {
-            position += velocity;
+        //public override void Update()
+        //{
+        //    position += velocity;
+        //}
 
-
-
-        }
         public override void Draw(SpriteBatch sprite)
         {
-
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-
-
         }
 
         public void CollideWallY(GameObject wall)

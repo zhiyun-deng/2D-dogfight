@@ -71,6 +71,7 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
+
             //redPlane = Content.Load<Texture2D>("biplanered80");
             //redPosition = new Vector2(1000, 400);
             //redVelocity = new Vector2(-1, 0);
@@ -82,6 +83,7 @@ namespace Final
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80good");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLeft");
+
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true);
             planeList.Add(playerOne);
 
@@ -90,16 +92,14 @@ namespace Final
 
             //Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
-            GameObject wall = new GameObject(wallImage, Vector2.Zero);
 
+            GameObject wall = new GameObject(wallImage, Vector2.Zero);
             wallList.Add(wall);
 
             wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));
-
             wallList.Add(wall);
 
             // Side Walls
-
             wallImage = Content.Load<Texture2D>("Border720");
 
             wall = new GameObject(wallImage, Vector2.Zero);
@@ -231,6 +231,7 @@ namespace Final
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
 
             for (int i = 0; i < wallList.Count; i++)
@@ -246,7 +247,7 @@ namespace Final
             //spriteBatch.Draw(bluePlane, bluePosition);
 
             playerOne.Update(wallList, planeList);
-            playerOne.Update(wallList, planeList);
+            playerTwo.Update(wallList, planeList);
 
             spriteBatch.End();
 
