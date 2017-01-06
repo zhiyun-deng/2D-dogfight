@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace Final
 {
     class Plane : GameObject
@@ -23,16 +24,21 @@ namespace Final
         double speed = 2;
         Texture2D leftTexture;
         Texture2D rightTexture;
-        int health;
+        int health = 10;
         bool shield;
+        AnimatedClass explosion;
+        bool dead = false;
+        bool exploding = false;
+
 
 
         
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
+            this.explosion = explosion;
 
             //providing the plane is horizontal
             if (right)
@@ -57,13 +63,14 @@ namespace Final
             velocity = new Vector2(0, 0);
         }
         //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            this.explosion = explosion;
 
             //providing the plane is horizontal
             if (right)
@@ -89,9 +96,14 @@ namespace Final
         public void Update(Plane another)
         {
             position += velocity;
-            if (another.BoundingBox.Intersects(this.BoundingBox))
+            if (another.BoundingBox.Intersects(BoundingBox))
             {
-                position.X -= 300;
+                explode();
+            }
+            explosion.Update();
+            if (dead)
+            {
+                velocity = new Vector2(0, 10f);
             }
             
             
@@ -102,6 +114,11 @@ namespace Final
         {
 
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            if (exploding)
+            {
+                explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
+
+            }
 
 
         }
@@ -116,6 +133,7 @@ namespace Final
 
         public void Up() //not for ffaceright
         {
+            if (dead) return;
             if (!faceRight) { angle += angleSpeed; }
             else
             {
@@ -170,6 +188,7 @@ namespace Final
 
         public void Down()
         {
+            if (dead) return;
             if (!faceRight) { angle -= angleSpeed; }
             else
             {
@@ -218,6 +237,7 @@ namespace Final
 
         public void Stop()
         {
+            if (dead) return;
             if (angle > 0)
             {
                 if (faceRight)
@@ -290,8 +310,11 @@ namespace Final
         }
         public void explode()
         {
-
+            health = 0;
+            dead = true;
+            exploding = true;
         }
+        
 
         
 

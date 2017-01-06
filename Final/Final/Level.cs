@@ -30,6 +30,7 @@ namespace Final
         protected MouseState previousMouse;
         protected Balloon balloon;
         private SpriteFont font;
+        AnimatedClass explosion;
 
         public Level()
         {
@@ -54,15 +55,18 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
+            Texture2D texture = Content.Load<Texture2D>("explosion17");
+            explosion = new AnimatedClass(texture, 5, 5);
+
             Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion);
             planeList.Add(playerTwo);
 
             balloon = new Balloon(balloonImage, new Vector2(300, 300), new Vector2(1, 1));
@@ -88,12 +92,17 @@ namespace Final
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
             wallList.Add(wall);
 
+
+            
+
         }
         public virtual void Update(KeyboardState state, MouseState mouse)
         {
-            
+
 
             // TODO: Add your update logic here
+
+            
 
             // PlayerOne Controls
 
