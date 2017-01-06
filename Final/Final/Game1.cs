@@ -20,6 +20,7 @@ namespace Final
         List<GameObject> wallList;
 
         private Texture2D background;
+        private Texture2D bullet;
         //Texture2D redPlane;
         //Vector2 redPosition;
         //Vector2 redVelocity;
@@ -71,7 +72,7 @@ namespace Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("sky");
-
+            bullet = Content.Load<Texture2D>("bulletGOOD");
             //redPlane = Content.Load<Texture2D>("biplanered80");
             //redPosition = new Vector2(1000, 400);
             //redVelocity = new Vector2(-1, 0);
@@ -83,6 +84,8 @@ namespace Final
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80good");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLeft");
+
+            Texture2D bulletRight = Content.Load<Texture2D>("bulletGood");
 
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true);
             planeList.Add(playerOne);
@@ -206,6 +209,12 @@ namespace Final
                     playerTwo.Stop();
                 }
 
+                if (state.IsKeyDown(Keys.Space))
+                {
+
+                }
+             
+
                 /*ball.Update(wallList, planeList)*/
                 if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
                 {
@@ -233,6 +242,7 @@ namespace Final
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(bullet, new Rectangle(1090, 335, 21, 11), Color.White);//DRAWS BULLET FOR TEST
 
             for (int i = 0; i < wallList.Count; i++)
             {

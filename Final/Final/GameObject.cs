@@ -88,6 +88,33 @@ namespace Final
             return false;
         }
 
+
+        public void MoveTo(Vector2 target)
+        {
+
+            if (position.Equals(target))
+            {
+                velocity = Vector2.Zero;
+                return;
+            }
+
+            //speed of gameObject calculated from the two vectors
+            double speed = Math.Sqrt((double)velocity.X * velocity.X + (double)velocity.Y * velocity.Y);
+            //ratio of the velocity.X and Y needed for object to move toward target
+            double ratio = (target.X - position.X) / (target.Y - position.Y);
+            velocity.Y = (float)Math.Sqrt(speed * speed / (ratio * ratio + 1));
+            velocity.X = (float)Math.Sqrt(speed * speed - velocity.Y * velocity.Y);
+
+            if (target.X < position.X)
+            {
+                velocity.X *= -1;
+            }
+            if (target.Y < position.Y)
+            {
+                velocity.Y *= -1;
+            }
+        }
+
         public virtual void Update()
         {
             position += velocity;
