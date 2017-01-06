@@ -21,7 +21,7 @@ namespace Final
 
         Vector2 origin;
         private float angleSpeed = 0.04f;
-        double speed = 2;
+        double speed = 1.5;
         Texture2D leftTexture;
         Texture2D rightTexture;
 
@@ -102,21 +102,70 @@ namespace Final
 
 
 
-        public override void Update()
-        {
-            position += velocity;
+        //public override void Update()
+        //{
+        //    position += velocity;
+        //}
 
-
-
-        }
         public override void Draw(SpriteBatch sprite)
         {
-
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-
-
         }
 
+        public void CollideWallY(GameObject wall)
+        {
+            if (position.Y - oldPosition.Y > 0)
+            {
+                position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
+            }
+            else if (position.Y - oldPosition.Y < 0)
+            {
+                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
+            }
+        }
+
+        public void CollideWallX(GameObject wall)
+        {
+            if (position.X - oldPosition.X > 0)
+            {
+                position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            }
+            else if (position.X - oldPosition.X < 0)
+            {
+                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
+            }
+        }
+
+        public void Update(List<GameObject> wallList, List<Plane> planeList)
+        {
+            oldPosition = position;
+
+            position.X += velocity.X;
+
+            // Check for x wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallX(wallList[i]);
+                }
+            }
+
+
+            position.Y += velocity.Y;
+
+            // Check for Y wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallY(wallList[i]);
+                }
+            }
+
+        }
 
         //if faceright and up, angle -
         //right and down +
@@ -165,14 +214,17 @@ namespace Final
             }
 
             tailPos = position;
+
             if (faceRight)
             {
                 headPos = new Vector2(tailPos.X + horiChange, tailPos.Y + upChange);
             }
+
             else
             {
                 headPos = new Vector2(tailPos.X - horiChange, tailPos.Y - upChange);
             }
+
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
 
@@ -302,5 +354,6 @@ namespace Final
 
     }
 }
+
 
 

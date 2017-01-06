@@ -96,16 +96,14 @@ namespace Final
 
             //Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
-            GameObject wall = new GameObject(wallImage, Vector2.Zero);
 
+            GameObject wall = new GameObject(wallImage, Vector2.Zero);
             wallList.Add(wall);
 
             wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));
-
             wallList.Add(wall);
 
             // Side Walls
-
             wallImage = Content.Load<Texture2D>("Border720");
 
             wall = new GameObject(wallImage, Vector2.Zero);
@@ -176,10 +174,11 @@ namespace Final
 
                 for (int i = 0; i < planeList.Count; i++)
                 {
-                    planeList[i].Update();
+                    planeList[i].Update(wallList, planeList);
                 }
 
-
+                //playerOne.Update;
+                //playerTwo.Update;
 
 
 
@@ -242,9 +241,14 @@ namespace Final
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
             spriteBatch.Draw(bulletTex, new Rectangle(1090, 335, 21, 11), Color.White);//DRAWS BULLET FOR TEST
 
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                wallList[i].Draw(spriteBatch);
+            }
 
             for (int i = 0; i < planeList.Count; i++)
             {
@@ -252,6 +256,9 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
+
+            playerOne.Update(wallList, planeList);
+            playerTwo.Update(wallList, planeList);
 
             spriteBatch.End();
 
