@@ -179,7 +179,11 @@ namespace Final
             {
                 planeList[i].Draw(spriteBatch);
             }
-            
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                wallList[i].Draw(spriteBatch);
+            }
+
             balloon.DrawSize(spriteBatch, 45, 70);
 
             spriteBatch.DrawString(font, ".", playerTwo.Position, Color.Black);
