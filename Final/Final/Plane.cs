@@ -92,6 +92,29 @@ namespace Final
             }
         }
 
+        public void CollideWallY(GameObject wall)
+        {
+            if (position.Y - oldPosition.Y > 0)
+            {
+                position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
+            }
+            else if (position.Y - oldPosition.Y < 0)
+            {
+                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
+            }
+        }
+
+        public void CollideWallX(GameObject wall)
+        {
+            if (position.X - oldPosition.X > 0)
+            {
+                position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            }
+            else if (position.X - oldPosition.X < 0)
+            {
+                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
+            }
+        }
 
         public void Update(Plane another)
         {
