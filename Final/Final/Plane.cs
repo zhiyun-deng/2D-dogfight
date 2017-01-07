@@ -105,9 +105,30 @@ namespace Final
             {
                 velocity = new Vector2(0, 7f);
             }
-            
-            
-            
+            // Check for x wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallX(wallList[i]);
+                }
+            }
+
+
+            position.Y += velocity.Y;
+
+            // Check for Y wall collision
+
+            for (int i = 0; i < wallList.Count; i++)
+            {
+                if (IsCollide(wallList[i]))
+                {
+                    CollideWallY(wallList[i]);
+                }
+            }
+
+
 
         }
         public override void Draw(SpriteBatch sprite)
