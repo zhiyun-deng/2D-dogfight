@@ -12,7 +12,11 @@ namespace Final
 {
     class Level
     {
-        protected List<Plane> planeList;
+        //stores all moving objects
+        protected List<GameObject> planeList;
+
+
+        //store walls, will not destroy plane
         protected List<GameObject> wallList;
 
         protected Texture2D background;
@@ -34,7 +38,7 @@ namespace Final
 
             
 
-            planeList = new List<Plane>();
+            planeList = new List<GameObject>();
             previousState = Keyboard.GetState();
 
             
@@ -126,8 +130,8 @@ namespace Final
             //    planeList[i].Update();
             //}
 
-            playerOne.Update(playerTwo);
-            playerTwo.Update(playerOne);
+            playerOne.Update(wallList, planeList);
+            playerTwo.Update(wallList, planeList);
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
             balloon.Update();

@@ -116,12 +116,15 @@ namespace Final
             }
         }
 
-        public void Update(Plane another)
+        public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
-            
-            if (another.BoundingBox.Intersects(BoundingBox))
+
+            foreach  (GameObject obstacle in obstacleList)
             {
-                explode();
+                if (obstacle.BoundingBox.Intersects(BoundingBox) && obstacle != this)
+                {
+                    explode();
+                } 
             }
             explosion.Update();
             if (dead)
