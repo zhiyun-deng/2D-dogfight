@@ -118,7 +118,7 @@ namespace Final
 
         public void Update(Plane another)
         {
-            position += velocity;
+            
             if (another.BoundingBox.Intersects(BoundingBox))
             {
                 explode();
@@ -128,6 +128,13 @@ namespace Final
             {
                 velocity = new Vector2(0, 7f);
             }
+
+
+
+
+            oldPosition = position;
+
+            position.X += velocity.X;
             // Check for x wall collision
 
             for (int i = 0; i < wallList.Count; i++)
