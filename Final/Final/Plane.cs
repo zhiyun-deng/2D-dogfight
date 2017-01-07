@@ -134,31 +134,38 @@ namespace Final
 
 
 
-
-            oldPosition = position;
-
-            position.X += velocity.X;
-            // Check for x wall collision
-
-            for (int i = 0; i < wallList.Count; i++)
+            if (!dead)
             {
-                if (IsCollide(wallList[i]))
+
+                oldPosition = position;
+
+                position.X += velocity.X;
+                // Check for x wall collision
+
+                for (int i = 0; i < wallList.Count; i++)
                 {
-                    CollideWallX(wallList[i]);
+                    if (IsCollide(wallList[i]))
+                    {
+                        CollideWallX(wallList[i]);
+                    }
                 }
+
+
+                position.Y += velocity.Y;
+
+                // Check for Y wall collision
+
+                for (int i = 0; i < wallList.Count; i++)
+                {
+                    if (IsCollide(wallList[i]))
+                    {
+                        CollideWallY(wallList[i]);
+                    }
+                } 
             }
-
-
-            position.Y += velocity.Y;
-
-            // Check for Y wall collision
-
-            for (int i = 0; i < wallList.Count; i++)
+            else
             {
-                if (IsCollide(wallList[i]))
-                {
-                    CollideWallY(wallList[i]);
-                }
+                position += velocity;
             }
 
 
