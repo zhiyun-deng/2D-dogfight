@@ -329,28 +329,9 @@ namespace Final
 
             }
             angle = -angle;
-            //still jumpy
+            
 
-            //if (faceRight && angle < 0)
-            //{
-            //    position.X = position.X + texture.Height;
-            //    position.Y = position.Y - texture.Width;
-            //}
-            //else if (faceRight && angle > 0)
-            //{
-            //    position.X = position.X - texture.Height;
-            //    position.Y = position.Y + texture.Width;
-            //}
-            //else if (!faceRight && angle > 0)
-            //{
-            //    position.X = position.X - texture.Height;
-            //    position.Y = position.Y + texture.Width;
-            //}
-            //else if (angle < 0)
-            //{
-            //    position.X = position.X + texture.Height;
-            //    position.Y = position.Y - texture.Width;
-            //}
+            
         }
         public void right()
         {
