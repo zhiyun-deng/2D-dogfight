@@ -136,6 +136,7 @@ namespace Final
             //}
 
             playerOne.Update(playerTwo);
+            playerTwo.Update(playerOne);
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
             balloon.Update();
@@ -194,11 +195,12 @@ namespace Final
             {
                 planeList[i].Draw(spriteBatch);
             }
-            //spriteBatch.Draw(redPlane, redPosition);
-            //spriteBatch.Draw(bluePlane, bluePosition);
+            
             balloon.DrawSize(spriteBatch, 45, 70);
 
-            spriteBatch.DrawString(font, "Hello!!!!!!!!!", new Vector2(0, 0), Color.Black);
+            spriteBatch.DrawString(font, ".", playerTwo.Position, Color.Black);
+            spriteBatch.DrawString(font, ".", playerOne.Position, Color.Black);
         }
+        
     }
 }

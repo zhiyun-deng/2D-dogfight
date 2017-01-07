@@ -103,7 +103,7 @@ namespace Final
             explosion.Update();
             if (dead)
             {
-                velocity = new Vector2(0, 10f);
+                velocity = new Vector2(0, 7f);
             }
             
             
@@ -119,6 +119,7 @@ namespace Final
                 explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
 
             }
+
 
 
         }
@@ -266,16 +267,46 @@ namespace Final
             faceRight = !faceRight;
             if (faceRight)
             {
-                texture = rightTexture;
                 
+                tailPos = position;
+                headPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(0, 0);
+                texture = rightTexture;
+
+
             }
             else
             {
+               
+                headPos = position;
+                tailPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(texture.Width, texture.Height);
                 texture = leftTexture;
+
             }
             angle = -angle;
             //still jumpy
-            position.X = position.X - texture.Height;
+
+            //if (faceRight && angle < 0)
+            //{
+            //    position.X = position.X + texture.Height;
+            //    position.Y = position.Y - texture.Width;
+            //}
+            //else if (faceRight && angle > 0)
+            //{
+            //    position.X = position.X - texture.Height;
+            //    position.Y = position.Y + texture.Width;
+            //}
+            //else if (!faceRight && angle > 0)
+            //{
+            //    position.X = position.X - texture.Height;
+            //    position.Y = position.Y + texture.Width;
+            //}
+            //else if (angle < 0)
+            //{
+            //    position.X = position.X + texture.Height;
+            //    position.Y = position.Y - texture.Width;
+            //}
         }
         public void right()
         {
