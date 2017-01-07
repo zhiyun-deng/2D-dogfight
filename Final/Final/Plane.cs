@@ -7,33 +7,38 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace Final
 {
     class Plane : GameObject
     {
+        //need to fix protection level of variables
         private Vector2 headPos;
         private Vector2 tailPos;
-        private bool faceRight = true;
-        private float angle = 0.0f;
+        public bool faceRight = true;
+        public float angle = 0.0f;
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.0f;
+        private float angleSpeed = 0.015f;
+        double speed = 2;
         Texture2D leftTexture;
         Texture2D rightTexture;
+        int health = 10;
+        bool shield;
+        AnimatedClass explosion;
+        bool dead = false;
+        bool exploding = false;
 
 
 
-        //public Plane(Texture2D texture, Vector2 position, bool right) : base(texture, position)
-
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
+        
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
         {
-            //this.texture = texture;
-            this.position = position;
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
-            this.velocity = velocity;
-            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            this.position = position;
+            this.explosion = explosion;
 
             //providing the plane is horizontal
             if (right)
@@ -54,37 +59,39 @@ namespace Final
                 origin = new Vector2(texture.Width, texture.Height);
                 texture = leftTexture;
             }
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
-            //sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            velocity = new Vector2(0, 0);
         }
+        //velocity might not be needed
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
+        {
+            this.leftTexture = leftTexture;
+            this.rightTexture = rightTexture;
+            this.position = position;
+            this.velocity = velocity;
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            this.explosion = explosion;
 
-        //public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
-        //{
-        //    this.leftTexture = leftTexture;
-        //    this.rightTexture = rightTexture;
-        //    this.position = position;
-        //    this.velocity = velocity;
-        //    sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            //providing the plane is horizontal
+            if (right)
+            {
+                faceRight = true;
+                tailPos = position;
+                headPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(0, 0);
+                texture = rightTexture;
 
-        //    //providing the plane is horizontal
-        //    if (right)
-        //    {
-        //        faceRight = true;
-        //        tailPos = position;
-        //        headPos = new Vector2(position.X + texture.Width, position.Y);
-        //        origin = new Vector2(0, 0);
-        //        texture = rightTexture;
-
-        //    }
-        //    else
-        //    {
-        //        faceRight = false;
-        //        headPos = position;
-        //        tailPos = new Vector2(position.X + texture.Width, position.Y);
-        //        origin = new Vector2(texture.Width, texture.Height);
-        //        texture = leftTexture;
-        //    }
-        //}
+            }
+            else
+            {
+                faceRight = false;
+                headPos = position;
+                tailPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
+            }
+        }
 
         public void CollideWallY(GameObject wall)
         {
@@ -109,59 +116,108 @@ namespace Final
                 position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
             }
         }
-        
-        public void Update(List<GameObject> wallList, List<Plane> planeList)
+
+        public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
-            oldPosition = position;
 
-            position.X += velocity.X;
-
-            // Check for x wall collision
-
-            for (int i = 0; i < wallList.Count; i++)
+            foreach  (GameObject obstacle in obstacleList)
             {
-                if (IsCollide(wallList[i]))
+                if (obstacle.CollisionRectangle.Intersects(CollisionRectangle) && obstacle != this)
                 {
-                    CollideWallX(wallList[i]);
-                }
+                    explode();
+                } 
+            }
+            explosion.Update();
+            if (dead)
+            {
+                velocity = new Vector2(0, 7f);
             }
 
 
-            position.Y += velocity.Y;
 
-            // Check for Y wall collision
-
-            for (int i = 0; i < wallList.Count; i++)
+            if (!dead)
             {
-                if (IsCollide(wallList[i]))
+
+                oldPosition = position;
+
+                position.X += velocity.X;
+                // Check for x wall collision
+
+                for (int i = 0; i < wallList.Count; i++)
                 {
-                    CollideWallY(wallList[i]);
+                    if (IsCollide(wallList[i]))
+                    {
+                        CollideWallX(wallList[i]);
+                    }
                 }
+
+
+                position.Y += velocity.Y;
+
+                // Check for Y wall collision
+
+                for (int i = 0; i < wallList.Count; i++)
+                {
+                    if (IsCollide(wallList[i]))
+                    {
+                        CollideWallY(wallList[i]);
+                    }
+                } 
+            }
+            else
+            {
+                position += velocity;
             }
 
 
-        }
-
-        public override void Update()
-        {
-            position += velocity;
 
         }
         public override void Draw(SpriteBatch sprite)
         {
 
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            if (exploding)
+            {
+                explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
+
+            }
+
 
 
         }
+
+
+        //if faceright and up, angle -
+        //right and down +
+        //left and down -
+        //left and up +
+
+
+
         public void Up() //not for ffaceright
         {
-            if (!faceRight) { angle += 0.01f; }
+            if (dead) return;
+            if (!faceRight) { angle += angleSpeed; }
             else
             {
-                angle -= 0.01f;
+                angle -= angleSpeed;
             }
-            double ratio = texture.Width / 4;
+
+            if (angle > Math.PI / 2 || angle < -Math.PI / 2)
+            {
+                flip();
+                if(angle> Math.PI / 2)
+                {
+                    angle = (float)Math.PI / 2;
+                }
+                else
+                {
+                    angle = -(float)Math.PI / 2;
+                }
+                
+            }
+            
+            double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -186,18 +242,36 @@ namespace Final
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
 
+
+
+
+            
+
         }
 
         public void Down()
         {
-            if (!faceRight) { angle -= 0.01f; }
+            if (dead) return;
+            if (!faceRight) { angle -= angleSpeed; }
             else
             {
-                angle += 0.01f;
+                angle += angleSpeed;
+            }
+            if (angle > Math.PI / 2 || angle < -Math.PI / 2)
+            {
+                flip();
+                if (angle > Math.PI / 2)
+                {
+                    angle = (float)Math.PI / 2;
+                }
+                else
+                {
+                    angle = -(float)Math.PI / 2;
+                }
+
             }
 
-
-            double ratio = texture.Width / 4;
+            double ratio = texture.Width / (speed*speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -219,20 +293,104 @@ namespace Final
             }
             velocity.X = (float)(horiChange / ratio);
             velocity.Y = upChange / (float)ratio;
+
+
+
         }
 
         public void Stop()
         {
+            if (dead) return;
             if (angle > 0)
+            {
+                if (faceRight)
+                {
+                    Up(); 
+                }
+                else
+                {
+                    Down();
+                }
+            }
+            else if (angle < 0)
+            {
+                if (faceRight)
+                {
+                    Down(); 
+                }
+                else
+                {
+                    Up();
+                }
+            }
+        }
+        public void flip()
+        {
+            faceRight = !faceRight;
+            if (faceRight)
+            {
+                
+                tailPos = position;
+                headPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(0, 0);
+                texture = rightTexture;
+
+
+            }
+            else
+            {
+               
+                headPos = position;
+                tailPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(texture.Width, texture.Height);
+                texture = leftTexture;
+
+            }
+            angle = -angle;
+            
+
+            
+        }
+        public void right()
+        {
+            if (faceRight)
+            {
+                Up();
+            }
+            else
             {
                 Down();
             }
-            else if (angle < 0)
+        }
+        public void left()
+        {
+
+            if (faceRight)
+            {
+                Down();
+            }
+            else
             {
                 Up();
             }
         }
+        public void accelerate(double speedAdded)
+        {
+            speed += speedAdded;
+        }
+        public void sheild()
+        {
 
+        }
+        public void explode()
+        {
+            health = 0;
+            dead = true;
+            exploding = true;
+        }
+        
+
+        
 
 
     }

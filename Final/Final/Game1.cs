@@ -31,7 +31,9 @@ namespace Final
         //Vector2 bluePosition;
         //Vector2 blueVelocity;
         KeyboardState previousState;
-
+        MouseState previousMouse;
+        Balloon balloon;
+        Level[] levelList = new Level[1];
 
         public Game1()
         {
@@ -52,12 +54,8 @@ namespace Final
         {
             // TODO: Add your initialization logic here
 
-            wallList = new List<GameObject>();
-
-            //planeList = new List<GameObject>();
-
-            planeList = new List<Plane>();
-            previousState = Keyboard.GetState();
+            Level one = new Level();
+            levelList[0] = one;
             base.Initialize();
         }
 
@@ -69,45 +67,8 @@ namespace Final
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("sky");
-            //redPlane = Content.Load<Texture2D>("biplanered80");
-            //redPosition = new Vector2(1000, 400);
-            //redVelocity = new Vector2(-1, 0);
-            //bluePlane = Content.Load<Texture2D>("bluebibplane80");
-            //bluePosition = new Vector2(0, 200);
-            //blueVelocity = new Vector2(1, 0);
-
-            Texture2D redPlaneImage = Content.Load<Texture2D>("bluebibplane80");
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("biplanered80");
-            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
-            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
-
-            playerOne = new Plane(redRight, redPlaneImage, Constants.planeOneStartPostion, Vector2.Zero,true);
-            planeList.Add(playerOne);
-
-            playerTwo = new Plane(blueLeft, bluePlaneImage, Constants.planeTwoStartPostion, Vector2.Zero,false);
-            planeList.Add(playerTwo);
-
-            //Walls
-            Texture2D wallImage = Content.Load<Texture2D>("Border1280");
-            GameObject wall = new GameObject(wallImage, Vector2.Zero);
-
-            wallList.Add(wall);
-
-            wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));
-
-            wallList.Add(wall);
-
-            // Side Walls
-
-            wallImage = Content.Load<Texture2D>("Border720");
-
-            wall = new GameObject(wallImage, Vector2.Zero);
-
-            wallList.Add(wall);
-
-            wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
-            wallList.Add(wall);
+            levelList[0].Load(Content);
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -119,6 +80,7 @@ namespace Final
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         /// <summary>
@@ -130,84 +92,14 @@ namespace Final
         {
             {
                 KeyboardState state = Keyboard.GetState();
+                MouseState mouse = Mouse.GetState();
 
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
                 if (GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
 
-                // TODO: Add your update logic here
-
-                // PlayerOne Controls
-
-                if (state.IsKeyDown(Keys.W) && !previousState.IsKeyDown(Keys.W))
-                {
-                    playerOne.Up();
-                }
-
-                //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
-                //{
-                //    playerOne.Left();
-                //}
-                //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
-                //{
-                //    playerOne.Right();
-                //}
-                if (state.IsKeyDown(Keys.S) && !previousState.IsKeyDown(Keys.S))
-                {
-
-                    playerOne.Down();
-                }
-                if ((state.IsKeyUp(Keys.W)) && (state.IsKeyUp(Keys.S) && (state.IsKeyUp(Keys.A) && (state.IsKeyUp(Keys.D)))))
-                {
-                    playerOne.Stop();
-                }
-
-
-                for (int i = 0; i < planeList.Count; i++)
-                {
-                    planeList[i].Update(wallList, planeList);
-                }
-
-
-
-                playerOne.Update();
-                playerTwo.Update();
-
-
-
-                //player two controls
-
-
-                if (state.IsKeyDown(Keys.Up) && !previousState.IsKeyDown(Keys.Up))
-                {
-                    playerTwo.Up();
-                }
-                ////if (state.IsKeyDown(Keys.Left) && !previousState.IsKeyDown(Keys.Left))
-                ////{
-                ////    playerTwo.Left();
-                ////}
-                ////if (state.IsKeyDown(Keys.Right) && !previousState.IsKeyDown(Keys.Right))
-                ////{
-                ////    playerTwo.Right();
-                ////}
-                if (state.IsKeyDown(Keys.Down) && !previousState.IsKeyDown(Keys.Down))
-                {
-                    playerTwo.Down();
-                }
-                //if ((state.IsKeyUp(Keys.Up)) && (state.IsKeyUp(Keys.Down)) && (state.IsKeyUp(Keys.Left) && (state.IsKeyUp(Keys.Right))))
-                //{
-                //    playerTwo.Stop();
-                //}
-
-                //for (int i = 0; i < planeList.Count; i++)
-                //{
-                //    planeList[i].Update(wallList);
-                //}
-
-                /*ball.Update(wallList, planeList)*/;
-
-                previousState = state;
+                levelList[0].Update( state,  mouse);
 
                 base.Update(gameTime);
             }
@@ -224,22 +116,10 @@ namespace Final
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+            
 
-            for (int i = 0; i < wallList.Count; i++)
-            {
-                wallList[i].Draw(spriteBatch);
-            }
 
-            for (int i = 0; i < planeList.Count; i++)
-            {
-                planeList[i].Draw(spriteBatch);
-            }
-            //spriteBatch.Draw(redPlane, redPosition);
-            //spriteBatch.Draw(bluePlane, bluePosition);
-
-            playerOne.Update(wallList, planeList);
-            playerOne.Update(wallList, planeList);
+            levelList[0].Draw(spriteBatch);
 
             spriteBatch.End();
 
@@ -247,5 +127,6 @@ namespace Final
 
             base.Draw(gameTime);
         }
+        
     }
 }
