@@ -121,7 +121,7 @@ namespace Final
 
             foreach  (GameObject obstacle in obstacleList)
             {
-                if (obstacle.BoundingBox.Intersects(BoundingBox) && obstacle != this)
+                if (obstacle.CollisionRectangle.Intersects(CollisionRectangle) && obstacle != this)
                 {
                     explode();
                 } 

@@ -46,7 +46,7 @@ namespace Final
 
         // This is used to calculate the recatangle of the texture for collision
 
-        public Rectangle BoundingBox
+        public Rectangle CollisionRectangle
         {
             get
             {
@@ -57,6 +57,7 @@ namespace Final
                     texture.Height);
             }
         }
+        
 
         // Constructors
 
@@ -85,7 +86,7 @@ namespace Final
 
         public bool IsCollide(GameObject target)
         {
-            if (BoundingBox.Intersects(target.BoundingBox))
+            if (CollisionRectangle.Intersects(target.CollisionRectangle))
             {
                 return true;
             }
