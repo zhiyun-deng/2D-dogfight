@@ -16,16 +16,12 @@ namespace Final
         protected List<GameObject> wallList;
 
         protected Texture2D background;
-        //Texture2D redPlane;
-        //Vector2 redPosition;
-        //Vector2 redVelocity;
+        
 
         protected Plane playerOne;
         protected Plane playerTwo;
 
-        //Texture2D bluePlane;
-        //Vector2 bluePosition;
-        //Vector2 blueVelocity;
+        
         protected KeyboardState previousState;
         protected MouseState previousMouse;
         protected Balloon balloon;
@@ -36,7 +32,7 @@ namespace Final
         {
             wallList = new List<GameObject>();
 
-            //planeList = new List<GameObject>();
+            
 
             planeList = new List<Plane>();
             previousState = Keyboard.GetState();
@@ -48,12 +44,7 @@ namespace Final
 
             font = Content.Load<SpriteFont>("Text");
             background = Content.Load<Texture2D>("sky");
-            //redPlane = Content.Load<Texture2D>("biplanered80");
-            //redPosition = new Vector2(1000, 400);
-            //redVelocity = new Vector2(-1, 0);
-            //bluePlane = Content.Load<Texture2D>("bluebibplane80");
-            //bluePosition = new Vector2(0, 200);
-            //blueVelocity = new Vector2(1, 0);
+            
 
             Texture2D texture = Content.Load<Texture2D>("explosion17");
             explosion = new AnimatedClass(texture, 5, 5);
@@ -155,14 +146,7 @@ namespace Final
                 playerTwo.left();
             }
 
-            //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
-            //{
-            //    playerOne.Left();
-            //}
-            //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
-            //{
-            //    playerOne.Right();
-            //}
+           
             if (state.IsKeyDown(Keys.Right))
             {
 
@@ -173,7 +157,7 @@ namespace Final
                 playerTwo.Stop();
             }
 
-            /*ball.Update(wallList, planeList)*/
+            
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
             {
                 playerOne.accelerate(0.5);
