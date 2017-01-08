@@ -46,18 +46,24 @@ namespace Final
         public virtual void Load(ContentManager Content)
         {
 
+            //load font for text
             font = Content.Load<SpriteFont>("Text");
+            //load background
             background = Content.Load<Texture2D>("sky");
             
-
+            //load explosion effect
             Texture2D texture = Content.Load<Texture2D>("explosion17");
             explosion = new AnimatedClass(texture, 5, 5);
 
+            //load plane images
             Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            //load balloon images
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
+
+            //initializing planes, balloons
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion);
             planeList.Add(playerOne);
 
@@ -65,8 +71,14 @@ namespace Final
             planeList.Add(playerTwo);
 
             balloon = new Balloon(balloonImage, new Vector2(300, 300), new Vector2(1, 1));
+            balloon.SetSize(45, 75);
+            planeList.Add(balloon);
 
-            //Walls
+            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1));
+            balloon.SetSize(45, 75);
+            planeList.Add(balloon);
+
+            //Horizontal Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
             GameObject wall = new GameObject(wallImage, Vector2.Zero);
 
@@ -88,7 +100,11 @@ namespace Final
             wallList.Add(wall);
 
 
-            
+            //obstacles
+            wall = new GameObject(wallImage, new Vector2(300, 300));
+            wall.SetSize(100, 100);
+            wallList.Add(wall);
+
 
         }
         public virtual void Update(KeyboardState state, MouseState mouse)
@@ -188,7 +204,7 @@ namespace Final
                 wallList[i].Draw(spriteBatch);
             }
 
-            balloon.DrawSize(spriteBatch, 45, 70);
+            
 
             spriteBatch.DrawString(font, ".", playerTwo.Position, Color.Black);
             spriteBatch.DrawString(font, ".", playerOne.Position, Color.Black);

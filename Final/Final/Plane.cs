@@ -20,8 +20,8 @@ namespace Final
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.015f;
-        double speed = 2;
+        private float angleSpeed = 0.04f;
+        double speed = 3;
         Texture2D leftTexture;
         Texture2D rightTexture;
         int health = 10;

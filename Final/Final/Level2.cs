@@ -152,7 +152,7 @@ namespace Final
             }
             //spriteBatch.Draw(redPlane, redPosition);
             //spriteBatch.Draw(bluePlane, bluePosition);
-            balloon.DrawSize(spriteBatch, 45, 70);
+            
         }
     }
 }

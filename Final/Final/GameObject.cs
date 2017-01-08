@@ -16,6 +16,8 @@ namespace Final
         protected Vector2 position;   // where it is
         protected Vector2 velocity;   // how fast it is moving
         protected Vector2 oldPosition; // where it was last frame
+        protected int width = 0;
+        protected int height = 0;
         
 
         // Properties
@@ -53,8 +55,8 @@ namespace Final
                 return new Rectangle(
                     (int)position.X,
                     (int)position.Y,
-                    texture.Width,
-                    texture.Height);
+                    width,
+                    height);
             }
         }
         
@@ -66,6 +68,8 @@ namespace Final
             this.texture = texture;
             this.position = position;
             this.velocity = velocity;
+            width = texture.Width;
+            height = texture.Height;
         }
 
         public GameObject(Texture2D texture, Vector2 position)
@@ -73,16 +77,16 @@ namespace Final
             this.texture = texture;
             this.position = position;
             velocity = new Vector2(0, 0);
+            width = texture.Width;
+            height = texture.Height;
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position);
+            spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), Color.White);
         }
-        public virtual void DrawSize(SpriteBatch spriteBatch, int width, int height)
-        {
-            spriteBatch.Draw(texture,new Rectangle((int)position.X, (int)position.Y, width, height),Color.White);
-        }
+        
 
         public bool IsCollide(GameObject target)
         {
@@ -122,6 +126,11 @@ namespace Final
         public virtual void Update()
         {
             position += velocity;
+        }
+        public void SetSize(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
         }
 
 
