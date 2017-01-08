@@ -46,7 +46,7 @@ namespace Final
 
         // This is used to calculate the recatangle of the texture for collision
 
-        public Rectangle CollisionRectangle
+        public virtual Rectangle CollisionRectangle
         {
             get
             {
