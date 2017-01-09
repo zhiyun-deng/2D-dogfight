@@ -82,7 +82,7 @@ namespace Final
 
             wallList.Add(wall);
 
-            wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));
+            wall = new GameObject(wallImage, new Vector2(0, Constants.screenHeight - wallImage.Height));  
 
             wallList.Add(wall);
 
