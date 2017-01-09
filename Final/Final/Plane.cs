@@ -137,7 +137,11 @@ namespace Final
             {
                 position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width+texture.Width;
             }
-            
+            //if (position.X - oldPosition.X > 0 && (!faceRight))
+            //{
+            //    position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            //}
+
         }
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)

@@ -70,9 +70,7 @@ namespace Final
             playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion);
             planeList.Add(playerTwo);
 
-            balloon = new Balloon(balloonImage, new Vector2(300, 300), new Vector2(1, 1));
-            balloon.SetSize(45, 75);
-            planeList.Add(balloon);
+            
 
             balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1));
             balloon.SetSize(45, 75);
