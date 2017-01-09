@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace Final
 {
     class Plane : GameObject
@@ -19,18 +20,25 @@ namespace Final
         Rectangle sourceRectangle;
 
         Vector2 origin;
-        private float angleSpeed = 0.01f;
+        private float angleSpeed = 0.015f;
         double speed = 2;
         Texture2D leftTexture;
         Texture2D rightTexture;
+        int health = 10;
+        bool shield;
+        AnimatedClass explosion;
+        bool dead = false;
+        bool exploding = false;
+
 
 
         
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
+            this.explosion = explosion;
 
             //providing the plane is horizontal
             if (right)
@@ -42,6 +50,7 @@ namespace Final
                 texture = rightTexture;
 
             }
+
             else
             {
                 faceRight = false;
@@ -55,13 +64,14 @@ namespace Final
             velocity = new Vector2(0, 0);
         }
         //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right) : base(leftTexture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            this.explosion = explosion;
 
             //providing the plane is horizontal
             if (right)
@@ -89,18 +99,95 @@ namespace Final
             }
         }
 
-
-        public override void Update()
+        public void CollideWallY(GameObject wall)
         {
-            position += velocity;
-            
-            
+            if (position.Y - oldPosition.Y > 0)
+            {
+                position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
+            }
+            else if (position.Y - oldPosition.Y < 0)
+            {
+                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
+            }
+        }
+
+        public void CollideWallX(GameObject wall)
+        {
+            if (position.X - oldPosition.X > 0)
+            {
+                position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            }
+            else if (position.X - oldPosition.X < 0)
+            {
+                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
+            }
+        }
+
+        public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
+        {
+
+            foreach  (GameObject obstacle in obstacleList)
+            {
+                if (obstacle.CollisionRectangle.Intersects(CollisionRectangle) && obstacle != this)
+                {
+                    explode();
+                } 
+            }
+            explosion.Update();
+            if (dead)
+            {
+                velocity = new Vector2(0, 7f);
+            }
+
+
+
+            if (!dead)
+            {
+
+                oldPosition = position;
+
+                position.X += velocity.X;
+                // Check for x wall collision
+
+                for (int i = 0; i < wallList.Count; i++)
+                {
+                    if (IsCollide(wallList[i]))
+                    {
+                        CollideWallX(wallList[i]);
+                    }
+                }
+
+
+                position.Y += velocity.Y;
+
+                // Check for Y wall collision
+
+                for (int i = 0; i < wallList.Count; i++)
+                {
+                    if (IsCollide(wallList[i]))
+                    {
+                        CollideWallY(wallList[i]);
+                    }
+                } 
+            }
+            else
+            {
+                position += velocity;
+            }
+
+
 
         }
         public override void Draw(SpriteBatch sprite)
         {
 
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            if (exploding)
+            {
+                explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
+
+            }
+
 
 
         }
@@ -115,6 +202,7 @@ namespace Final
 
         public void Up() //not for ffaceright
         {
+            if (dead) return;
             if (!faceRight) { angle += angleSpeed; }
             else
             {
@@ -169,6 +257,7 @@ namespace Final
 
         public void Down()
         {
+            if (dead) return;
             if (!faceRight) { angle -= angleSpeed; }
             else
             {
@@ -217,6 +306,7 @@ namespace Final
 
         public void Stop()
         {
+            if (dead) return;
             if (angle > 0)
             {
                 if (faceRight)
@@ -245,14 +335,27 @@ namespace Final
             faceRight = !faceRight;
             if (faceRight)
             {
-                texture = rightTexture;
                 
+                tailPos = position;
+                headPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(0, 0);
+                texture = rightTexture;
+
+
             }
             else
             {
+               
+                headPos = position;
+                tailPos = new Vector2(position.X + texture.Width, position.Y);
+                origin = new Vector2(texture.Width, texture.Height);
                 texture = leftTexture;
+
             }
             angle = -angle;
+            
+
+            
         }
         public void right()
         {
@@ -281,7 +384,19 @@ namespace Final
         {
             speed += speedAdded;
         }
+        public void sheild()
+        {
 
+        }
+        public void explode()
+        {
+            health = 0;
+            dead = true;
+            exploding = true;
+        }
+        
+
+        
 
 
     }
