@@ -21,8 +21,8 @@ namespace Final
        
 
         Vector2 origin;
-        private float angleSpeed = 0.015f;
-        double speed = 2;
+        private float angleSpeed = 0.04f;
+        double speed = 3;
         Texture2D leftTexture;
         Texture2D rightTexture;
         int health = 10;
@@ -98,33 +98,58 @@ namespace Final
                 origin = new Vector2(texture.Width, texture.Height);
                 texture = leftTexture;
             }
-
-        
-
-    }
+        }
+        public override Rectangle CollisionRectangle
+        {
+            get
+            {
+                if (faceRight)
+                {
+                    return new Rectangle(
+                                            (int)position.X,
+                                            (int)position.Y,
+                                            texture.Width,
+                                            texture.Height); 
+                }
+                else
+                {
+                    return new Rectangle(
+                                            (int)position.X-texture.Width,
+                                            (int)position.Y-texture.Height,
+                                            texture.Width,
+                                            texture.Height);
+                }
+            }
+        }
 
         public void CollideWallY(GameObject wall)
         {
+            //bottom wall
             if (position.Y - oldPosition.Y > 0)
             {
                 position.Y = wall.CollisionRectangle.Y - CollisionRectangle.Height;
             }
             else if (position.Y - oldPosition.Y < 0)
             {
-                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height;
+                position.Y = wall.CollisionRectangle.Y + wall.CollisionRectangle.Height+texture.Height;
             }
         }
 
         public void CollideWallX(GameObject wall)
         {
-            if (position.X - oldPosition.X > 0)
+            if (position.X - oldPosition.X > 0&&faceRight)
             {
                 position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
             }
-            else if (position.X - oldPosition.X < 0)
+            else if (position.X - oldPosition.X < 0&&(!faceRight))
             {
-                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width;
+                position.X = wall.CollisionRectangle.X + wall.CollisionRectangle.Width+texture.Width;
             }
+            //if (position.X - oldPosition.X > 0 && (!faceRight))
+            //{
+            //    position.X = wall.CollisionRectangle.X - CollisionRectangle.Width;
+            //}
+
         }
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
@@ -135,6 +160,7 @@ namespace Final
                 if (obstacle.CollisionRectangle.Intersects(CollisionRectangle) && obstacle != this)
                 {
                     explode();
+                    
                 } 
             }
             explosion.Update();
