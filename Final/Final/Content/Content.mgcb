@@ -103,18 +103,6 @@
 /processorParam:TextureFormat=Color
 /build:biplanered80goodRight.png
 
-#begin biplanered80good.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:biplanered80good.png
-
 #begin bluebibplane80good.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -126,4 +114,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:bluebibplane80good.png
+
+#begin biplanered80.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:biplanered80.png
 
