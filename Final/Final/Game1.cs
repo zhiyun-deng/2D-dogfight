@@ -118,10 +118,8 @@ namespace Final
             spriteBatch.Begin();
             
 
-            for (int i = 0; i < wallList.Count; i++)
-            {
-                wallList[i].Draw(spriteBatch);
-            }
+            
+            
 
             levelList[0].Draw(spriteBatch);
 
