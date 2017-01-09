@@ -20,6 +20,7 @@ namespace Final
         List<GameObject> wallList;
         private Texture2D bullet;
         private Texture2D background;
+        private Texture2D bullet;
         //Texture2D redPlane;
         //Vector2 redPosition;
         //Vector2 redVelocity;
@@ -122,8 +123,12 @@ namespace Final
             
 
             levelList[0].Draw(spriteBatch);
+            spriteBatch.Draw(bullet, new Rectangle(1090, 335, 21, 11), Color.White);//DRAWS BULLET FOR TEST
 
             
+
+            playerOne.Update(wallList, planeList);
+            playerTwo.Update(wallList, planeList);
 
             spriteBatch.End();
 
