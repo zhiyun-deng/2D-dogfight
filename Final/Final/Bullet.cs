@@ -10,10 +10,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final
 {
-    class Bullet : GameObject
-    {
-         Plane.headPos: 
+    //class Bullet : GameObject
+    //{
+    //     Plane.headPos: 
 
        
-    }
+    //}
 }
