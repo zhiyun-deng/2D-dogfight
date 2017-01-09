@@ -13,11 +13,12 @@ namespace Final
     class Plane : GameObject
     {
         //need to fix protection level of variables
-        private Vector2 headPos;
-        private Vector2 tailPos;
+        public Vector2 headPos;
+        public Vector2 tailPos;
         public bool faceRight = true;
         public float angle = 0.0f;
         Rectangle sourceRectangle;
+       
 
         Vector2 origin;
         private float angleSpeed = 0.04f;
@@ -241,7 +242,7 @@ namespace Final
             if (angle > Math.PI / 2 || angle < -Math.PI / 2)
             {
                 flip();
-                if(angle> Math.PI / 2)
+                if (angle > Math.PI / 2)
                 {
                     angle = (float)Math.PI / 2;
                 }
@@ -249,10 +250,10 @@ namespace Final
                 {
                     angle = -(float)Math.PI / 2;
                 }
-                
+
             }
-            
-            double ratio = texture.Width / (speed*speed);
+
+            double ratio = texture.Width / (speed * speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -306,7 +307,7 @@ namespace Final
 
             }
 
-            double ratio = texture.Width / (speed*speed);
+            double ratio = texture.Width / (speed * speed);
 
             //velocity.Y = (float)Math.Tan(angle) * velocity.X;
             float upChange = (float)Math.Sin(angle) * texture.Width;//
@@ -340,7 +341,7 @@ namespace Final
             {
                 if (faceRight)
                 {
-                    Up(); 
+                    Up();
                 }
                 else
                 {
@@ -351,7 +352,7 @@ namespace Final
             {
                 if (faceRight)
                 {
-                    Down(); 
+                    Down();
                 }
                 else
                 {
@@ -430,4 +431,6 @@ namespace Final
 
     }
 }
+
+
 
