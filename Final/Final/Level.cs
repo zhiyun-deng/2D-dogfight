@@ -56,10 +56,10 @@ namespace Final
             explosion = new AnimatedClass(texture, 5, 5);
 
             //load plane images
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80STARright");
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
-            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
-            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80good");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80STARleft");
             //load balloon images
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
 
