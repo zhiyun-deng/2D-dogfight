@@ -98,7 +98,7 @@ namespace Final
 
 
             //obstacles
-            wall = new GameObject(wallImage, new Vector2(300, 300));
+            wall = new GameObject(wallImage, new Vector2(550, 600));
             wall.SetSize(100, 100);
             wallList.Add(wall);
 
