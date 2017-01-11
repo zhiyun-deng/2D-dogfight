@@ -47,6 +47,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="Level0.cs" />
     <Compile Include="Level2.cs" />
+    <Compile Include="Level3.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
