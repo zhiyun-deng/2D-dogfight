@@ -10,13 +10,13 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Final
 {
-    class Level2 : Level
+    class Level3 : Level
     {
-        public Level2()
+        public Level3()
         {
 
         }
-        public override void Load(ContentManager Content)
+            public override void Load(ContentManager Content)
         {
             background = Content.Load<Texture2D>("sky");
             //redPlane = Content.Load<Texture2D>("biplanered80");
@@ -157,5 +157,6 @@ namespace Final
             //spriteBatch.Draw(bluePlane, bluePosition);
 
         }
+    }
     }
 }

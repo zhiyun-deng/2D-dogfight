@@ -187,7 +187,7 @@ namespace Final
 
             
             balloon.MoveRandom();
-            balloon.MoveTo(playerOne.Position);
+            //balloon.MoveTo(playerOne.Position);
             balloon.Update();
 
 
