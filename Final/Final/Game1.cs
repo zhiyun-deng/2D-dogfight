@@ -33,7 +33,9 @@ namespace Final
         KeyboardState previousState;
         MouseState previousMouse;
         Balloon balloon;
-        Level[] levelList = new Level[1];
+        //levellist has the size of the number of levels
+        Level[] levelList = new Level[2];
+        Level currentLevel;
 
         public Game1()
         {
@@ -56,6 +58,11 @@ namespace Final
 
             Level one = new Level();
             levelList[0] = one;
+
+            Level2 two = new Level2();
+            levelList[1] = two;
+
+            currentLevel = levelList[0];
             base.Initialize();
         }
 
@@ -67,7 +74,10 @@ namespace Final
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            levelList[0].Load(Content);
+            foreach (Level level in levelList)
+            {
+                level.Load(Content); 
+            }
             
 
             // TODO: use this.Content to load your game content here
@@ -99,7 +109,12 @@ namespace Final
                 if (GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
 
-                levelList[0].Update( state,  mouse);
+                if (currentLevel.Done == true)
+                {
+                    currentLevel = levelList[Array.IndexOf(levelList, currentLevel) + 1];
+                }
+
+                currentLevel.Update( state,  mouse);
 
                 base.Update(gameTime);
             }
@@ -121,7 +136,7 @@ namespace Final
             
             
 
-            levelList[0].Draw(spriteBatch);
+            currentLevel.Draw(spriteBatch);
             
 
             spriteBatch.End();

@@ -26,10 +26,10 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
-            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80");
+            Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80good");
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
-            Texture2D redRight = Content.Load<Texture2D>("biplanered80Right");
-            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80LEFT");
+            Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
+            Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, null);
             planeList.Add(playerOne);

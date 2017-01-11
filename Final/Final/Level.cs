@@ -32,6 +32,20 @@ namespace Final
         private SpriteFont font;
         AnimatedClass explosion;
 
+        private bool done = false;
+        public bool Done
+        {
+            get
+            {
+                return done;
+            }
+            set
+            {
+                done = value;
+            }
+        }
+
+
         public Level()
         {
             wallList = new List<GameObject>();
@@ -145,6 +159,11 @@ namespace Final
 
             playerOne.Update(wallList, planeList);
             playerTwo.Update(wallList, planeList);
+
+            if (playerOne.Position.Y > Constants.screenHeight || playerTwo.Position.Y > Constants.screenHeight)
+            {
+                done = true;
+            }
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
             balloon.Update();
@@ -205,6 +224,10 @@ namespace Final
 
             spriteBatch.DrawString(font, ".", playerTwo.Position, Color.Black);
             spriteBatch.DrawString(font, ".", playerOne.Position, Color.Black);
+        }
+        public bool Ended()
+        {
+            return done;
         }
         
     }
