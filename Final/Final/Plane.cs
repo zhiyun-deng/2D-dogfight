@@ -224,7 +224,7 @@ namespace Final
             }
             else
             {
-                position += velocity;
+                position += velocity; // velocity 
             }
 
 
