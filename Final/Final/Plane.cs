@@ -227,7 +227,7 @@ namespace Final
                 position += velocity; // velocity 
             }
 
-
+            
 
         }
         public override void Draw(SpriteBatch sprite)
