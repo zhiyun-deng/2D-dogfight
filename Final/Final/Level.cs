@@ -87,7 +87,6 @@ namespace Final
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             Texture2D bulletImage = Content.Load<Texture2D>("bulletgood");
 
-
             //initializing planes, balloons
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion);
             planeList.Add(playerOne);
@@ -98,7 +97,9 @@ namespace Final
             
 
             balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1));
+            
             balloon.SetSize(45, 75);
+            
             planeList.Add(balloon);
 
             //Horizontal Walls
