@@ -16,9 +16,9 @@ namespace Final
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        
-        
+       
+
+
         //levellist has the size of the number of levels
         Level[] levelList = new Level[2];
         Level currentLevel;

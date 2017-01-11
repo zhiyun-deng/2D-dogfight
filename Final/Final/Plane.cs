@@ -251,7 +251,7 @@ namespace Final
         //left and up +
         public void Shoot()
         {
-            Bullet bullet = new Final.Bullet(bulletTex, position);
+            Bullet bullet = new Bullet(bulletTex, position);
             bullet.MoveTo(Vector2.Zero);
         }
 
