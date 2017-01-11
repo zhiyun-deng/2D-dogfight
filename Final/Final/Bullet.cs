@@ -13,21 +13,22 @@ namespace Final
 
     {
         Rectangle bulletRectangle;
-        
 
 
-        public Bullet(Texture2D bulletTexture, Vector2 position):base(bulletTexture,position)
+
+        public Bullet(Texture2D bulletTexture, Vector2 position) : base(bulletTexture, position)
         {
-            
+
             this.position = position;
             bulletRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            
+
 
         }
-    //class Bullet : GameObject
-    //{
-    //     Plane.headPos: 
+        //class Bullet : GameObject
+        //{
+        //     Plane.headPos: 
 
-       
-    //}
+
+        //}
+    }
 }
