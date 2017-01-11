@@ -178,6 +178,14 @@ namespace Final
                 playerOne.Stop();
             }
 
+            if (state.IsKeyDown(Keys.S))
+            {
+
+                playerOne.Shoot();
+            }
+
+
+
 
             //for (int i = 0; i < planeList.Count; i++)
             //{
