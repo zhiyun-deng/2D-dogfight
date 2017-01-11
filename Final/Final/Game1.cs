@@ -16,23 +16,9 @@ namespace Final
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Plane> planeList;
-        List<GameObject> wallList;
-        private Texture2D bullet;
-        private Texture2D background;
-        //Texture2D redPlane;
-        //Vector2 redPosition;
-        //Vector2 redVelocity;
-
-        Plane playerOne;
-        Plane playerTwo;
-
-        //Texture2D bluePlane;
-        //Vector2 bluePosition;
-        //Vector2 blueVelocity;
-        KeyboardState previousState;
-        MouseState previousMouse;
-        Balloon balloon;
+        
+        
+        
         //levellist has the size of the number of levels
         Level[] levelList = new Level[2];
         Level currentLevel;
