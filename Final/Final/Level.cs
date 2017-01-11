@@ -85,6 +85,7 @@ namespace Final
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
+            Texture2D bulletImage = Content.Load<Texture2D>("bulletgood");
 
 
             //initializing planes, balloons

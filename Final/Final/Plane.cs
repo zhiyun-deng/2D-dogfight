@@ -25,6 +25,7 @@ namespace Final
         double speed = 3;
         Texture2D leftTexture;
         Texture2D rightTexture;
+        Texture2D bulletTex;
         int health = 10;
         bool shield;
         AnimatedClass explosion;
@@ -40,6 +41,7 @@ namespace Final
             this.rightTexture = rightTexture;
             this.position = position;
             this.explosion = explosion;
+            this.bulletTex = bulletTex;
 
             //providing the plane is horizontal
             if (right)
@@ -64,7 +66,7 @@ namespace Final
 
             velocity = new Vector2(0, 0);
 
-            this.bulletTex = bulletTex;
+            
         }
         //velocity might not be needed
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
@@ -75,6 +77,7 @@ namespace Final
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             this.explosion = explosion;
+            this.bulletTex = bulletTex;
 
             //providing the plane is horizontal
             if (right)
@@ -123,7 +126,7 @@ namespace Final
                 }
             }
 
-            this.bulletTex = bulletTex;
+            
 
         }
 
@@ -139,10 +142,7 @@ namespace Final
         //    position += velocity;
         //}
 
-        public override void Draw(SpriteBatch sprite)
-        {
-            sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-        }
+        
 
         public void CollideWallY(GameObject wall)
         {
