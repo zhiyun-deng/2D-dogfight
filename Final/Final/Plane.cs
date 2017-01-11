@@ -25,6 +25,7 @@ namespace Final
         double speed = 3;
         Texture2D leftTexture;
         Texture2D rightTexture;
+        Texture2D bulletTex;
         int health = 10;
         bool shield;
         AnimatedClass explosion;
@@ -34,12 +35,13 @@ namespace Final
 
 
         
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
             this.explosion = explosion;
+            this.bulletTex = bulletTex;
 
             //providing the plane is horizontal
             if (right)
@@ -64,7 +66,7 @@ namespace Final
 
             velocity = new Vector2(0, 0);
 
-            //this.bulletTex = bulletTex;
+            
         }
         //velocity might not be needed
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
@@ -75,6 +77,7 @@ namespace Final
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             this.explosion = explosion;
+            this.bulletTex = bulletTex;
 
             //providing the plane is horizontal
             if (right)
@@ -123,7 +126,7 @@ namespace Final
                 }
             }
 
-            //this.bulletTex = bulletTex;
+            
 
         }
 
@@ -246,11 +249,11 @@ namespace Final
         //right and down +
         //left and down -
         //left and up +
-        //public void Shoot()
-        //{
-           // Bullet bullet = new Final.Bullet(bulletTex, position);
-           // bullet.MoveTo(Vector2.Zero);
-       // }
+        public void Shoot()
+        {
+            Bullet bullet = new Final.Bullet(bulletTex, position);
+            bullet.MoveTo(Vector2.Zero);
+        }
 
 
         public void Up() //not for ffaceright

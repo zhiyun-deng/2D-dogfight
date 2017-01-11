@@ -24,11 +24,7 @@ namespace Final
 
 
         }
-        //class Bullet : GameObject
-        //{
-        //     Plane.headPos: 
 
 
-        //}
     }
 }
