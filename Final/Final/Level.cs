@@ -86,6 +86,7 @@ namespace Final
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
 
+
             //initializing planes, balloons
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion);
             planeList.Add(playerOne);

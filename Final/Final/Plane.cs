@@ -34,7 +34,7 @@ namespace Final
 
 
         
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -63,6 +63,8 @@ namespace Final
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             velocity = new Vector2(0, 0);
+
+            this.bulletTex = bulletTex;
         }
         //velocity might not be needed
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
@@ -120,6 +122,26 @@ namespace Final
                                             texture.Height);
                 }
             }
+
+            this.bulletTex = bulletTex;
+
+        }
+
+
+   
+
+
+
+
+
+        //public override void Update()
+        //{
+        //    position += velocity;
+        //}
+
+        public override void Draw(SpriteBatch sprite)
+        {
+            sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
         }
 
         public void CollideWallY(GameObject wall)
@@ -202,7 +224,7 @@ namespace Final
             }
             else
             {
-                position += velocity;
+                position += velocity; // velocity 
             }
 
             
@@ -227,7 +249,11 @@ namespace Final
         //right and down +
         //left and down -
         //left and up +
-
+        public void Shoot()
+        {
+            Bullet bullet = new Final.Bullet(bulletTex, position);
+            bullet.MoveTo(Vector2.Zero);
+        }
 
 
         public void Up() //not for ffaceright
