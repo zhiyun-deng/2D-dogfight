@@ -34,7 +34,7 @@ namespace Final
 
 
         
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
