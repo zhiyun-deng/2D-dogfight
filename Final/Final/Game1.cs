@@ -18,8 +18,9 @@ namespace Final
         SpriteBatch spriteBatch;
         List<Plane> planeList;
         List<GameObject> wallList;
-        private Texture2D bullet;
+
         private Texture2D background;
+        private Texture2D bulletTex;
         //Texture2D redPlane;
         //Vector2 redPosition;
         //Vector2 redVelocity;
@@ -56,6 +57,13 @@ namespace Final
 
             Level one = new Level();
             levelList[0] = one;
+            wallList = new List<GameObject>();
+
+            //planeList = new List<GameObject>();
+
+            planeList = new List<Plane>();
+            previousState = Keyboard.GetState();
+            
             base.Initialize();
         }
 
