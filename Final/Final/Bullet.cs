@@ -16,7 +16,7 @@ namespace Final
 
 
 
-        public Bullet(Texture2D bulletTexture, Vector2 position) : base(bulletTexture, position)
+        public Bullet(Texture2D bulletImage, Vector2 position) : base(bulletImage, position)
         {
 
             this.position = position;

@@ -18,6 +18,7 @@ namespace Final
 
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
+        protected List<Plane> bulletList;
 
         //the red block
 
