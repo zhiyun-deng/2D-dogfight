@@ -122,7 +122,9 @@ namespace Final
             wallList.Add(wall);
 
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
+            
             wallList.Add(wall);
+
 
 
             //obstacles
