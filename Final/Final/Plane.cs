@@ -70,7 +70,7 @@ namespace Final
             
         }
         //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion,Texture2D bulletTex) : base(leftTexture, position, velocity)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -254,7 +254,7 @@ namespace Final
         {
             Bullet bullet = new Bullet(bulletTex, position);
             bullet.MoveTo(Vector2.Zero);
-            bulletList 
+            //bulletList 
         }
 
 
