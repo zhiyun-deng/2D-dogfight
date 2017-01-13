@@ -35,7 +35,7 @@ namespace Final
         protected Balloon balloon;
         private SpriteFont font;
         AnimatedClass explosion;
-        Texture2D bulletImage;
+        protected Texture2D bulletImage;
         string text = "";
         string secondText = "";
 
@@ -89,10 +89,10 @@ namespace Final
             bulletImage = Content.Load<Texture2D>("bulletgood");
 
             //initializing planes, balloons
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletImage);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletImage);
             planeList.Add(playerTwo);
 
             
