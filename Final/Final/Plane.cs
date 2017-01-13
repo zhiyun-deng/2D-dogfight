@@ -26,6 +26,7 @@ namespace Final
         double speed = 3;
         Texture2D leftTexture;
         Texture2D rightTexture;
+        Texture2D bulletTex;
         int health = 10;
         bool shield;
         AnimatedClass explosion;
@@ -35,12 +36,13 @@ namespace Final
 
 
         
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
             this.position = position;
             this.explosion = explosion;
+            this.bulletTex = bulletTex;
 
             //providing the plane is horizontal
             if (right)
@@ -64,6 +66,8 @@ namespace Final
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             velocity = new Vector2(0, 0);
+
+            
         }
         //velocity might not be needed
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion) : base(leftTexture, position, velocity)
@@ -74,6 +78,7 @@ namespace Final
             this.velocity = velocity;
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             this.explosion = explosion;
+            this.bulletTex = bulletTex;
 
             //providing the plane is horizontal
             if (right)
@@ -121,7 +126,24 @@ namespace Final
                                             texture.Height);
                 }
             }
+
+            
+
         }
+
+
+   
+
+
+
+
+
+        //public override void Update()
+        //{
+        //    position += velocity;
+        //}
+
+        
 
         public void CollideWallY(GameObject wall)
         {
@@ -203,10 +225,10 @@ namespace Final
             }
             else
             {
-                position += velocity;
+                position += velocity; // velocity 
             }
 
-
+            
 
         }
         public override void Draw(SpriteBatch sprite)
@@ -228,7 +250,12 @@ namespace Final
         //right and down +
         //left and down -
         //left and up +
-
+        public void Shoot()
+        {
+            Bullet bullet = new Bullet(bulletTex, position);
+            bullet.MoveTo(Vector2.Zero);
+            bulletList 
+        }
 
 
         public void Up() //not for ffaceright

@@ -77,8 +77,8 @@ namespace Final
             this.texture = texture;
             this.position = position;
             velocity = new Vector2(0, 0);
-            width = texture.Width;
-            height = texture.Height;
+            //width = texture.Width;
+            //height = texture.Height;
 
         }
 
