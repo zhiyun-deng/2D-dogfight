@@ -254,7 +254,7 @@ namespace Final
         {
             Bullet bullet = new Bullet(bulletTex, position);
             bullet.MoveTo(Vector2.Zero);
-            bulletList 
+            //bulletList 
         }
 
 
