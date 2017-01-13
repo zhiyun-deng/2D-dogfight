@@ -34,7 +34,7 @@ namespace Final
         protected MouseState previousMouse;
         protected Balloon balloon;
         private SpriteFont font;
-        AnimatedClass explosion;
+        protected AnimatedClass explosion;
         protected Texture2D bulletTex;
         string text = "";
         string secondText = "";
@@ -287,6 +287,7 @@ namespace Final
         {
             return done;
         }
+        
         
         
     }
