@@ -31,10 +31,12 @@ namespace Final
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, null);
+            bulletImage = Content.Load<Texture2D>("bulletgood");
+
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, null,bulletImage);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false, null);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false, null,bulletImage);
             planeList.Add(playerTwo);
 
             balloon = new Balloon(balloonImage, new Vector2(300, 300), new Vector2(1, 1));
