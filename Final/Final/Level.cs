@@ -34,7 +34,7 @@ namespace Final
         protected MouseState previousMouse;
         protected Balloon balloon;
         private SpriteFont font;
-        AnimatedClass explosion;
+        protected AnimatedClass explosion;
         protected Texture2D bulletImage;
         string text = "";
         string secondText = "";
@@ -122,7 +122,9 @@ namespace Final
             wallList.Add(wall);
 
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
+            
             wallList.Add(wall);
+
 
 
             //obstacles

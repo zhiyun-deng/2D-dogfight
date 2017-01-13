@@ -26,6 +26,9 @@ namespace Final
             //bluePosition = new Vector2(0, 200);
             //blueVelocity = new Vector2(1, 0);
 
+            Texture2D texture = Content.Load<Texture2D>("explosion17");
+            explosion = new AnimatedClass(texture, 5, 5);
+
             Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80good");
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
