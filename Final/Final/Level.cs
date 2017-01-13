@@ -34,10 +34,12 @@ namespace Final
         protected MouseState previousMouse;
         protected Balloon balloon;
         private SpriteFont font;
-        AnimatedClass explosion;
+        protected AnimatedClass explosion;
         protected Texture2D bulletTex;
         string text = "";
         string secondText = "";
+        //timer initialization 
+
 
         bool gettingResponse = false;
 
@@ -230,7 +232,13 @@ namespace Final
                 playerTwo.Stop();
             }
 
-            
+            if (state.IsKeyDown(Keys.Down))
+            {
+
+                playerTwo.Shoot();
+            }
+
+
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
             {
                 playerOne.accelerate(0.5);

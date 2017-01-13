@@ -177,6 +177,8 @@ namespace Final
             //}
 
         }
+        Timer timer;
+        Boolean BulletReady = true;
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
