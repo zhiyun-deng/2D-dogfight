@@ -18,7 +18,7 @@ namespace Final
 
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
-        protected List<Plane> bulletList;
+        
 
         //the red block
 
@@ -35,7 +35,7 @@ namespace Final
         protected Balloon balloon;
         private SpriteFont font;
         AnimatedClass explosion;
-        protected Texture2D bulletImage;
+        protected Texture2D bulletTex;
         string text = "";
         string secondText = "";
 
@@ -86,13 +86,13 @@ namespace Final
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
-            bulletImage = Content.Load<Texture2D>("bulletgood");
+            bulletTex = Content.Load<Texture2D>("bulletgood");
 
             //initializing planes, balloons
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletImage);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletImage);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletTex);
             planeList.Add(playerTwo);
 
             
@@ -160,6 +160,7 @@ namespace Final
             if (state.IsKeyDown(Keys.A))
             {
                 playerOne.left();
+                
             }
 
             //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))

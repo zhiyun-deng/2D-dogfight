@@ -32,10 +32,11 @@ namespace Final
         AnimatedClass explosion;
         bool dead = false;
         bool exploding = false;
+        protected List<Bullet> bulletList;
 
 
 
-        
+
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
@@ -43,6 +44,7 @@ namespace Final
             this.position = position;
             this.explosion = explosion;
             this.bulletTex = bulletTex;
+            bulletList = new List<Bullet>();
 
             //providing the plane is horizontal
             if (right)
@@ -79,6 +81,7 @@ namespace Final
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             this.explosion = explosion;
             this.bulletTex = bulletTex;
+            bulletList = new List<Bullet>();
 
             //providing the plane is horizontal
             if (right)
@@ -177,6 +180,10 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
+            foreach (Bullet bullet in bulletList)
+            {
+                bullet.Update();
+            }
 
             foreach  (GameObject obstacle in obstacleList)
             {
@@ -240,6 +247,10 @@ namespace Final
                 explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
 
             }
+            foreach (Bullet bullet in bulletList)
+            {
+                bullet.Draw(sprite);
+            }
 
 
 
@@ -254,7 +265,7 @@ namespace Final
         {
             Bullet bullet = new Bullet(bulletTex, position);
             bullet.MoveTo(Vector2.Zero);
-            //bulletList 
+            bulletList.Add(bullet);
         }
 
 

@@ -16,11 +16,12 @@ namespace Final
 
 
 
-        public Bullet(Texture2D bulletImage, Vector2 position) : base(bulletImage, position)
+        public Bullet(Texture2D bulletTex, Vector2 position) : base(bulletTex, position)
         {
 
             this.position = position;
             bulletRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            velocity = new Vector2(2, 2);
 
 
         }
