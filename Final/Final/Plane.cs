@@ -34,6 +34,18 @@ namespace Final
         bool exploding = false;
         protected List<Bullet> bulletList;
 
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health = value;
+            }
+        }
+
 
 
 
@@ -185,15 +197,25 @@ namespace Final
             foreach (Bullet bullet in bulletList)
             {
                 bullet.Update();
+                if (bullet.NeedsRemove == true)
+                {
+                    bulletList.Remove(bullet);
+
+                }
             }
 
-            foreach  (GameObject obstacle in obstacleList)
+            foreach (GameObject obstacle in obstacleList)
             {
                 if (obstacle.CollisionRectangle.Intersects(CollisionRectangle) && obstacle != this)
                 {
                     explode();
-                    
-                } 
+
+                }
+            }
+
+            if (health == 0)
+            {
+                explode();
             }
             explosion.Update();
             if (dead)
@@ -265,7 +287,7 @@ namespace Final
         //left and up +
         public void Shoot()
         {
-            Bullet bullet = new Bullet(bulletTex, position);
+            Bullet bullet = new Bullet(bulletTex, position,this);
             bullet.MoveTo(Vector2.Zero);
             bulletList.Add(bullet);
         }
@@ -465,9 +487,13 @@ namespace Final
             dead = true;
             exploding = true;
         }
-        
+        public void damage()
+        {
+            health--;
+        }
 
-        
+
+
 
 
     }
