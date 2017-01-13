@@ -14,6 +14,7 @@ namespace Final
     {
         //need to fix protection level of variables
         public Vector2 headPos;
+
         public Vector2 tailPos;
         public bool faceRight = true;
         public float angle = 0.0f;
