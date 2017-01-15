@@ -33,6 +33,7 @@ namespace Final
         bool dead = false;
         bool exploding = false;
         protected List<Bullet> bulletList;
+        protected List<GameObject> obstacleList;
 
         public int Health
         {
@@ -190,13 +191,13 @@ namespace Final
 
         }
         Timer timer;
-        Boolean BulletReady = true;
+        bool BulletReady = true;
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
-            foreach (Bullet bullet in bulletList)
+            foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
-                bullet.Update();
+                bullet.Update(obstacleList);
                 if (bullet.NeedsRemove == true)
                 {
                     bulletList.Remove(bullet);
@@ -266,6 +267,7 @@ namespace Final
         {
 
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            
             if (exploding)
             {
                 explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));

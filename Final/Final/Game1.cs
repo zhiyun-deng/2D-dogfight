@@ -22,6 +22,7 @@ namespace Final
         //levellist has the size of the number of levels
         Level[] levelList = new Level[2];
         Level currentLevel;
+        
 
         public Game1()
         {
@@ -97,9 +98,16 @@ namespace Final
 
                 if (currentLevel.Done == true)
                 {
-                    currentLevel = levelList[Array.IndexOf(levelList, currentLevel) + 1];
+                    if (currentLevel == levelList[levelList.Length - 1])
+                    {
+                        Exit();
+                    }
+                    else
+                    {
+                        currentLevel = levelList[Array.IndexOf(levelList, currentLevel) + 1];
+                    }
                 }
-
+                
                 currentLevel.Update( state,  mouse);
 
                 base.Update(gameTime);

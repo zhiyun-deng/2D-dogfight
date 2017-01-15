@@ -37,7 +37,19 @@ namespace Final
                 NeedsRemove = true;
             }
         }
-        
+        public void Update(List<GameObject> obstacleList)
+        {
+            position += velocity;
+            foreach (GameObject obstacle in obstacleList)
+            {
+                if(obstacle is Plane)
+                {
+                    CheckCollide((Plane)obstacle);
+                }
+            }
+            
+        }
+
 
 
     }

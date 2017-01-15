@@ -14,11 +14,24 @@ namespace Final
     {
         //stores all moving objects
         protected List<GameObject> planeList;
+        public List<GameObject> PlaneList
+        {
+            get
+            {
+                return planeList;
+            }
+        }
 
 
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
-        
+        public List<GameObject> WallList
+        {
+            get
+            {
+                return wallList;
+            }
+        }
 
         //the red block
 
@@ -33,17 +46,19 @@ namespace Final
         protected KeyboardState previousState;
         protected MouseState previousMouse;
         protected Balloon balloon;
-        private SpriteFont font;
+        protected SpriteFont font;
+        protected SpriteFont smallFont;
         protected AnimatedClass explosion;
         protected Texture2D bulletTex;
-        string text = "";
-        string secondText = "";
+        protected string text = "";
+        protected string secondText = "";
+        protected string objective = "Compete with the other plane: The one who touches the trophy wins!";
         //timer initialization 
 
 
-        bool gettingResponse = false;
+        protected bool gettingResponse = false;
 
-        private bool done = false;
+        protected bool done = false;
         public bool Done
         {
             get
@@ -73,6 +88,8 @@ namespace Final
 
             //load font for text
             font = Content.Load<SpriteFont>("Text");
+            smallFont = Content.Load<SpriteFont>("SmallText");
+
             //load background
             background = Content.Load<Texture2D>("sky");
             
@@ -130,9 +147,7 @@ namespace Final
 
 
             //obstacles
-            wall = new GameObject(wallImage, new Vector2(550, 600));
-            wall.SetSize(100, 100);
-            wallList.Add(wall);
+            
 
             //trophy
             Texture2D trophyImage = Content.Load<Texture2D>("Golden Vector Trophy");
@@ -287,6 +302,7 @@ namespace Final
             trophy.Draw(spriteBatch);
             spriteBatch.DrawString(font, text, new Vector2(400, 400), Color.WhiteSmoke);
             spriteBatch.DrawString(font, secondText, new Vector2(400, 450), Color.WhiteSmoke);
+            spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, 0), Color.RosyBrown);
 
 
 
