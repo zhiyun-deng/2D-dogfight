@@ -27,13 +27,13 @@ namespace Final
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
-        int health = 10;
+        int health = 20;
         bool shield;
         AnimatedClass explosion;
         bool dead = false;
         bool exploding = false;
         protected List<Bullet> bulletList;
-        protected List<GameObject> obstacleList;
+        
 
         public int Health
         {
@@ -190,8 +190,7 @@ namespace Final
             //}
 
         }
-        Timer timer;
-        bool BulletReady = true;
+        
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
@@ -289,9 +288,13 @@ namespace Final
         //left and up +
         public void Shoot()
         {
-            Bullet bullet = new Bullet(bulletTex, position,this);
-            bullet.MoveTo(Vector2.Zero);
-            bulletList.Add(bullet);
+            Random rng = new Random();
+            if (rng.Next(10) == 0)
+            {
+                Bullet bullet = new Bullet(bulletTex, position, this);
+                bullet.MoveTo(Vector2.Zero);
+                bulletList.Add(bullet); 
+            }
         }
 
 
