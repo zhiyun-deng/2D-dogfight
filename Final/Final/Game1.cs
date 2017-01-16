@@ -20,7 +20,7 @@ namespace Final
 
 
         //levellist has the size of the number of levels
-        Level[] levelList = new Level[3];
+        Level[] levelList = new Level[4];
         Level currentLevel;
         
 
@@ -51,6 +51,9 @@ namespace Final
 
             Level3 three = new Level3();
             levelList[2] = three;
+
+            Level4 four = new Level4();
+            levelList[3] = four;
 
             currentLevel = levelList[0];
             base.Initialize();
