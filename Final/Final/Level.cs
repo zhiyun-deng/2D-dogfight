@@ -147,7 +147,7 @@ namespace Final
 
 
             //obstacles
-            
+
 
             //trophy
             Texture2D trophyImage = Content.Load<Texture2D>("Golden Vector Trophy");
