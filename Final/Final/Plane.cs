@@ -292,7 +292,19 @@ namespace Final
             if (rng.Next(10) == 0)
             {
                 Bullet bullet = new Bullet(bulletTex, position, this);
-                bullet.MoveTo(Vector2.Zero);
+                float xChange = 0, yChange = 0;
+                if (faceRight)
+                {
+                    xChange = 1;
+                    yChange = (float)Math.Tan(angle);
+                }
+                else
+                {
+                    xChange = -1;
+                    yChange = -(float)Math.Tan(angle);
+                }
+                bullet.MoveTo(new Vector2(position.X+ xChange,position.Y+yChange));
+
                 bulletList.Add(bullet); 
             }
         }

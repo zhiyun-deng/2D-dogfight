@@ -13,18 +13,18 @@ namespace Final
 
     {
         Rectangle bulletRectangle;
-        Plane control;
+        GameObject control;
 
         public bool NeedsRemove { get; set; }
 
-        public Bullet(Texture2D bulletTex, Vector2 position,Plane plane) : base(bulletTex, position)
+        public Bullet(Texture2D bulletTex, Vector2 position,GameObject control) : base(bulletTex, position)
         {
 
             this.position = position;
             bulletRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            velocity = new Vector2(2, 2);
+            velocity = new Vector2(10, 10);
             NeedsRemove = false;
-            control = plane;
+            this.control = control;
 
 
 
