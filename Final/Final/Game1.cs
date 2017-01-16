@@ -57,6 +57,9 @@ namespace Final
 
             
 
+            Level4 four = new Level4();
+            levelList[3] = four;
+
             currentLevel = levelList[0];
             base.Initialize();
         }
