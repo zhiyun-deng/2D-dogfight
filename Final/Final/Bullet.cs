@@ -13,17 +13,43 @@ namespace Final
 
     {
         Rectangle bulletRectangle;
+        GameObject control;
 
+        public bool NeedsRemove { get; set; }
 
-
-        public Bullet(Texture2D bulletImage, Vector2 position) : base(bulletImage, position)
+        public Bullet(Texture2D bulletTex, Vector2 position,GameObject control) : base(bulletTex, position)
         {
 
             this.position = position;
             bulletRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            velocity = new Vector2(10, 10);
+            NeedsRemove = false;
+            this.control = control;
+
 
 
         }
+        public void CheckCollide(Plane plane)
+        {
+            if(CollisionRectangle.Intersects(plane.CollisionRectangle) && plane != control)
+            {
+                plane.damage();
+                NeedsRemove = true;
+            }
+        }
+        public void Update(List<GameObject> obstacleList)
+        {
+            position += velocity;
+            foreach (GameObject obstacle in obstacleList)
+            {
+                if(obstacle is Plane)
+                {
+                    CheckCollide((Plane)obstacle);
+                }
+            }
+            
+        }
+
 
 
     }

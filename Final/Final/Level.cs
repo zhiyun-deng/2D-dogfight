@@ -14,11 +14,24 @@ namespace Final
     {
         //stores all moving objects
         protected List<GameObject> planeList;
+        public List<GameObject> PlaneList
+        {
+            get
+            {
+                return planeList;
+            }
+        }
 
 
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
-        protected List<Plane> bulletList;
+        public List<GameObject> WallList
+        {
+            get
+            {
+                return wallList;
+            }
+        }
 
         //the red block
 
@@ -33,15 +46,19 @@ namespace Final
         protected KeyboardState previousState;
         protected MouseState previousMouse;
         protected Balloon balloon;
-        private SpriteFont font;
-        AnimatedClass explosion;
-        protected Texture2D bulletImage;
-        string text = "";
-        string secondText = "";
+        protected SpriteFont font;
+        protected SpriteFont smallFont;
+        protected AnimatedClass explosion;
+        protected Texture2D bulletTex;
+        protected string text = "";
+        protected string secondText = "";
+        protected string objective = "Compete with the other plane: The one who touches the trophy wins!";
+        //timer initialization 
 
-        bool gettingResponse = false;
 
-        private bool done = false;
+        protected bool gettingResponse = false;
+
+        protected bool done = false;
         public bool Done
         {
             get
@@ -71,6 +88,8 @@ namespace Final
 
             //load font for text
             font = Content.Load<SpriteFont>("Text");
+            smallFont = Content.Load<SpriteFont>("SmallText");
+
             //load background
             background = Content.Load<Texture2D>("sky");
             
@@ -86,18 +105,18 @@ namespace Final
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
-            bulletImage = Content.Load<Texture2D>("bulletgood");
+            bulletTex = Content.Load<Texture2D>("bulletgood");
 
             //initializing planes, balloons
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletImage);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex);
             planeList.Add(playerOne);
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletImage);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletTex);
             planeList.Add(playerTwo);
 
             
 
-            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1));
+            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1),bulletTex);
             
             balloon.SetSize(45, 75);
             
@@ -122,13 +141,13 @@ namespace Final
             wallList.Add(wall);
 
             wall = new GameObject(wallImage, new Vector2(Constants.screenWidth - wallImage.Width, 0));
+            
             wallList.Add(wall);
+
 
 
             //obstacles
-            wall = new GameObject(wallImage, new Vector2(550, 600));
-            wall.SetSize(100, 100);
-            wallList.Add(wall);
+
 
             //trophy
             Texture2D trophyImage = Content.Load<Texture2D>("Golden Vector Trophy");
@@ -160,6 +179,7 @@ namespace Final
             if (state.IsKeyDown(Keys.A))
             {
                 playerOne.left();
+                
             }
 
             //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
@@ -200,7 +220,7 @@ namespace Final
             
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
-            balloon.Update();
+            balloon.Update(planeList);
 
 
 
@@ -227,7 +247,13 @@ namespace Final
                 playerTwo.Stop();
             }
 
-            
+            if (state.IsKeyDown(Keys.Down))
+            {
+
+                playerTwo.Shoot();
+            }
+
+
             if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
             {
                 playerOne.accelerate(0.5);
@@ -241,13 +267,13 @@ namespace Final
                 secondText = "Press enter to go to next level.";
                 gettingResponse = true;
             }
-            if (trophy.IsCollide(playerOne))
+            if (trophy.IsCollide(playerOne)&&playerOne.Health!=0)
             {
                 text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
                 gettingResponse = true;
             }
-            else if (trophy.IsCollide(playerTwo))
+            else if (trophy.IsCollide(playerTwo)&&playerTwo.Health!=0)
             {
                 text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
@@ -278,6 +304,7 @@ namespace Final
             trophy.Draw(spriteBatch);
             spriteBatch.DrawString(font, text, new Vector2(400, 400), Color.WhiteSmoke);
             spriteBatch.DrawString(font, secondText, new Vector2(400, 450), Color.WhiteSmoke);
+            spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, 0), Color.RosyBrown);
 
 
 
@@ -286,6 +313,7 @@ namespace Final
         {
             return done;
         }
+        
         
         
     }

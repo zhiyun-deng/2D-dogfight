@@ -13,29 +13,43 @@ namespace Final
     class Plane : GameObject
     {
         //need to fix protection level of variables
-        public Vector2 headPos;
+        private Vector2 headPos;
 
-        public Vector2 tailPos;
-        public bool faceRight = true;
-        public float angle = 0.0f;
+        private Vector2 tailPos;
+        private bool faceRight = true;
+        private float angle = 0.0f;
         Rectangle sourceRectangle;
        
 
         Vector2 origin;
-        private float angleSpeed = 0.04f;
-        double speed = 3;
+        private float angleSpeed = 0.035f;
+        double speed = 2.5;
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
-        int health = 10;
+        private int health = 20;
         bool shield;
         AnimatedClass explosion;
         bool dead = false;
         bool exploding = false;
-
-
-
+        protected List<Bullet> bulletList;
         
+
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health = value;
+            }
+        }
+
+
+
+
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
@@ -43,6 +57,7 @@ namespace Final
             this.position = position;
             this.explosion = explosion;
             this.bulletTex = bulletTex;
+            bulletList = new List<Bullet>();
 
             //providing the plane is horizontal
             if (right)
@@ -79,6 +94,7 @@ namespace Final
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             this.explosion = explosion;
             this.bulletTex = bulletTex;
+            bulletList = new List<Bullet>();
 
             //providing the plane is horizontal
             if (right)
@@ -174,17 +190,32 @@ namespace Final
             //}
 
         }
+        
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
+            foreach (Bullet bullet in bulletList.Reverse<Bullet>())
+            {
+                bullet.Update(obstacleList);
+                if (bullet.NeedsRemove == true)
+                {
+                    bulletList.Remove(bullet);
 
-            foreach  (GameObject obstacle in obstacleList)
+                }
+            }
+
+            foreach (GameObject obstacle in obstacleList)
             {
                 if (obstacle.CollisionRectangle.Intersects(CollisionRectangle) && obstacle != this)
                 {
                     explode();
-                    
-                } 
+
+                }
+            }
+
+            if (health == 0)
+            {
+                explode();
             }
             explosion.Update();
             if (dead)
@@ -235,10 +266,15 @@ namespace Final
         {
 
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            
             if (exploding)
             {
                 explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
 
+            }
+            foreach (Bullet bullet in bulletList)
+            {
+                bullet.Draw(sprite);
             }
 
 
@@ -252,9 +288,25 @@ namespace Final
         //left and up +
         public void Shoot()
         {
-            Bullet bullet = new Bullet(bulletTex, position);
-            bullet.MoveTo(Vector2.Zero);
-            //bulletList 
+            Random rng = new Random();
+            if (rng.Next(10) == 0)
+            {
+                Bullet bullet = new Bullet(bulletTex, position, this);
+                float xChange = 0, yChange = 0;
+                if (faceRight)
+                {
+                    xChange = 1;
+                    yChange = (float)Math.Tan(angle);
+                }
+                else
+                {
+                    xChange = -1;
+                    yChange = -(float)Math.Tan(angle);
+                }
+                bullet.MoveTo(new Vector2(position.X+ xChange,position.Y+yChange));
+
+                bulletList.Add(bullet); 
+            }
         }
 
 
@@ -452,9 +504,13 @@ namespace Final
             dead = true;
             exploding = true;
         }
-        
+        public void damage()
+        {
+            health--;
+        }
 
-        
+
+
 
 
     }
