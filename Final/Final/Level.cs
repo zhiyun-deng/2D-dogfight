@@ -116,7 +116,7 @@ namespace Final
 
             
 
-            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1));
+            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1),bulletTex);
             
             balloon.SetSize(45, 75);
             
@@ -220,7 +220,7 @@ namespace Final
             
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
-            balloon.Update();
+            balloon.Update(planeList);
 
 
 
@@ -267,13 +267,13 @@ namespace Final
                 secondText = "Press enter to go to next level.";
                 gettingResponse = true;
             }
-            if (trophy.IsCollide(playerOne))
+            if (trophy.IsCollide(playerOne)&&playerOne.Health!=0)
             {
                 text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
                 gettingResponse = true;
             }
-            else if (trophy.IsCollide(playerTwo))
+            else if (trophy.IsCollide(playerTwo)&&playerTwo.Health!=0)
             {
                 text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";

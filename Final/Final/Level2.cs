@@ -26,7 +26,7 @@ namespace Final
             Random RNG = new Random();
             for (int x = 0; x <= 7; x++)
             {
-                balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1,Constants.screenHeight), RNG.Next(1,Constants.screenHeight)), new Vector2(RNG.Next(-4,4)/4, RNG.Next(-4,4)/4));
+                balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1,Constants.screenHeight), RNG.Next(1,Constants.screenWidth)), new Vector2(RNG.Next(-4,4)/4, RNG.Next(-4,4)/4),bulletTex);
                 balloon.SetSize(45, 70);
                 BalloonList[x] = balloon;
                 planeList.Add(balloon);

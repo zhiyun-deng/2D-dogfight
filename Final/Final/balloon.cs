@@ -13,13 +13,17 @@ namespace Final
 
     {
         private float acceleration;
+        protected List<Bullet> bulletList = new List<Bullet>();
+        private float angle;
+        Texture2D bulletTex;
 
-        public Balloon(Texture2D texture, Vector2 pos, Vector2 velocity):base(texture, pos, velocity)
+        public Balloon(Texture2D texture, Vector2 pos, Vector2 velocity,Texture2D bulletTex):base(texture, pos, velocity)
         {
             position = pos;
             this.texture = texture;
             this.velocity = velocity;
             acceleration = 0.2f;
+            this.bulletTex = bulletTex;
         }
         
         public void Up()
@@ -61,7 +65,54 @@ namespace Final
             }
             
         }
-        
+        public void Shoot()
+        {
+            Random rng = new Random();
+            if (rng.Next(10) == 0)
+            {
+                Bullet bullet = new Bullet(bulletTex, position, this);
+                float xChange = 0, yChange = 0;
+                if (Math.Floor(angle/Math.PI*2) %2 == 0)
+                { 
+                    xChange = 1;
+                    yChange = (float)Math.Tan(angle); 
+                }
+                else
+                {
+                    xChange = -1;
+                    yChange = -(float)Math.Tan(angle);
+                }
+                bullet.MoveTo(new Vector2(position.X + xChange, position.Y + yChange));
+
+                bulletList.Add(bullet);
+            }
+        }
+        public void Update(List<GameObject> obstacleList)
+        {
+            base.Update();
+            foreach (Bullet bullet in bulletList.Reverse<Bullet>())
+            {
+                bullet.Update(obstacleList);
+                if (bullet.NeedsRemove == true)
+                {
+                    bulletList.Remove(bullet);
+
+                }
+            }
+            angle += 0.01f;
+            
+            Shoot();
+
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            foreach (Bullet bullet in bulletList.Reverse<Bullet>())
+            {
+                bullet.Draw(spriteBatch);
+            }
+        }
+
 
     }
 }
