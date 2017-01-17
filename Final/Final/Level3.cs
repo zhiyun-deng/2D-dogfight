@@ -19,6 +19,10 @@ namespace Final
             public override void Load(ContentManager Content)
         {
             base.Load(Content);
+            Texture2D wallImage = Content.Load<Texture2D>("Border1280");
+            GameObject wall = new GameObject(wallImage, new Vector2(300,300));
+            wall.SetSize(250, 80);
+            wallList.Add(wall);
 
         }
         public override void Update(KeyboardState state, MouseState mouse)

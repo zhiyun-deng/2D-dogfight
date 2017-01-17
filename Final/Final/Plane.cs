@@ -13,17 +13,17 @@ namespace Final
     class Plane : GameObject
     {
         //need to fix protection level of variables
-        public Vector2 headPos;
+        private Vector2 headPos;
 
-        public Vector2 tailPos;
-        public bool faceRight = true;
-        public float angle = 0.0f;
+        private Vector2 tailPos;
+        private bool faceRight = true;
+        private float angle = 0.0f;
         Rectangle sourceRectangle;
        
 
         Vector2 origin;
-        private float angleSpeed = 0.04f;
-        double speed = 3;
+        private float angleSpeed = 0.035f;
+        double speed = 2.5;
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
