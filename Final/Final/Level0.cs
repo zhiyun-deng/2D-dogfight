@@ -12,6 +12,6 @@ namespace Final
     class Level0
     {
         
-        GameObject instrutionscreen = new GameObject(, Vector2.Zero);
+        
     }
 }
