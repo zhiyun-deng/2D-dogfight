@@ -17,7 +17,7 @@ namespace Final
 
         public Level5()
         {
-            
+            objective = "For a twist, COOPERATE with your friend to help them survive the longest!";
         }
         public override void Load(ContentManager Content)
         {
