@@ -44,6 +44,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Heart.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Level0.cs" />
     <Compile Include="Level2.cs" />
