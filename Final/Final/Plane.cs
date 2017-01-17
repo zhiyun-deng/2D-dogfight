@@ -27,7 +27,7 @@ namespace Final
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
-        public int health = 20;
+        public int health = 1;
         bool shield;
         AnimatedClass explosion;
         bool dead = false;

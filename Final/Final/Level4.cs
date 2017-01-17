@@ -35,7 +35,7 @@ namespace Final
 
             }
             trophy.Position = (new Vector2(-100, -100));
-            Plane.health = 1;
+            //Plane.health = 1;
 
         }
         public override void Update(KeyboardState state, MouseState mouse)
