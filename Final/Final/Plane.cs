@@ -29,6 +29,7 @@ namespace Final
         Texture2D bulletTex;
         private int health = 20;
         bool shield;
+        Texture2D heartTex;
         AnimatedClass explosion;
         bool dead = false;
         bool exploding = false;

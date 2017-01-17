@@ -50,6 +50,7 @@ namespace Final
         protected SpriteFont smallFont;
         protected AnimatedClass explosion;
         protected Texture2D bulletTex;
+        protected Texture2D heartTex;
         protected string text = "";
         protected string secondText = "";
         protected string objective = "Compete with the other plane: The one who touches the trophy wins!";
@@ -261,7 +262,7 @@ namespace Final
 
 
 
-            if (playerOne.Position.Y > Constants.screenHeight || playerTwo.Position.Y > Constants.screenHeight)
+            if (playerOne.Position.Y > Constants.screenHeight && playerTwo.Position.Y > Constants.screenHeight)
             {
                 text = "Ah! Too bad!";
                 secondText = "Press enter to go to next level.";
@@ -273,7 +274,23 @@ namespace Final
                 secondText = "Press enter to go to next level";
                 gettingResponse = true;
             }
-            else if (trophy.IsCollide(playerTwo)&&playerTwo.Health!=0)
+
+            if (playerOne.Position.Y > Constants.screenHeight  && playerTwo.Health != 0)
+            {
+                text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                secondText = "Press enter to go to next level";
+                gettingResponse = true;
+
+            }
+
+            if (playerTwo.Position.Y > Constants.screenHeight && playerOne.Health != 0)
+            {
+                text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                secondText = "Press enter to go to next level";
+                gettingResponse = true;
+
+            }
+            else if (trophy.IsCollide(playerTwo) && playerTwo.Health != 0)
             {
                 text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
@@ -294,6 +311,8 @@ namespace Final
             {
                 planeList[i].Draw(spriteBatch);
             }
+
+
             for (int i = 0; i < wallList.Count; i++)
             {
                 wallList[i].Draw(spriteBatch);
