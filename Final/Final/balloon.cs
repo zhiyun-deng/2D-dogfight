@@ -72,8 +72,16 @@ namespace Final
             {
                 Bullet bullet = new Bullet(bulletTex, position, this);
                 float xChange = 0, yChange = 0;
-                xChange = 1;
-                yChange = (float)Math.Tan(angle);
+                if (Math.Floor(angle/Math.PI*2) %2 == 0)
+                { 
+                    xChange = 1;
+                    yChange = (float)Math.Tan(angle); 
+                }
+                else
+                {
+                    xChange = -1;
+                    yChange = -(float)Math.Tan(angle);
+                }
                 bullet.MoveTo(new Vector2(position.X + xChange, position.Y + yChange));
 
                 bulletList.Add(bullet);
@@ -92,10 +100,7 @@ namespace Final
                 }
             }
             angle += 0.01f;
-            if(angle> Math.PI / 2)
-            {
-                angle *= -1;
-            }
+            
             Shoot();
 
         }
