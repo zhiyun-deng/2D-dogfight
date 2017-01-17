@@ -19,16 +19,16 @@ namespace Final
         public Level4()
         {
             objective = "Compete With the Other Plane: Shoot Down Your Opponent To Win!";
-            BalloonList = new Balloon[2];
+            BalloonList = new Balloon[0];
         }
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             Random RNG = new Random();
-            for (int x = 0; x < 2; x++)
+            for (int x = 0; x < 0; x++)
             {
-                balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1, Constants.screenHeight), RNG.Next(1, Constants.screenHeight)), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4),bulletTex);
+                balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1, Constants.screenHeight), RNG.Next(1, Constants.screenHeight)), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4), bulletTex);
                 balloon.SetSize(45, 70);
                 BalloonList[x] = balloon;
                 planeList.Add(balloon);
