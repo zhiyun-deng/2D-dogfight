@@ -20,7 +20,7 @@ namespace Final
 
 
         //levellist has the size of the number of levels
-        Level[] levelList = new Level[5];
+        Level[] levelList = new Level[6];
         Level currentLevel;
         
 
@@ -59,6 +59,9 @@ namespace Final
 
             Level4 four = new Level4();
             levelList[4] = four;
+
+            Level5 five = new Level5();
+            levelList[5] = five;
 
             currentLevel = levelList[0];
             base.Initialize();
@@ -118,8 +121,17 @@ namespace Final
                         currentLevel = levelList[Array.IndexOf(levelList, currentLevel) + 1];
                     }
                 }
-                
-                currentLevel.Update( state,  mouse);
+
+                if (currentLevel is Level5)
+                {
+                    ((Level5)currentLevel).Update(state, mouse,gameTime); 
+                }
+                else
+                {
+                    currentLevel.Update(state, mouse);
+                }
+
+
 
                 base.Update(gameTime);
             }

@@ -13,22 +13,23 @@ namespace Final
     class Plane : GameObject
     {
         //need to fix protection level of variables
-        public Vector2 headPos;
+        private Vector2 headPos;
 
-        public Vector2 tailPos;
-        public bool faceRight = true;
-        public float angle = 0.0f;
+        private Vector2 tailPos;
+        private bool faceRight = true;
+        private float angle = 0.0f;
         Rectangle sourceRectangle;
        
 
         Vector2 origin;
-        private float angleSpeed = 0.04f;
-        double speed = 3;
+        private float angleSpeed = 0.035f;
+        double speed = 2.5;
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
-        public int health = 20;
+        private int health = 20;
         bool shield;
+        Texture2D heartTex;
         AnimatedClass explosion;
         bool dead = false;
         bool exploding = false;
@@ -292,7 +293,19 @@ namespace Final
             if (rng.Next(10) == 0)
             {
                 Bullet bullet = new Bullet(bulletTex, position, this);
-                bullet.MoveTo(Vector2.Zero);
+                float xChange = 0, yChange = 0;
+                if (faceRight)
+                {
+                    xChange = 1;
+                    yChange = (float)Math.Tan(angle);
+                }
+                else
+                {
+                    xChange = -1;
+                    yChange = -(float)Math.Tan(angle);
+                }
+                bullet.MoveTo(new Vector2(position.X+ xChange,position.Y+yChange));
+
                 bulletList.Add(bullet); 
             }
         }

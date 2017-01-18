@@ -50,6 +50,7 @@ namespace Final
         protected SpriteFont smallFont;
         protected AnimatedClass explosion;
         protected Texture2D bulletTex;
+        protected Texture2D heartTex;
         protected string text = "";
         protected string secondText = "";
         protected string objective = "Compete with the other plane: The one who touches the trophy wins!";
@@ -106,6 +107,8 @@ namespace Final
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             bulletTex = Content.Load<Texture2D>("bulletgood");
+            heartTex = Content.Load<Texture2D>("heart");
+
 
             //initializing planes, balloons
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex);
@@ -116,7 +119,7 @@ namespace Final
 
             
 
-            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1));
+            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1),bulletTex);
             
             balloon.SetSize(45, 75);
             
@@ -220,7 +223,7 @@ namespace Final
             
             balloon.MoveRandom();
             //balloon.MoveTo(playerOne.Position);
-            balloon.Update();
+            balloon.Update(planeList);
 
 
 
@@ -261,19 +264,35 @@ namespace Final
 
 
 
-            if (playerOne.Position.Y > Constants.screenHeight || playerTwo.Position.Y > Constants.screenHeight)
+            if (playerOne.Position.Y > Constants.screenHeight && playerTwo.Position.Y > Constants.screenHeight)
             {
                 text = "Ah! Too bad!";
                 secondText = "Press enter to go to next level.";
                 gettingResponse = true;
             }
-            if (trophy.IsCollide(playerOne))
+            if (trophy.IsCollide(playerOne)&&playerOne.Health!=0)
             {
                 text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
                 gettingResponse = true;
             }
-            else if (trophy.IsCollide(playerTwo))
+
+            if (playerOne.Position.Y > Constants.screenHeight  && playerTwo.Health != 0)
+            {
+                text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                secondText = "Press enter to go to next level";
+                gettingResponse = true;
+
+            }
+
+            if (playerTwo.Position.Y > Constants.screenHeight && playerOne.Health != 0)
+            {
+                text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+                secondText = "Press enter to go to next level";
+                gettingResponse = true;
+
+            }
+            else if (trophy.IsCollide(playerTwo) && playerTwo.Health != 0)
             {
                 text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
@@ -294,6 +313,8 @@ namespace Final
             {
                 planeList[i].Draw(spriteBatch);
             }
+
+
             for (int i = 0; i < wallList.Count; i++)
             {
                 wallList[i].Draw(spriteBatch);
