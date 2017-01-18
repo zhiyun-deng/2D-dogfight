@@ -34,6 +34,7 @@ namespace Final
         bool dead = false;
         bool exploding = false;
         protected List<Bullet> bulletList;
+        protected List<Heart> heartList;
         
 
         public int Health
@@ -59,6 +60,11 @@ namespace Final
             this.explosion = explosion;
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
+            heartList = new List<Heart>();
+            for (int i = 0; i < 5; i++)
+            {
+                Heart heart = new Heart(heartTex, new Vector2 (1250,680-20*i));
+            }
 
             //providing the plane is horizontal
             if (right)
@@ -96,7 +102,11 @@ namespace Final
             this.explosion = explosion;
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
-
+            heartList = new List<Heart>();
+            for (int i = 0; i < 5; i++)
+            {
+                Heart heart = new Heart(heartTex, new Vector2(1250, 680 - 20 * i));
+            }
             //providing the plane is horizontal
             if (right)
             {
@@ -195,6 +205,7 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
+            foreach (Heart heart )
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
                 bullet.Update(obstacleList);
@@ -276,6 +287,11 @@ namespace Final
             foreach (Bullet bullet in bulletList)
             {
                 bullet.Draw(sprite);
+            }
+
+            foreach (Heart heart in heartList)
+            {
+                heart.Draw(sprite);
             }
 
 

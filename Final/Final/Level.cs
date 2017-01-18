@@ -22,7 +22,7 @@ namespace Final
             }
         }
 
-
+        protected List<GameObject> heartList;
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
         public List<GameObject> WallList
@@ -46,6 +46,7 @@ namespace Final
         protected KeyboardState previousState;
         protected MouseState previousMouse;
         protected Balloon balloon;
+        protected Heart heart;
         protected SpriteFont font;
         protected SpriteFont smallFont;
         protected AnimatedClass explosion;
@@ -113,11 +114,12 @@ namespace Final
             //initializing planes, balloons
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex);
             planeList.Add(playerOne);
+            
 
             playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletTex);
             planeList.Add(playerTwo);
 
-            
+             
 
             
 
@@ -222,7 +224,7 @@ namespace Final
             
 
 
-
+          
 
 
 
