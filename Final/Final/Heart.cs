@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Final
-{
-    class Heart : GameObject
-    {
-    }
-}
+//namespace Final
+//{
+    //class Heart : GameObject
+    //{
+    //}
+//}
