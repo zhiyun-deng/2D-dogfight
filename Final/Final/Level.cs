@@ -119,11 +119,7 @@ namespace Final
 
             
 
-            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1),bulletTex);
             
-            balloon.SetSize(45, 75);
-            
-            planeList.Add(balloon);
 
             //Horizontal Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
@@ -221,9 +217,9 @@ namespace Final
             playerTwo.Update(wallList, planeList);
 
             
-            balloon.MoveRandom();
+            
             //balloon.MoveTo(playerOne.Position);
-            balloon.Update(planeList);
+            
 
 
 
