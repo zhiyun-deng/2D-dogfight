@@ -11,19 +11,19 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Final
 {
-    class StartMenu : Level
+    class InstructionScreen : Level
     {
-        Texture2D startMenu;
+        Texture2D instructionScreen;
 
-        public StartMenu()
+        public InstructionScreen()
         {
-            
+
         }
 
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
-            startMenu = Content.Load<Texture2D>("MainMenu");
+            instructionScreen = Content.Load<Texture2D>("instructions");
         }
 
         public override void Update(KeyboardState state, MouseState mouse)
@@ -34,7 +34,7 @@ namespace Final
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(startMenu, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(instructionScreen, new Vector2(0, 0), Color.White);
         }
     }
 }
