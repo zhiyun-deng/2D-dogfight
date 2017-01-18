@@ -17,14 +17,14 @@ namespace Final
 
         public Level2()
         {
-            BalloonList = new Balloon[8];
+            BalloonList = new Balloon[6];
         }
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             Random RNG = new Random();
-            for (int x = 0; x <= 7; x++)
+            for (int x = 0; x <= 5; x++)
             {
                 balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1,Constants.screenHeight), RNG.Next(1,Constants.screenHeight)), new Vector2(RNG.Next(-4,4)/4, RNG.Next(-4,4)/4));
                 balloon.SetSize(45, 70);
