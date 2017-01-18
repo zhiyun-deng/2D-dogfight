@@ -12,32 +12,24 @@ namespace Final
 {
     class Level3 : Level
     {
+        GameObject blimp;
         public Level3()
         {
-
+            
         }
-            public override void Load(ContentManager Content)
+
+        public override void Load(ContentManager Content)
         {
             base.Load(Content);
-            Texture2D wallImage = Content.Load<Texture2D>("Border1280");
-            GameObject wall = new GameObject(wallImage, new Vector2(300,300));
-            wall.SetSize(250, 80);
-            wallList.Add(wall);
-
+            Texture2D blimpImage = Content.Load<Texture2D>("Blimp");
+            blimp = new GameObject(blimpImage, new Vector2(300, 300));
         }
+
         public override void Update(KeyboardState state, MouseState mouse)
         {
-
-
             // TODO: Add your update logic here
-
             base.Update(state, mouse);
-        }
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-
+            blimp.Draw(spriteBatch);
         }
     }
-    
 }

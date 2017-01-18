@@ -98,7 +98,8 @@ namespace Final
             Texture2D texture = Content.Load<Texture2D>("explosion17");
             explosion = new AnimatedClass(texture, 5, 5);
 
-            
+            //load blimp image
+            Texture2D blimpImage = Content.Load<Texture2D>("Blimp");
 
             //load plane images
             Texture2D bluePlaneImage = Content.Load<Texture2D>("bluebibplane80good");

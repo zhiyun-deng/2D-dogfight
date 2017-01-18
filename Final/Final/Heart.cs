@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Final
 {
-    class Heart : GameObject
-    {
-    }
+    //class Heart : GameObject
+    //{
+    //}
 }
