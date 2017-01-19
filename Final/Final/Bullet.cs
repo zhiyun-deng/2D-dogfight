@@ -22,7 +22,7 @@ namespace Final
 
             this.position = position;  // the position of the bullet
             bulletRectangle = new Rectangle(0, 0, texture.Width, texture.Height);  // sets the width and height of the bullet texture
-            velocity = new Vector2(10, 10); // thus is the speed that the bullet fires at
+            velocity = new Vector2(6, 6); // thus is the speed that the bullet fires at
             NeedsRemove = false;  // if a bullet does not hit anything it can stay on the screen
             this.control = control;
 
