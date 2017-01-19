@@ -20,7 +20,7 @@ namespace Final
         public Level5()
         {
             objective = "For a twist, COOPERATE with your friend so that ONE OF THE PLANES survives the longest!";
-            balloonList = new Balloon[8];
+            balloonList = new Balloon[16];
         }
 
 
@@ -34,12 +34,15 @@ namespace Final
 
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             Random RNG = new Random();
-            for (int x = 0; x <= 7; x++)
+            for (int x = 0; x < 4; x++)
             {
-                balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1, 1280), RNG.Next(1, 720)), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4), bulletTex);
-                balloon.SetSize(45, 70);
-                balloonList[x] = balloon;
-                planeList.Add(balloon);
+                for (int i = 0; i < 4; i++)
+                {
+                    balloon = new Balloon(balloonImage, new Vector2(400 * x, 400 * i), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4), bulletTex);
+                    balloon.SetSize(45, 70);
+                    balloonList[x*4+i] = balloon;
+                    planeList.Add(balloon); 
+                }
 
             }
 
