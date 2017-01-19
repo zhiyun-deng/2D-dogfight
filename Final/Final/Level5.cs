@@ -14,15 +14,18 @@ namespace Final
     {
         
         TimeSpan timeSpan = TimeSpan.FromMilliseconds(0000);
+        double finishTime = 0.0;
+        Balloon[] balloonList;
 
         public Level5()
         {
-            objective = "For a twist, COOPERATE with your friend to help them survive the longest!";
+            objective = "For a twist, COOPERATE with your friend so that ONE OF THE PLANES survives the longest!";
+            balloonList = new Balloon[8];
         }
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
-            
+            trophy.Position = new Vector2(-100, -100);
 
 
 
@@ -33,7 +36,24 @@ namespace Final
 
             base.Update(state, mouse);
             timeSpan += gameTime.ElapsedGameTime;
+            gettingResponse = false;
+            text = "";
+            secondText = "";
+            
+            if (playerOne.Position.Y > Constants.screenHeight && playerTwo.Position.Y > Constants.screenHeight)
+            {
+                if (finishTime == 0.0)
+                {
+                    finishTime = Math.Floor(timeSpan.TotalSeconds);
+                }
+                text = "You manage to hold on for " + finishTime + " seconds!" ;
+                secondText = "Press enter close the game.";
+                gettingResponse = true;
+            }
+            
 
+            
+            
 
 
 
@@ -49,7 +69,10 @@ namespace Final
         {
 
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(font, timeSpan.TotalSeconds.ToString(), new Vector2(100, 100), Color.Black);
+            if (finishTime == 0.0)
+            {
+                spriteBatch.DrawString(smallFont, timeSpan.TotalSeconds.ToString(), new Vector2(100, 100), Color.Black);
+            }
 
         }
     }
