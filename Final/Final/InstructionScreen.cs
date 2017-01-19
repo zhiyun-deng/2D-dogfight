@@ -21,7 +21,7 @@ namespace Final
         }
 
         public override void Load(ContentManager Content)
-        {
+        { 
             base.Load(Content);
             instructionScreen = Content.Load<Texture2D>("instructions");
         }
@@ -29,7 +29,10 @@ namespace Final
         public override void Update(KeyboardState state, MouseState mouse)
         {
             base.Update(state, mouse);
-            gettingResponse = true;
+            if (state.IsKeyDown(Keys.Space))
+            {
+                done = true;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

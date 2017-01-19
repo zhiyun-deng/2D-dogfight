@@ -29,7 +29,7 @@ namespace Final
         {
             // TODO: Add your update logic here
             base.Update(state, mouse);
-            blimp.Draw(spriteBatch);
+            //blimp.Draw(spriteBatch);
         }
     }
 }
