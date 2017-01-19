@@ -35,6 +35,7 @@ namespace Final
         bool exploding = false;
         protected List<Bullet> bulletList;
         protected List<Heart> heartList;
+        protected int lastHealth;
         
 
         public int Health
@@ -52,7 +53,7 @@ namespace Final
 
 
 
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex,Texture2D heartTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -61,9 +62,10 @@ namespace Final
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
             heartList = new List<Heart>();
+            lastHealth = health;
             for (int i = 0; i < 5; i++)
             {
-                Heart heart = new Heart(heartTex, new Vector2 (1250,680-20*i));
+                Heart heart = new Heart(heartTex, new Vector2 (1250-20*i,680));
             }
 
             //providing the plane is horizontal
@@ -92,7 +94,7 @@ namespace Final
             
         }
         //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion,Texture2D bulletTex) : base(leftTexture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion,Texture2D bulletTex,Texture2D heartTex) : base(leftTexture, position, velocity)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -103,9 +105,11 @@ namespace Final
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
             heartList = new List<Heart>();
+            lastHealth = health;
             for (int i = 0; i < 5; i++)
             {
                 Heart heart = new Heart(heartTex, new Vector2(1250, 680 - 20 * i));
+                heartList.Add(heart);
             }
             //providing the plane is horizontal
             if (right)
@@ -205,7 +209,10 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
-            foreach (Heart heart )
+            if((lastHealth - health >= health / 5) && heartList.Count != 0 )
+            {
+                heartList.RemoveAt(heartList.Count - 1);
+            }
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
                 bullet.Update(obstacleList);
