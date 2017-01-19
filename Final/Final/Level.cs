@@ -22,7 +22,7 @@ namespace Final
             }
         }
 
-        protected List<GameObject> heartList;
+        //protected List<GameObject> heartList;
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
         public List<GameObject> WallList

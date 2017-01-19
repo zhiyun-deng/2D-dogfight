@@ -205,7 +205,7 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
-            foreach (Heart heart )
+            //foreach (Heart heart)
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
                 bullet.Update(obstacleList);
