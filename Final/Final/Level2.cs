@@ -17,30 +17,27 @@ namespace Final
 
         public Level2()
         {
-            BalloonList = new Balloon[5];
+            BalloonList = new Balloon[3];
         }
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
-            Random RNG = new Random();
-            for (int x = 0; x <= 4; x++)
-            {
-                balloon = new Balloon(balloonImage, new Vector2(RNG.Next(1, 1280), RNG.Next(1, 720)), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4), bulletTex);
-                balloon.SetSize(45, 70);
-                BalloonList[x] = balloon;
-                if (balloon.CollisionRectangle.Intersects(playerOne.CollisionRectangle) || balloon.CollisionRectangle.Intersects(playerTwo.CollisionRectangle))
-                {
-                    continue;
-
-                }
-                else
-                {
-                    planeList.Add(balloon);
-                }
+            balloon = new Balloon(balloonImage, new Vector2(200,200), new Vector2(0,0), bulletTex);
+            balloon.SetSize(45, 70);
+            BalloonList[0] = balloon;
+            planeList.Add(balloon);
+            balloon = new Balloon(balloonImage, new Vector2(600, 400), new Vector2(0, 0), bulletTex);
+            balloon.SetSize(45, 70);
+            BalloonList[1] = balloon;
+            planeList.Add(balloon);
+            balloon = new Balloon(balloonImage, new Vector2(800, 100), new Vector2(0, 0), bulletTex);
+            balloon.SetSize(45, 70);
+            BalloonList[2] = balloon;
+            planeList.Add(balloon);
 
 
-            }
+
         }
         public override void Update(KeyboardState state, MouseState mouse)
         {

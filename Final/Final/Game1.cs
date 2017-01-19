@@ -46,7 +46,7 @@ namespace Final
             Level startMenu = new StartMenu();
             levelList[0] = startMenu;
 
-            Level instructionScreen = new InstructionScreen();
+            InstructionScreen instructionScreen = new InstructionScreen();
             levelList[1] = instructionScreen;
 
             Level one = new Level();
