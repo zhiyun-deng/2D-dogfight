@@ -38,8 +38,8 @@ namespace Final
 
             }
             trophy.Position = (new Vector2(-100, -100));
-            playerOne.Health = 1;
-            playerTwo.Health = 1;
+            playerOne.Health = 5;
+            playerTwo.Health = 5;
 
         }
         public override void Update(KeyboardState state, MouseState mouse)
