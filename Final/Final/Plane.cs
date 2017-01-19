@@ -27,7 +27,7 @@ namespace Final
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
-        private int health = 20;
+        private int health = 5;
         bool shield;
         Texture2D heartTex;
         AnimatedClass explosion;
@@ -63,9 +63,23 @@ namespace Final
             bulletList = new List<Bullet>();
             heartList = new List<Heart>();
             lastHealth = health;
-            for (int i = 0; i < 5; i++)
+            if (!right)
             {
-                Heart heart = new Heart(heartTex, new Vector2 (1250-20*i,680));
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(1230 - 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(20 + 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                }
             }
 
             //providing the plane is horizontal
@@ -106,10 +120,23 @@ namespace Final
             bulletList = new List<Bullet>();
             heartList = new List<Heart>();
             lastHealth = health;
-            for (int i = 0; i < 5; i++)
+            if (!right)
             {
-                Heart heart = new Heart(heartTex, new Vector2(1250, 680 - 20 * i));
-                heartList.Add(heart);
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(1230 - 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                } 
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(20 + 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                }
             }
             //providing the plane is horizontal
             if (right)
@@ -209,9 +236,10 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
-            if((lastHealth - health >= health / 5) && heartList.Count != 0 )
+            if((lastHealth - health >= 1) && heartList.Count != 0 )
             {
                 heartList.RemoveAt(heartList.Count - 1);
+                lastHealth = health;
             }
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
