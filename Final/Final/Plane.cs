@@ -27,13 +27,15 @@ namespace Final
         Texture2D leftTexture;
         Texture2D rightTexture;
         Texture2D bulletTex;
-        private int health = 20;
+        private int health = 5;
         bool shield;
         Texture2D heartTex;
         AnimatedClass explosion;
         bool dead = false;
         bool exploding = false;
         protected List<Bullet> bulletList;
+        protected List<Heart> heartList;
+        protected int lastHealth;
         
 
         public int Health
@@ -51,7 +53,7 @@ namespace Final
 
 
 
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex) : base(leftTexture, position)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex,Texture2D heartTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -59,6 +61,26 @@ namespace Final
             this.explosion = explosion;
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
+            heartList = new List<Heart>();
+            lastHealth = health;
+            if (!right)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(1230 - 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(20 + 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                }
+            }
 
             //providing the plane is horizontal
             if (right)
@@ -86,7 +108,7 @@ namespace Final
             
         }
         //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion,Texture2D bulletTex) : base(leftTexture, position, velocity)
+        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion,Texture2D bulletTex,Texture2D heartTex) : base(leftTexture, position, velocity)
         {
             this.leftTexture = leftTexture;
             this.rightTexture = rightTexture;
@@ -96,7 +118,26 @@ namespace Final
             this.explosion = explosion;
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
-
+            heartList = new List<Heart>();
+            lastHealth = health;
+            if (!right)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(1230 - 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                } 
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Heart heart = new Heart(heartTex, new Vector2(20 + 20 * i, 680));
+                    heart.SetSize(20, 20);
+                    heartList.Add(heart);
+                }
+            }
             //providing the plane is horizontal
             if (right)
             {
@@ -195,6 +236,11 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
+            if((lastHealth - health >= 1) && heartList.Count != 0 )
+            {
+                heartList.RemoveAt(heartList.Count - 1);
+                lastHealth = health;
+            }
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
                 bullet.Update(obstacleList);
@@ -276,6 +322,11 @@ namespace Final
             foreach (Bullet bullet in bulletList)
             {
                 bullet.Draw(sprite);
+            }
+
+            foreach (Heart heart in heartList)
+            {
+                heart.Draw(sprite);
             }
 
 

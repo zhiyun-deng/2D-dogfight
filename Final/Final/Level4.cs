@@ -15,12 +15,15 @@ namespace Final
     {
         Balloon[] BalloonList;
 
+        //Level Four of the Game
 
         public Level4()
         {
             objective = "Compete With the Other Plane: Shoot Down Your Opponent To Win!";
             BalloonList = new Balloon[0];
         }
+
+        //Loads Objects
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
@@ -35,8 +38,8 @@ namespace Final
 
             }
             trophy.Position = (new Vector2(-100, -100));
-            playerOne.Health = 1;
-            playerTwo.Health = 1;
+            playerOne.Health = 5;
+            playerTwo.Health = 5;
 
         }
         public override void Update(KeyboardState state, MouseState mouse)

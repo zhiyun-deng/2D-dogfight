@@ -22,7 +22,7 @@ namespace Final
             }
         }
 
-
+        
         //store walls, will not destroy plane
         protected List<GameObject> wallList;
         public List<GameObject> WallList
@@ -46,6 +46,7 @@ namespace Final
         protected KeyboardState previousState;
         protected MouseState previousMouse;
         protected Balloon balloon;
+        
         protected SpriteFont font;
         protected SpriteFont smallFont;
         protected AnimatedClass explosion;
@@ -112,19 +113,16 @@ namespace Final
 
 
             //initializing planes, balloons
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex,heartTex);
             planeList.Add(playerOne);
+            
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletTex);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletTex,heartTex);
             planeList.Add(playerTwo);
 
-            
+             
 
-            balloon = new Balloon(balloonImage, new Vector2(400,400), new Vector2(1, 1),bulletTex);
             
-            balloon.SetSize(45, 75);
-            
-            planeList.Add(balloon);
 
             //Horizontal Walls
             Texture2D wallImage = Content.Load<Texture2D>("Border1280");
@@ -222,12 +220,12 @@ namespace Final
             playerTwo.Update(wallList, planeList);
 
             
-            balloon.MoveRandom();
+            
             //balloon.MoveTo(playerOne.Position);
-            balloon.Update(planeList);
+            
 
 
-
+          
 
 
 

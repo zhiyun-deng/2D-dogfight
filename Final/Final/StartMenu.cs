@@ -20,18 +20,21 @@ namespace Final
             
         }
 
+        //Loads the image of the Menu screen
         public override void Load(ContentManager Content)
         {
             base.Load(Content);
             startMenu = Content.Load<Texture2D>("MainMenu");
         }
 
+        //Goes to the next page once you hit enter
         public override void Update(KeyboardState state, MouseState mouse)
         {
             base.Update(state, mouse);
             gettingResponse = true;
         }
 
+        //Draws the image of the Menu screen
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(startMenu, new Vector2(0, 0), Color.White);
