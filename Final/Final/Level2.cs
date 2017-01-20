@@ -35,6 +35,14 @@ namespace Final
             balloon.SetSize(45, 70);
             BalloonList[2] = balloon;
             planeList.Add(balloon);
+            balloon = new Balloon(balloonImage, new Vector2(300, 500), new Vector2(0, 0), bulletTex);
+            balloon.SetSize(45, 70);
+            BalloonList[0] = balloon;
+            planeList.Add(balloon);
+            balloon = new Balloon(balloonImage, new Vector2(900, 450), new Vector2(0, 0), bulletTex);
+            balloon.SetSize(45, 70);
+            BalloonList[0] = balloon;
+            planeList.Add(balloon);
 
 
 
