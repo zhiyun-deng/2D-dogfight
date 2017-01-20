@@ -14,7 +14,7 @@ namespace Final
         public static int screenWidth { get { return 1280; } }
         public static int screenHeight { get { return 720; } }
 
-        public static Vector2 planeOneStartPostion { get { return new Vector2(300, 230); } }
-        public static Vector2 planeTwoStartPostion { get { return new Vector2(1000, 250); } }
+        public static Vector2 planeOneStartPostion { get { return new Vector2(40, 230); } }
+        public static Vector2 planeTwoStartPostion { get { return new Vector2(1200, 250); } }
     }
 }

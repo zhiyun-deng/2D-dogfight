@@ -64,7 +64,7 @@ namespace Final
             Level5 five = new Level5();
             levelList[6] = five;
             
-            currentLevel = levelList[0];  // sets the current level so that the game advances
+            currentLevel = levelList[5];  // sets the current level so that the game advances
             base.Initialize();
         }
 

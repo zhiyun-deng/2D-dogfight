@@ -316,7 +316,7 @@ namespace Final
             trophy.Draw(spriteBatch);
             spriteBatch.DrawString(font, text, new Vector2(400, 400), Color.WhiteSmoke);
             spriteBatch.DrawString(font, secondText, new Vector2(400, 450), Color.WhiteSmoke);
-            spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, 0), Color.PapayaWhip);
+            spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, -5), Color.Black);
 
 
 
