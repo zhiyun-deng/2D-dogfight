@@ -23,13 +23,16 @@ namespace Final
             base.Load(Content);
             Texture2D blimpImage = Content.Load<Texture2D>("Blimp");
             blimp = new GameObject(blimpImage, new Vector2(300, 300));
+            wallList.Add(blimp);
         }
 
         public override void Update(KeyboardState state, MouseState mouse)
         {
             // TODO: Add your update logic here
             base.Update(state, mouse);
+            
             //blimp.Draw(spriteBatch);
         }
+        
     }
 }
