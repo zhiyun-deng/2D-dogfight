@@ -184,14 +184,7 @@ namespace Final
                 
             }
 
-            //if (state.IsKeyDown(Keys.A) && !previousState.IsKeyDown(Keys.A))
-            //{
-            //    playerOne.Left();
-            //}
-            //if (state.IsKeyDown(Keys.D) && !previousState.IsKeyDown(Keys.D))
-            //{
-            //    playerOne.Right();
-            //}
+            
             if (state.IsKeyDown(Keys.D))
             {
 
@@ -211,10 +204,7 @@ namespace Final
 
 
 
-            //for (int i = 0; i < planeList.Count; i++)
-            //{
-            //    planeList[i].Update();
-            //}
+           
 
             playerOne.Update(wallList, planeList);
             playerTwo.Update(wallList, planeList);
