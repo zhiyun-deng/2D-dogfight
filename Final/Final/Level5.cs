@@ -28,8 +28,10 @@ namespace Final
         {
             base.Load(Content);
             trophy.Position = new Vector2(-100, -100);
+            playerOne.Health = 10;
+            playerTwo.Health = 10;
 
-            
+
 
 
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
