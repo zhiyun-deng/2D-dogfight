@@ -240,6 +240,10 @@ namespace Final
             {
                 heartList.RemoveAt(heartList.Count - 1);
                 lastHealth = health;
+                if(health == 0)
+                {
+                    heartList.Clear();
+                }
             }
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
