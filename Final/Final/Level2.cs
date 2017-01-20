@@ -17,7 +17,7 @@ namespace Final
 
         public Level2()
         {
-            BalloonList = new Balloon[3];
+            BalloonList = new Balloon[4];
         }
         public override void Load(ContentManager Content)
         {
@@ -27,22 +27,25 @@ namespace Final
             balloon.SetSize(45, 70);
             BalloonList[0] = balloon;
             planeList.Add(balloon);
-            balloon = new Balloon(balloonImage, new Vector2(600, 400), new Vector2(0, 0), bulletTex);
+            balloon = new Balloon(balloonImage, new Vector2(800, 100), new Vector2(0, 0), bulletTex);
             balloon.SetSize(45, 70);
             BalloonList[1] = balloon;
             planeList.Add(balloon);
-            balloon = new Balloon(balloonImage, new Vector2(800, 100), new Vector2(0, 0), bulletTex);
+            balloon = new Balloon(balloonImage, new Vector2(300, 500), new Vector2(0, 0), bulletTex);
             balloon.SetSize(45, 70);
             BalloonList[2] = balloon;
             planeList.Add(balloon);
-            balloon = new Balloon(balloonImage, new Vector2(300, 500), new Vector2(0, 0), bulletTex);
-            balloon.SetSize(45, 70);
-            BalloonList[0] = balloon;
-            planeList.Add(balloon);
             balloon = new Balloon(balloonImage, new Vector2(900, 450), new Vector2(0, 0), bulletTex);
             balloon.SetSize(45, 70);
-            BalloonList[0] = balloon;
+            BalloonList[3] = balloon;
             planeList.Add(balloon);
+
+            //Loads Blimp
+            Texture2D blimpImage = Content.Load<Texture2D>("Blimp");
+            GameObject blimp = new GameObject(blimpImage, new Vector2(400, 300));
+            blimp.SetSize(350, 200);
+            wallList.Add(blimp);
+            
 
 
 
