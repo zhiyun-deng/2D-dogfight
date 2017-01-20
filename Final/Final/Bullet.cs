@@ -39,7 +39,7 @@ namespace Final
         }
         public void Update(List<GameObject> obstacleList)
         {
-            position += velocity;
+            position += velocity; // moves the planes coordinates causeing it to move
             foreach (GameObject obstacle in obstacleList)  // checks for collissions between bullets and other objects
             {
                 if(obstacle is Plane) // if the obsticle is another plane, run the bullet/plane collission 
