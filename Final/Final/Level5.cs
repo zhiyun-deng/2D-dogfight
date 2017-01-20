@@ -20,7 +20,7 @@ namespace Final
         public Level5()
         {
             objective = "For a twist, COOPERATE with your friend so that ONE OF THE PLANES survives the longest!";
-            balloonList = new Balloon[16];
+            balloonList = new Balloon[4];
         }
 
 
@@ -28,25 +28,46 @@ namespace Final
         {
             base.Load(Content);
             trophy.Position = new Vector2(-100, -100);
-            playerOne.Health = 10;
-            playerTwo.Health = 10;
+            playerOne.Health = 5;
+            playerTwo.Health = 5;
 
 
 
 
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             Random RNG = new Random();
-            for (int x = 0; x < 4; x++)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    balloon = new Balloon(balloonImage, new Vector2(400 * x, 400 * i), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4), bulletTex);
-                    balloon.SetSize(45, 70);
-                    balloonList[x*4+i] = balloon;
-                    planeList.Add(balloon); 
-                }
+            //for (int x = 0; x < 4; x++)
+            //{
+            //    for (int i = 0; i < 4; i++)
+            //    {
+            //        balloon = new Balloon(balloonImage, new Vector2(400 * x, 400 * i), new Vector2(RNG.Next(-4, 4) / 4, RNG.Next(-4, 4) / 4), bulletTex);
+            //        balloon.SetSize(45, 70);
+            //        balloonList[x*4+i] = balloon;
+            //        planeList.Add(balloon); 
+            //    }
 
-            }
+            //}
+            balloon = new Balloon(balloonImage, new Vector2(50, 50), Vector2.Zero, bulletTex);
+            balloon.SetSize(45, 70);
+            balloonList[0] = balloon;
+            planeList.Add(balloon);
+
+            balloon = new Balloon(balloonImage, new Vector2(1200, 50), Vector2.Zero, bulletTex);
+            balloon.SetSize(45, 70);
+            balloonList[1] = balloon;
+            planeList.Add(balloon);
+
+            balloon = new Balloon(balloonImage, new Vector2(1200, 600), Vector2.Zero, bulletTex);
+            balloon.SetSize(45, 70);
+            balloonList[2] = balloon;
+            planeList.Add(balloon);
+
+            balloon = new Balloon(balloonImage, new Vector2(50, 600), Vector2.Zero, bulletTex);
+            balloon.SetSize(45, 70);
+            balloonList[3] = balloon;
+            planeList.Add(balloon);
+
+           
 
 
 
@@ -55,7 +76,7 @@ namespace Final
 
 
 
-       
+
 
         public void Update(KeyboardState state, MouseState mouse,GameTime gameTime)
         {
