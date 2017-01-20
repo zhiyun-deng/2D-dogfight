@@ -42,8 +42,8 @@ namespace Final
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            Level startMenu = new StartMenu(); // sets the first level as the menu screen
+            //initiating each level and load them to levelList
+            Level startMenu = new StartMenu();
             levelList[0] = startMenu;
 
             InstructionScreen instructionScreen = new InstructionScreen();
@@ -76,7 +76,9 @@ namespace Final
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (Level level in levelList)  
+
+            //load content in each level
+            foreach (Level level in levelList)
             {
                 level.Load(Content); 
             }
@@ -102,7 +104,8 @@ namespace Final
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            {
+            
+                //getting states
                 KeyboardState state = Keyboard.GetState();
                 MouseState mouse = Mouse.GetState();
 
@@ -111,22 +114,27 @@ namespace Final
                 if (GamePad.GetState(PlayerIndex.Two).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
 
+                //if level has finished and flagged "Done"
                 if (currentLevel.Done == true)
                 {
+
+                    //if this is last level, close the game
                     if (currentLevel == levelList[levelList.Length - 1])
                     {
                         Exit();
                     }
+                    //otherwise, advance to next level
                     else
                     {
                         currentLevel = levelList[Array.IndexOf(levelList, currentLevel) + 1];
                     }
                 }
-
+                //needs to pass gameTime variable to level five because it needs a clock
                 if (currentLevel is Level5)
                 {
                     ((Level5)currentLevel).Update(state, mouse,gameTime); 
                 }
+                //update other levels as normal
                 else
                 {
                     currentLevel.Update(state, mouse);
@@ -135,10 +143,10 @@ namespace Final
 
 
                 base.Update(gameTime);
-            }
+            
 
 
-            base.Update(gameTime);
+            
         }
 
         /// <summary>
@@ -153,7 +161,7 @@ namespace Final
 
             
             
-
+            
             currentLevel.Draw(spriteBatch);
             
 
