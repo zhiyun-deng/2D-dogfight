@@ -24,6 +24,7 @@ namespace Final
             Texture2D blimpImage = Content.Load<Texture2D>("Blimp");
             blimp = new GameObject(blimpImage, new Vector2(300, 300));
             wallList.Add(blimp);
+            
         }
 
         public override void Update(KeyboardState state, MouseState mouse)

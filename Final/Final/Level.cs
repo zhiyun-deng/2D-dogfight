@@ -11,9 +11,12 @@ using Microsoft.Xna.Framework.Content;
 namespace Final
 {
     class Level
+
+        //This is the first real level, with basic features. All other levels inherit from it. 
     {
-        //stores all moving objects
+        //stores all moving objects, including BALLOON AND PLANE
         protected List<GameObject> planeList;
+        //planeList properties
         public List<GameObject> PlaneList
         {
             get
@@ -23,7 +26,7 @@ namespace Final
         }
 
         
-        //store walls, will not destroy plane
+        //store walls, or any other objects that will not destroy plane(such as blimp)
         protected List<GameObject> wallList;
         public List<GameObject> WallList
         {
@@ -33,19 +36,20 @@ namespace Final
             }
         }
 
-        //the red block
-
-        protected Texture2D background;
+        
+        
+        protected Texture2D background;//background image
         
 
-        protected Plane playerOne;
-        protected Plane playerTwo;
+        protected Plane playerOne;//blue blane
+        protected Plane playerTwo;//red plane
 
         protected GameObject trophy;
         
-        protected KeyboardState previousState;
+        protected KeyboardState previousState;//
         protected MouseState previousMouse;
-        protected Balloon balloon;
+
+        protected Balloon balloon; //red balloon, not used in this level, but it is inherited
         
         protected SpriteFont font;
         protected SpriteFont smallFont;
@@ -201,7 +205,7 @@ namespace Final
                 playerOne.Shoot();
             }
 
-
+            
 
 
            
@@ -312,7 +316,7 @@ namespace Final
             trophy.Draw(spriteBatch);
             spriteBatch.DrawString(font, text, new Vector2(400, 400), Color.WhiteSmoke);
             spriteBatch.DrawString(font, secondText, new Vector2(400, 450), Color.WhiteSmoke);
-            spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, 0), Color.RosyBrown);
+            spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, 0), Color.PapayaWhip);
 
 
 

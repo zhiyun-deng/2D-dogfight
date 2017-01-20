@@ -66,7 +66,7 @@ namespace Final
             levelList[6] = five;
             
             //set currentlevel to startMenu
-            currentLevel = levelList[0];
+            currentLevel = levelList[3];
             base.Initialize();
         }
 

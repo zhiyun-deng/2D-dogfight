@@ -236,6 +236,7 @@ namespace Final
 
         public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
         {
+            
             if((lastHealth - health >= 1) && heartList.Count != 0 )
             {
                 heartList.RemoveAt(heartList.Count - 1);
