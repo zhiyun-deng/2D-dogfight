@@ -29,20 +29,20 @@ namespace Final
 
 
         }
-        public void CheckCollide(Plane plane)
+        public void CheckCollide(Plane plane) // checks for collissions between planes and bullets
         {
             if(CollisionRectangle.Intersects(plane.CollisionRectangle) && plane != control)
             {
-                plane.damage();
+                plane.damage(); // if the plane gets hit--remove health
                 NeedsRemove = true;
             }
         }
         public void Update(List<GameObject> obstacleList)
         {
             position += velocity;
-            foreach (GameObject obstacle in obstacleList)
+            foreach (GameObject obstacle in obstacleList)  // checks for collissions between bullets and other objects
             {
-                if(obstacle is Plane)
+                if(obstacle is Plane) // if the obsticle is another plane, run the bullet/plane collission 
                 {
                     CheckCollide((Plane)obstacle);
                 }

@@ -53,10 +53,10 @@ namespace Final
             Level one = new Level();
             levelList[2] = one;
             
-            Level2 two = new Level2();
+            Level3 two = new Level3();
             levelList[3] = two;
 
-            Level3 three = new Level3();
+            Level2 three = new Level2();
             levelList[4] = three;
 
             Level4 four = new Level4();
