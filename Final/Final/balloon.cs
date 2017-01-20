@@ -68,19 +68,29 @@ namespace Final
         public void Shoot()
         {
             Random rng = new Random();
-            if (rng.Next(10) == 0)
+            if (rng.Next(20) == 0)
             {
                 Bullet bullet = new Bullet(bulletTex, position, this);
                 float xChange = 0, yChange = 0;
-                if (Math.Floor(angle/Math.PI*2) %2 == 0)
+                if (Math.Floor(angle/Math.PI*2) %4 == 0)
                 { 
                     xChange = 1;
                     yChange = (float)Math.Tan(angle); 
                 }
-                else
+                else if (Math.Floor(angle / Math.PI * 2) % 4 == 1)
                 {
                     xChange = -1;
                     yChange = -(float)Math.Tan(angle);
+                }
+                else if (Math.Floor(angle / Math.PI * 2) % 4 == 2)
+                {
+                    xChange = -1;
+                    yChange = -(float)Math.Tan(angle);
+                }
+                else if (Math.Floor(angle / Math.PI * 2) % 4 == 3)
+                {
+                    xChange = 1;
+                    yChange = (float)Math.Tan(angle);
                 }
                 bullet.MoveTo(new Vector2(position.X + xChange, position.Y + yChange));
 
@@ -100,6 +110,10 @@ namespace Final
                 }
             }
             angle += 0.01f;
+            //if(angle > Math.PI)
+            //{
+                
+            //}
             
             Shoot();
 
