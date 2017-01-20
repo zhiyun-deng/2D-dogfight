@@ -20,8 +20,8 @@ namespace Final
 
 
         //levellist has the size of the number of levels
-        Level[] levelList = new Level[7];
-        Level currentLevel;
+        Level[] levelList = new Level[7]; // creates a list for the levels with 7 elements
+        Level currentLevel; // sets the current level to the level the player is currently on
         
 
         public Game1()
@@ -43,14 +43,14 @@ namespace Final
         {
             // TODO: Add your initialization logic here
 
-            Level startMenu = new StartMenu();
+            Level startMenu = new StartMenu(); // sets the first level as the menu screen
             levelList[0] = startMenu;
 
             InstructionScreen instructionScreen = new InstructionScreen();
-            levelList[1] = instructionScreen;
+            levelList[1] = instructionScreen; //sets the instruction screen as the 2nd level
 
             Level one = new Level();
-            levelList[2] = one;
+            levelList[2] = one;            // sets the first actual playing level as the third level
             
             Level3 two = new Level3();
             levelList[3] = two;
@@ -64,7 +64,7 @@ namespace Final
             Level5 five = new Level5();
             levelList[6] = five;
             
-            currentLevel = levelList[0];
+            currentLevel = levelList[0];  // sets the current level so that the game advances
             base.Initialize();
         }
 
@@ -76,7 +76,7 @@ namespace Final
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            foreach (Level level in levelList)
+            foreach (Level level in levelList)  
             {
                 level.Load(Content); 
             }
