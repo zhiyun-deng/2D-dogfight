@@ -122,11 +122,11 @@ namespace Final
 
 
             //initializing planes
-            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex,heartTex);
+            playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion,true, explosion, bulletTex,heartTex);
             planeList.Add(playerOne);
             
 
-            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, Vector2.Zero, false,explosion,bulletTex,heartTex);
+            playerTwo = new Plane(redPlaneImage, redRight, Constants.planeTwoStartPostion, false,explosion,bulletTex,heartTex);
             planeList.Add(playerTwo);
 
              
@@ -329,6 +329,7 @@ namespace Final
             spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, -5), Color.Black);
             spriteBatch.DrawString(smallFont, "Blue Plane Health", new Vector2(30, 630), Color.SpringGreen);
             spriteBatch.DrawString(smallFont, "Red Plane Health", new Vector2(1050, 630), Color.SpringGreen);
+            
 
 
 

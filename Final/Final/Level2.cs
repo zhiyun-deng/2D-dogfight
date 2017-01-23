@@ -12,15 +12,16 @@ namespace Final
 {
     class Level2 : Level
     {
-        Balloon[] BalloonList;
+        Balloon[] BalloonList;//stores balloons in this level
         
-
+        //constructor
         public Level2()
         {
             BalloonList = new Balloon[4];
         }
-        public override void Load(ContentManager Content)
+        public override void Load(ContentManager Content)//load content
         {
+            
             base.Load(Content);
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             balloon = new Balloon(balloonImage, new Vector2(400,200), new Vector2(0,0), bulletTex);

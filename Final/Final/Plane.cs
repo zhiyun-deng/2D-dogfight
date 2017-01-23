@@ -10,23 +10,27 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final
 {
+    //plane object that flies and shoots
     class Plane : GameObject
     {
-        //need to fix protection level of variables
-        private Vector2 headPos;
+        
+        public Vector2 headPos;//where the head of the plane is
 
-        private Vector2 tailPos;
-        private bool faceRight = true;
-        private float angle = 0.0f;
-        Rectangle sourceRectangle;
+        private Vector2 tailPos;//where the tail of the plane is
+        private bool faceRight = true;//if the plane faces right, faceright = true
+        private float angle = 0.0f;//the angle at which plane goes
+        Rectangle sourceRectangle;//the rectangle selected from the plane picture to draw
        
 
-        Vector2 origin;
-        private float angleSpeed = 0.035f;
-        double speed = 2.5;
-        Texture2D leftTexture;
-        Texture2D rightTexture;
-        Texture2D bulletTex;
+        Vector2 origin;//the point around which plane rotates
+        private float angleSpeed = 0.035f;//speed at which plane rotates
+        double speed = 2.5;//speed at which plane moves
+
+        //two pictures of the plane are needed for plane to flip
+        Texture2D leftTexture;//picture of the plane facing left
+        Texture2D rightTexture;//picture of plane facing right
+
+        Texture2D bulletTex;//bullet image
         private int health = 5;
         bool shield;
         Texture2D heartTex;
@@ -52,7 +56,7 @@ namespace Final
 
 
 
-
+        //constructor
         public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, bool right, AnimatedClass explosion, Texture2D bulletTex,Texture2D heartTex) : base(leftTexture, position)
         {
             this.leftTexture = leftTexture;
@@ -63,8 +67,12 @@ namespace Final
             bulletList = new List<Bullet>();
             heartList = new List<GameObject>();
             lastHealth = health;
+
+            //creating health index(hearts)
+            //if the plane starts by facing left, health index is on the right part of screen
             if (!right)
             {
+
                 for (int i = 0; i < 5; i++)
                 {
                     GameObject heart = new GameObject(heartTex, new Vector2(1230 - 20 * i, 680));
@@ -72,6 +80,7 @@ namespace Final
                     heartList.Add(heart);
                 }
             }
+            //otherwise, put it on left part
             else
             {
                 for (int i = 0; i < 5; i++)
@@ -82,7 +91,7 @@ namespace Final
                 }
             }
 
-            //providing the plane is horizontal
+            //these variables' initialvalue depend in orientation of plane
             if (right)
             {
                 faceRight = true;
@@ -101,68 +110,17 @@ namespace Final
                 origin = new Vector2(texture.Width, texture.Height);
                 texture = leftTexture;
             }
+
+            
             sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
 
             velocity = new Vector2(0, 0);
 
             
         }
-        //velocity might not be needed
-        public Plane(Texture2D leftTexture, Texture2D rightTexture, Vector2 position, Vector2 velocity, bool right, AnimatedClass explosion,Texture2D bulletTex,Texture2D heartTex) : base(leftTexture, position, velocity)
-        {
-            this.leftTexture = leftTexture;
-            this.rightTexture = rightTexture;
-            this.position = position;
-            this.velocity = velocity;
-            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            this.explosion = explosion;
-            this.bulletTex = bulletTex;
-            bulletList = new List<Bullet>();
-            heartList = new List<GameObject>();
-            lastHealth = health;
-            if (!right)
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    GameObject heart = new GameObject(heartTex, new Vector2(1230 - 20 * i, 680));
-                    heart.SetSize(20, 20);
-                    heartList.Add(heart);
-                } 
-            }
-            else
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    GameObject heart = new GameObject(heartTex, new Vector2(20 + 20 * i, 680));
-                    heart.SetSize(20, 20);
-                    heartList.Add(heart);
-                }
-            }
-            //providing the plane is horizontal
-            if (right)
-            {
-                faceRight = true;
-                tailPos = position;
-                headPos = new Vector2(position.X + texture.Width, position.Y);
-                origin = new Vector2(0, 0);
-                texture = rightTexture;
-
-            // Check for x wall collision
-
-            
-
-            
-            position.Y += velocity.Y;
-            }
-            else
-            {
-                faceRight = false;
-                headPos = position;
-                tailPos = new Vector2(position.X + texture.Width, position.Y);
-                origin = new Vector2(texture.Width, texture.Height);
-                texture = leftTexture;
-            }
-        }
+        
+      //because position is always at the tail of the plane, collision rectangle has to be modified to
+      //take into account plane's orietation
         public override Rectangle CollisionRectangle
         {
             get
@@ -197,11 +155,7 @@ namespace Final
 
 
 
-        //public override void Update()
-        //{
-        //    position += velocity;
-        //}
-
+      
         
 
         public void CollideWallY(GameObject wall)
@@ -235,9 +189,9 @@ namespace Final
         }
         
 
-        public void Update(List<GameObject> wallList, List<GameObject> obstacleList)
+        public void Update(List<GameObject> wallList, List<GameObject> obstacleList)//moves plane, make it explode if necessary
         {
-            
+            //for every health point deducted, remove a heart
             if((lastHealth - health >= 1) && heartList.Count != 0 )
             {
                 heartList.RemoveAt(heartList.Count - 1);
@@ -247,6 +201,8 @@ namespace Final
                     heartList.Clear();
                 }
             }
+
+            //update bullet, removing bullet from list if needed
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
                 bullet.Update(obstacleList);
