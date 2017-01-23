@@ -9,14 +9,17 @@ using Microsoft.Xna.Framework;
 
 namespace Final
 {
-    class AnimatedClass
+    class AnimatedClass //copied from RB whitaker tutorial
+        //used to animate a picture atlas
     {
-        public Texture2D Texture { get; set; }
-        public int Rows { get; set; }
-        public int Columns { get; set; }
+        private Texture2D Texture { get; set; }
+        private int Rows { get; set; }
+        private int Columns { get; set; }
         private int currentFrame;
         private int totalFrames;
 
+
+        //constructor, loads atlas and number of rows/columns
         public AnimatedClass(Texture2D texture, int rows, int columns)
         {
             Texture = texture;
@@ -26,6 +29,7 @@ namespace Final
             totalFrames = Rows * Columns;
         }
 
+        //advance to the next frame( going in a cycle)
         public void Update()
         {
             currentFrame++;
@@ -33,6 +37,7 @@ namespace Final
                 currentFrame = 0;
         }
 
+        //draws the current frame
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             int width = Texture.Width / Columns;

@@ -23,7 +23,7 @@ namespace Final
         {
             base.Load(Content);
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
-            balloon = new Balloon(balloonImage, new Vector2(200,200), new Vector2(0,0), bulletTex);
+            balloon = new Balloon(balloonImage, new Vector2(400,200), new Vector2(0,0), bulletTex);
             balloon.SetSize(45, 70);
             BalloonList[0] = balloon;
             planeList.Add(balloon);

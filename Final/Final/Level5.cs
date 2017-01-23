@@ -57,12 +57,12 @@ namespace Final
             balloonList[1] = balloon;
             planeList.Add(balloon);
 
-            balloon = new Balloon(balloonImage, new Vector2(1200, 600), Vector2.Zero, bulletTex);
+            balloon = new Balloon(balloonImage, new Vector2(1200, 600), new Vector2(1,1), bulletTex);
             balloon.SetSize(45, 70);
             balloonList[2] = balloon;
             planeList.Add(balloon);
 
-            balloon = new Balloon(balloonImage, new Vector2(50, 600), Vector2.Zero, bulletTex);
+            balloon = new Balloon(balloonImage, new Vector2(50, 600), new Vector2(1, 1), bulletTex);
             balloon.SetSize(45, 70);
             balloonList[3] = balloon;
             planeList.Add(balloon);
@@ -90,7 +90,16 @@ namespace Final
 
             for (int i = 0; i < balloonList.Length; i++)
             {
+                if (i == 2)
+                {
+                    balloonList[i].MoveTo(playerOne.Position);
+                }
+                if ( i == 3)
+                {
+                    balloonList[i].MoveTo(playerTwo.Position);
+                }
                 balloonList[i].Update(planeList);
+                
                 //BalloonList[i].MoveRandom();
                 //BalloonList[i].Shoot();
             }
@@ -102,7 +111,7 @@ namespace Final
                     finishTime = Math.Floor(timeSpan.TotalSeconds);
                 }
                 text = "You manage to hold on for " + finishTime + " seconds!" ;
-                secondText = "Press enter close the game.";
+                secondText = "Press enter to close the game.";
                 gettingResponse = true;
             }
             

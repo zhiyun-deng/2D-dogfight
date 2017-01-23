@@ -12,11 +12,12 @@ namespace Final
     class Balloon : GameObject
 
     {
-        private float acceleration;
-        protected List<Bullet> bulletList = new List<Bullet>();
-        private float angle;
-        Texture2D bulletTex;
+        private float acceleration; //acceleration of balloon: rate at which balloon changes its course
+        protected List<Bullet> bulletList = new List<Bullet>();//stores list of bullets that balloon shoots out
+        private float angle;//the angle at which balloon shoots bullets
+        Texture2D bulletTex;//texture of bullets
 
+        //constructor
         public Balloon(Texture2D texture, Vector2 pos, Vector2 velocity,Texture2D bulletTex):base(texture, pos, velocity)
         {
             position = pos;
@@ -26,22 +27,28 @@ namespace Final
             this.bulletTex = bulletTex;
         }
         
+
+        //change the course (velocity) of the balloon so that it goes more upward
         public void Up()
         {
             velocity.Y -= acceleration;
         }
+        //change the course (velocity) of the balloon so that it goes more downward
         public void Down()
         {
             velocity.Y += acceleration;
         }
+        //change the course (velocity) of the balloon so that it goes more to the left
         public void Left()
         {
             velocity.X -= acceleration;
         }
+        //change the course (velocity) of the balloon so that it goes more to the right
         public void Right()
         {
             velocity.X += acceleration;
         }
+
         public void MoveRandom()
         {
             Random rng = new Random();

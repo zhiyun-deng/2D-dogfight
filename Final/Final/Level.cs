@@ -250,10 +250,7 @@ namespace Final
             }
 
 
-            if (mouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton != ButtonState.Pressed)
-            {
-                playerOne.accelerate(0.5);
-            }
+            
 
 
 
@@ -317,6 +314,9 @@ namespace Final
             spriteBatch.DrawString(font, text, new Vector2(400, 400), Color.WhiteSmoke);
             spriteBatch.DrawString(font, secondText, new Vector2(400, 450), Color.WhiteSmoke);
             spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, -5), Color.Black);
+            spriteBatch.DrawString(smallFont, "Blue Plane Health", new Vector2(30, 630), Color.SpringGreen);
+            spriteBatch.DrawString(smallFont, "Red Plane Health", new Vector2(1050, 630), Color.SpringGreen);
+
 
 
 

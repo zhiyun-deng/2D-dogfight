@@ -34,7 +34,7 @@ namespace Final
         bool dead = false;
         bool exploding = false;
         protected List<Bullet> bulletList;
-        protected List<Heart> heartList;
+        protected List<GameObject> heartList;
         protected int lastHealth;
         
 
@@ -61,13 +61,13 @@ namespace Final
             this.explosion = explosion;
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
-            heartList = new List<Heart>();
+            heartList = new List<GameObject>();
             lastHealth = health;
             if (!right)
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Heart heart = new Heart(heartTex, new Vector2(1230 - 20 * i, 680));
+                    GameObject heart = new GameObject(heartTex, new Vector2(1230 - 20 * i, 680));
                     heart.SetSize(20, 20);
                     heartList.Add(heart);
                 }
@@ -76,7 +76,7 @@ namespace Final
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Heart heart = new Heart(heartTex, new Vector2(20 + 20 * i, 680));
+                    GameObject heart = new GameObject(heartTex, new Vector2(20 + 20 * i, 680));
                     heart.SetSize(20, 20);
                     heartList.Add(heart);
                 }
@@ -118,13 +118,13 @@ namespace Final
             this.explosion = explosion;
             this.bulletTex = bulletTex;
             bulletList = new List<Bullet>();
-            heartList = new List<Heart>();
+            heartList = new List<GameObject>();
             lastHealth = health;
             if (!right)
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Heart heart = new Heart(heartTex, new Vector2(1230 - 20 * i, 680));
+                    GameObject heart = new GameObject(heartTex, new Vector2(1230 - 20 * i, 680));
                     heart.SetSize(20, 20);
                     heartList.Add(heart);
                 } 
@@ -133,7 +133,7 @@ namespace Final
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Heart heart = new Heart(heartTex, new Vector2(20 + 20 * i, 680));
+                    GameObject heart = new GameObject(heartTex, new Vector2(20 + 20 * i, 680));
                     heart.SetSize(20, 20);
                     heartList.Add(heart);
                 }
@@ -167,6 +167,7 @@ namespace Final
         {
             get
             {
+
                 if (faceRight)
                 {
                     return new Rectangle(
@@ -319,17 +320,21 @@ namespace Final
 
             sprite.Draw(texture, position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
             
-            if (exploding)
+            if (exploding&&faceRight)
             {
                 explosion.Draw(sprite, new Vector2(position.X-50, position.Y-50));
 
+            }
+            else if (exploding)
+            {
+                explosion.Draw(sprite, new Vector2(position.X - 100, position.Y - 100));
             }
             foreach (Bullet bullet in bulletList)
             {
                 bullet.Draw(sprite);
             }
 
-            foreach (Heart heart in heartList)
+            foreach (GameObject heart in heartList)
             {
                 heart.Draw(sprite);
             }
@@ -524,7 +529,7 @@ namespace Final
 
             
         }
-        public void right()
+        public void left()
         {
             if (faceRight)
             {
@@ -535,7 +540,7 @@ namespace Final
                 Down();
             }
         }
-        public void left()
+        public void right()
         {
 
             if (faceRight)
