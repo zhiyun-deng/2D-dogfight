@@ -16,12 +16,12 @@ namespace Final
         protected Vector2 position;   // where it is
         protected Vector2 velocity;   // how fast it is moving
         protected Vector2 oldPosition; // where it was last frame
-        protected int width = 0;
-        protected int height = 0;
+        protected int width = 0; //width of object
+        protected int height = 0;//height of object
         
 
         // Properties
-
+        //position of object
         public Vector2 Position
         {
             get
@@ -33,7 +33,7 @@ namespace Final
                 position = value;
             }
         }
-
+        //velocity of object
         public Vector2 Velocity
         {
             get
@@ -46,7 +46,7 @@ namespace Final
             }
         }
 
-        // This is used to calculate the recatangle of the texture for collision
+        // This is used to calculate the rectangle of the texture for collision
 
         public virtual Rectangle CollisionRectangle
         {
@@ -81,13 +81,13 @@ namespace Final
             height = texture.Height;
 
         }
-
+        //draw object
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), Color.White);
         }
         
-
+        //CHeck if it collides with another object
         public bool IsCollide(GameObject target)
         {
             if (CollisionRectangle.Intersects(target.CollisionRectangle))
@@ -98,6 +98,7 @@ namespace Final
             return false;
         }
         
+        //changes velocity so that object moves to a position desired
         public void MoveTo(Vector2 target)
         {
 
@@ -109,11 +110,13 @@ namespace Final
 
             //speed of gameObject calculated from the two vectors
             double speed = Math.Sqrt((double)velocity.X * velocity.X + (double)velocity.Y * velocity.Y);
+
             //ratio of the velocity.X and Y needed for object to move toward target
             double ratio = (target.X - position.X) / (target.Y - position.Y);
             velocity.Y = (float)Math.Sqrt(speed * speed / (ratio * ratio + 1));
             velocity.X = (float)Math.Sqrt(speed * speed - velocity.Y * velocity.Y);
 
+            //so far, the velocity is positive, change it to negative if needed
             if (target.X < position.X)
             {
                 velocity.X *= -1;
@@ -124,11 +127,11 @@ namespace Final
             }
         }
 
-        public virtual void Update()
+        public virtual void Update() //moves object
         {
             position += velocity;
         }
-        public void SetSize(int width, int height)
+        public void SetSize(int width, int height)//sets size of object
         {
             this.width = width;
             this.height = height;

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Final
 {
+    //the framework for all levels, includes background, plane, and trophy,
     class Level
 
         //This is the first real level, with basic features. All other levels inherit from it. 
@@ -44,26 +45,27 @@ namespace Final
         protected Plane playerOne;//blue blane
         protected Plane playerTwo;//red plane
 
-        protected GameObject trophy;
+        protected GameObject trophy;//trophy object, can be set to be off the screen if necessary
         
-        protected KeyboardState previousState;//
-        protected MouseState previousMouse;
+        protected KeyboardState previousState;//previous keyboard state;
+        protected MouseState previousMouse;//previous mouse state;
 
         protected Balloon balloon; //red balloon, not used in this level, but it is inherited
         
-        protected SpriteFont font;
-        protected SpriteFont smallFont;
-        protected AnimatedClass explosion;
-        protected Texture2D bulletTex;
-        protected Texture2D heartTex;
-        protected string text = "";
-        protected string secondText = "";
-        protected string objective = "Compete with the other plane: The one who touches the trophy wins!";
-        //timer initialization 
+        protected SpriteFont font;//the big font used in end message
+        protected SpriteFont smallFont;//the small font used on objectives of levels
+        protected AnimatedClass explosion;//animated effects of explosion
+        protected Texture2D bulletTex;//pictures of bullet
+        protected Texture2D heartTex;//pictures of hearts, used for health
+        protected string text = "";//first line of end message
+        protected string secondText = "";//second line of end message
+        protected string objective = "Compete with the other plane: The one who touches the trophy wins!";//text that appears on top of screen each level
+        
 
-
+        //if the level is in stage when it is displaying the end message(waiting user to press enter), gettingResponse will be true
         protected bool gettingResponse = false;
 
+        //if user pressed enter in the end message stage, level is finished and done is set to true. Game1 will move to next level.
         protected bool done = false;
         public bool Done
         {
@@ -77,7 +79,7 @@ namespace Final
             }
         }
 
-
+        //constructor
         public Level()
         {
             wallList = new List<GameObject>();
@@ -86,10 +88,11 @@ namespace Final
 
             planeList = new List<GameObject>();
             previousState = Keyboard.GetState();
+            previousMouse = Mouse.GetState();
 
             
         }
-        public virtual void Load(ContentManager Content)
+        public virtual void Load(ContentManager Content)//load content
         {
 
             //load font for text
@@ -111,12 +114,14 @@ namespace Final
             Texture2D redPlaneImage = Content.Load<Texture2D>("biplanered80");
             Texture2D redRight = Content.Load<Texture2D>("biplanered80goodRight");
             Texture2D blueLeft = Content.Load<Texture2D>("bluebibplane80goodLEFT");
+
+            //load balloon, bullet, heart image
             Texture2D balloonImage = Content.Load<Texture2D>("balloon - Copy");
             bulletTex = Content.Load<Texture2D>("bulletgood");
             heartTex = Content.Load<Texture2D>("heart");
 
 
-            //initializing planes, balloons
+            //initializing planes
             playerOne = new Plane(blueLeft, bluePlaneImage, Constants.planeOneStartPostion, Vector2.Zero, true, explosion, bulletTex,heartTex);
             planeList.Add(playerOne);
             
@@ -152,7 +157,7 @@ namespace Final
 
 
 
-            //obstacles
+            
 
 
             //trophy
@@ -162,12 +167,13 @@ namespace Final
 
 
         }
-        public virtual void Update(KeyboardState state, MouseState mouse)
+        public virtual void Update(KeyboardState state, MouseState mouse)//update level each time
         {
 
 
             // TODO: Add your update logic here
-
+            
+            //if displaying end message, do not update level
             if (gettingResponse)
             {
                 if (state.IsKeyDown(Keys.Enter))
@@ -205,24 +211,6 @@ namespace Final
                 playerOne.Shoot();
             }
 
-            
-
-
-           
-
-            playerOne.Update(wallList, planeList);
-            playerTwo.Update(wallList, planeList);
-
-            
-            
-            //balloon.MoveTo(playerOne.Position);
-            
-
-
-          
-
-
-
 
             //player two controls
 
@@ -232,7 +220,7 @@ namespace Final
                 playerTwo.left();
             }
 
-           
+
             if (state.IsKeyDown(Keys.Right))
             {
 
@@ -250,23 +238,45 @@ namespace Final
             }
 
 
-            
 
 
 
+            //update both planes
+            playerOne.Update(wallList, planeList);
+            playerTwo.Update(wallList, planeList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //end message display
+
+            //both plane dead(fall out of screen)at the same time
             if (playerOne.Position.Y > Constants.screenHeight && playerTwo.Position.Y > Constants.screenHeight)
             {
+                
                 text = "Ah! Too bad!";
                 secondText = "Press enter to go to next level.";
                 gettingResponse = true;
             }
+            //blue plane got to trophy first 
             if (trophy.IsCollide(playerOne)&&playerOne.Health!=0)
             {
                 text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
                 secondText = "Press enter to go to next level";
                 gettingResponse = true;
             }
-
+            //blue plane dies first
             if (playerOne.Position.Y > Constants.screenHeight  && playerTwo.Health != 0)
             {
                 text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
@@ -274,7 +284,7 @@ namespace Final
                 gettingResponse = true;
 
             }
-
+            //red plane dies first
             if (playerTwo.Position.Y > Constants.screenHeight && playerOne.Health != 0)
             {
                 text = "Blue plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
@@ -282,6 +292,7 @@ namespace Final
                 gettingResponse = true;
 
             }
+            //red plane gets to trophy first
             else if (trophy.IsCollide(playerTwo) && playerTwo.Health != 0)
             {
                 text = "Red plane won!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
@@ -296,9 +307,10 @@ namespace Final
             previousMouse = mouse;
 
         }
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)//draw level
         {
             spriteBatch.Draw(background, new Rectangle(0, 0, 1280, 720), Color.White);
+
             for (int i = 0; i < planeList.Count; i++)
             {
                 planeList[i].Draw(spriteBatch);
@@ -311,6 +323,7 @@ namespace Final
             }
 
             trophy.Draw(spriteBatch);
+
             spriteBatch.DrawString(font, text, new Vector2(400, 400), Color.WhiteSmoke);
             spriteBatch.DrawString(font, secondText, new Vector2(400, 450), Color.WhiteSmoke);
             spriteBatch.DrawString(smallFont, "Level Objective: "+objective, new Vector2(0, -5), Color.Black);
@@ -321,10 +334,7 @@ namespace Final
 
 
         }
-        public bool Ended()
-        {
-            return done;
-        }
+        
         
         
         

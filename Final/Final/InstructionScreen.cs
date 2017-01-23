@@ -11,10 +11,11 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Final
 {
+    //instruction screen as a level, by Sam
     class InstructionScreen : Level
     {
-        Texture2D instructionScreen;
-
+        Texture2D instructionScreen; //the image of the instruction screen
+        //constructor
         public InstructionScreen()
         {
 

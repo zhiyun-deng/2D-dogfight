@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final
 {
+    //the balloon object, special abilities, by David D.
     class Balloon : GameObject
 
     {
@@ -49,9 +50,13 @@ namespace Final
             velocity.X += acceleration;
         }
 
+        //adjust the course of the balloon randomly. The method is not used in the game itself.
         public void MoveRandom()
         {
             Random rng = new Random();
+
+            //randomly selects a horizintal direction move(0 = left,1 =right)
+            //do the same for vertical direction(0 = up, 1 = right)
             int verticalDirection = rng.Next(2);
             int horiDirection = rng.Next(2);
             if (verticalDirection == 0)
@@ -72,12 +77,21 @@ namespace Final
             }
             
         }
+
+        //shoots at the direction indicated by the angle
         public void Shoot()
         {
             Random rng = new Random();
-            if (rng.Next(20) == 0)
+
+            //random function makes sure that balloon does not shoot with every update call
+            //instead, it has a i in 15 chance of firing
+            //this reduces predictability and reduce the frequency of shooting to once every 15 frames on average
+            if (rng.Next(15) == 0)
             {
+                //create bullet
                 Bullet bullet = new Bullet(bulletTex, position, this);
+
+                //calculate target position based on angle
                 float xChange = 0, yChange = 0;
                 if (Math.Floor(angle/Math.PI*2) %4 == 0)
                 { 
@@ -99,14 +113,22 @@ namespace Final
                     xChange = 1;
                     yChange = (float)Math.Tan(angle);
                 }
+
+                //commands bullet to move to target
                 bullet.MoveTo(new Vector2(position.X + xChange, position.Y + yChange));
 
+                
                 bulletList.Add(bullet);
             }
         }
+
+        //move balloon if needed, fire shots, remove bullets as needed, 
         public void Update(List<GameObject> obstacleList)
         {
+            //move balloon
             base.Update();
+
+            //update each bullet(moving it), remove some bullets if necessary
             foreach (Bullet bullet in bulletList.Reverse<Bullet>())
             {
                 bullet.Update(obstacleList);
@@ -116,15 +138,15 @@ namespace Final
 
                 }
             }
+
+            //change the direction of shooting gradually
             angle += 0.01f;
-            //if(angle > Math.PI)
-            //{
-                
-            //}
+            
             
             Shoot();
 
         }
+        //draw balloon and bullets
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);

@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final
 {
-    class Constants
+    class Constants//constants storing class
     {
+        
         public static int screenWidth { get { return 1280; } }
         public static int screenHeight { get { return 720; } }
 
